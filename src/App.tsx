@@ -1,3 +1,9 @@
+import Navbar from "./components/Navbar";
+
 export default function App() {
-  return <h1>Let's ginger it!</h1>;
+  return (
+    <main>
+      <Navbar />
+    </main>
+  );
 }
