@@ -1,1 +1,32 @@
 @import "tailwindcss";
+
+/* ===== Brand Theme ===== */
+:root {
+  --ginger: #f97316;
+  --ginger-dark: #ea580c;
+  --text-primary: #1f2937;
+  --text-muted: #6b7280;
+  --border-light: #e5e7eb;
+}
+
+@layer utilities {
+  .text-ginger {
+    color: var(--ginger);
+  }
+
+  .bg-ginger {
+    background-color: var(--ginger);
+  }
+
+  .hover\:text-ginger:hover {
+    color: var(--ginger);
+  }
+
+  .hover\:bg-ginger-dark:hover {
+    background-color: var(--ginger-dark);
+  }
+
+  .ring-ginger {
+    --tw-ring-color: var(--ginger);
+  }
+}
