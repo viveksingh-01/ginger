@@ -1,4 +1,5 @@
 import { HelpCircle, MapPin, Percent, Search, ShoppingCart, User } from "lucide-react";
+import Logo from "./Logo";
 import NavItem from "./NavItem";
 
 const Navbar = () => {
@@ -8,9 +9,8 @@ const Navbar = () => {
         <div className="flex h-16 items-center justify-between">
           {/* Left */}
           <div className="flex items-center gap-6">
-            {/* Logo */}
             <div className="flex items-center gap-2 cursor-pointer">
-              <span className="text-xl font-bold text-ginger">ginger</span>
+              <Logo />
             </div>
 
             {/* Location */}
