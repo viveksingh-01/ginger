@@ -8,23 +8,25 @@ const Hero = () => {
       <div className="absolute inset-0 bg-linear-to-b from-white via-orange-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"></div>
 
       {/* Animated Wavy Overlay */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <svg
-          className="w-full h-full animate-wave"
+          className="absolute left-[-50%] top-0 w-[200%] h-full"
           viewBox="0 0 1440 320"
-          xmlns="http://www.w3.org/2000/svg"
           preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
         >
           <defs>
             <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#F97316" stopOpacity="0.1" />
-              <stop offset="100%" stopColor="#F59E0B" stopOpacity="0.1" />
+              <stop offset="0%" stopColor="#F97316" stopOpacity="0.08" />
+              <stop offset="100%" stopColor="#F59E0B" stopOpacity="0.08" />
             </linearGradient>
           </defs>
+
           <path
+            className="wave-motion"
             fill="url(#waveGradient)"
-            d="M0,64L48,80C96,96,192,128,288,160C384,192,480,224,576,208C672,192,768,128,864,106.7C960,85,1056,107,1152,122.7C1248,139,1344,149,1392,154.7L1440,160L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"
-          ></path>
+            d="M0,64L48,80C96,96,192,128,288,160C384,192,480,224,576,208C672,192,768,128,864,106.7C960,85,1056,107,1152,122.7C1248,139,1344,149,1392,154.7L1440,160L1440,0L0,0Z"
+          />
         </svg>
       </div>
 
