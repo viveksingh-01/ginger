@@ -5,7 +5,7 @@ const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden text-center">
       {/* Full-screen gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white via-orange-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"></div>
+      <div className="absolute inset-0 bg-linear-to-b from-white via-orange-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"></div>
 
       {/* Animated Wavy Overlay */}
       <div className="absolute inset-0">
