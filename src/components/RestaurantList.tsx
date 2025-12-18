@@ -1,15 +1,23 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import type IRestaurant from "../models/restaurant";
 
 const RestaurantList: React.FC = () => {
-  async function getRestaurantList() {
-    const res = await fetch("/data/restaurant-list.json");
-    const restaurantList = await res.json();
-    console.log(restaurantList);
-  }
+  const [restaurants, setRestaurants] = useState<IRestaurant[]>([]);
 
   useEffect(() => {
+    const getRestaurantList = async () => {
+      try {
+        const res = await fetch("/data/restaurant-list.json");
+        const { restaurants } = await res.json();
+        setRestaurants(restaurants || []);
+      } catch (err) {
+        console.error("Error fetching restaurants", err);
+      }
+    };
     getRestaurantList();
   }, []);
+
+  console.log(restaurants);
 
   return (
     <section className="min-h-screen">
