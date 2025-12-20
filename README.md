@@ -1,3 +1,3 @@
 # ginger
 
-Restaurant app made using React
+Food ordering app made using React
