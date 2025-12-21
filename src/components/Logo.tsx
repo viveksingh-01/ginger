@@ -2,7 +2,7 @@ const Logo = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="160" height="40" viewBox="0 0 160 40">
     <defs>
       <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-        <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#f97316" flood-opacity="0.4" />
+        <feDropShadow dx="0" dy="2" stdDeviation="2" floodColor="#f97316" floodOpacity="0.4" />
       </filter>
     </defs>
     <circle cx="20" cy="20" r="12" fill="#F97316" filter="url(#shadow)" />
