@@ -60,11 +60,29 @@ const Hero = () => {
   );
 };
 
-// Feature Card Component
 const FeatureCard = ({ icon, label }: { icon: React.ReactNode; label: string }) => (
-  <div className="flex items-center gap-2 bg-white dark:bg-gray-800 shadow-md rounded-xl px-4 py-2 hover:shadow-lg transform hover:-translate-y-1 transition">
-    <div className="text-ginger w-6 h-6">{icon}</div>
-    <span className="text-gray-700 dark:text-gray-300 font-medium">{label}</span>
+  <div
+    className="
+        group
+        flex items-center gap-2
+        bg-white dark:bg-gray-800
+        rounded-xl px-4 py-2
+        shadow-sm
+        transition-all duration-200 ease-out
+        hover:-translate-y-[2px]
+        hover:shadow-md
+      "
+  >
+    <div
+      className="
+          text-ginger
+          transition-transform duration-200
+          group-hover:scale-110
+        "
+    >
+      {icon}
+    </div>
+    <span className="font-medium text-gray-700 dark:text-gray-300">{label}</span>
   </div>
 );
 
