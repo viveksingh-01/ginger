@@ -22,20 +22,21 @@ const RestaurantList: React.FC = () => {
 
   return (
     <section className="min-h-screen">
-      <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Restaurants near you</h2>
-      {/* Grid */}
-      <div
-        className="
+      <div className="container mx-auto px-6 py-10">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Restaurants near you</h2>
+        <div
+          className="
             grid gap-6
             grid-cols-1
             sm:grid-cols-2
             md:grid-cols-3
             lg:grid-cols-4
           "
-      >
-        {restaurants.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} restaurant={restaurant} />
-        ))}
+        >
+          {restaurants.map((restaurant) => (
+            <RestaurantCard key={restaurant.info.id} restaurant={restaurant} />
+          ))}
+        </div>
       </div>
     </section>
   );
