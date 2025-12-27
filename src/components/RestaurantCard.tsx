@@ -37,6 +37,11 @@ const RestaurantCard = ({ restaurant }: { restaurant: IRestaurant }) => {
       </div>
       <div className="p-4 space-y-1">
         <h3 className="font-semibold text-gray-900 dark:text-white truncate">{restaurant.info.name}</h3>
+        <p className="text-sm text-gray-500 truncate">{restaurant.info.cuisines.join(", ")}</p>
+        <div className="flex items-center justify-between text-sm text-gray-600 mt-2">
+          <span>{restaurant.info.sla.slaString}</span>
+          <span>{restaurant.info.costForTwo}</span>
+        </div>
       </div>
     </div>
   );
