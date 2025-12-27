@@ -4,21 +4,34 @@ import RestaurantCard from "./RestaurantCard";
 
 const RestaurantList: React.FC = () => {
   const [restaurants, setRestaurants] = useState<IRestaurant[]>([]);
+  const [loading, setLoading] = useState<boolean>();
 
   useEffect(() => {
     const getRestaurantList = async () => {
       try {
+        setLoading(true);
         const res = await fetch("/data/restaurant-list.json");
         const { restaurants } = await res.json();
         setRestaurants(restaurants || []);
       } catch (err) {
         console.error("Error fetching restaurants", err);
+      } finally {
+        setLoading(false);
       }
     };
     getRestaurantList();
   }, []);
 
-  console.log(restaurants);
+  if (loading) {
+    return (
+      <section className="min-h-screen">
+        <div className="container mx-auto px-6 py-10">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Restaurants near you</h2>
+          <div>Loading...</div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="min-h-screen">
