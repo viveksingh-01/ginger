@@ -19,7 +19,11 @@ const RestaurantCard = ({ restaurant }: { restaurant: IRestaurant }) => {
         <img
           src={IMAGE_URL + restaurant.info.cloudinaryImageId}
           alt={restaurant.info.name}
-          className="w-full h-44 object-cover"
+          className="
+              w-full h-44 object-cover
+              transition-transform duration-300
+              group-hover:scale-[1.04]
+            "
         />
 
         {/* Rating badge */}
