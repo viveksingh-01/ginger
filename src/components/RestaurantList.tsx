@@ -7,19 +7,24 @@ const RestaurantList: React.FC = () => {
   const [restaurants, setRestaurants] = useState<IRestaurant[]>([]);
   const [loading, setLoading] = useState<boolean>();
 
-  useEffect(() => {
-    const getRestaurantList = async () => {
-      try {
-        setLoading(true);
-        const res = await fetch("/data/restaurant-list.json");
-        const { restaurants } = await res.json();
-        setRestaurants(restaurants || []);
-      } catch (err) {
-        console.error("Error fetching restaurants", err);
-      } finally {
-        setLoading(false);
+  const getRestaurantList = async () => {
+    try {
+      setLoading(true);
+      const res = await fetch("/data/restaurant-list.json");
+      if (!res.ok) {
+        throw new Error("Failed to fetch restaurant data");
       }
-    };
+
+      const { restaurants } = await res.json();
+      setRestaurants(restaurants || []);
+    } catch (err) {
+      console.error("Error fetching restaurants:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     getRestaurantList();
   }, []);
 
