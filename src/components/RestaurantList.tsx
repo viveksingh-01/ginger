@@ -3,6 +3,8 @@ import type IRestaurant from "../models/restaurant";
 import RestaurantCard from "./RestaurantCard";
 import RestaurantListSkeleton from "./RestaurantListSkeleton";
 
+const BASE_URL = import.meta.env.VITE_GINGER_API_URL;
+
 const RestaurantList: React.FC = () => {
   const [restaurants, setRestaurants] = useState<IRestaurant[]>([]);
   const [loading, setLoading] = useState<boolean>();
@@ -10,13 +12,13 @@ const RestaurantList: React.FC = () => {
   const getRestaurantList = async () => {
     try {
       setLoading(true);
-      const res = await fetch("/data/restaurant-list.json");
+      const res = await fetch(`${BASE_URL}/restaurants`);
       if (!res.ok) {
         throw new Error("Failed to fetch restaurant data");
       }
 
-      const { restaurants } = await res.json();
-      setRestaurants(restaurants || []);
+      const { data } = await res.json();
+      setRestaurants(data || []);
     } catch (err) {
       console.error("Error fetching restaurants:", err);
     } finally {
