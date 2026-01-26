@@ -67,7 +67,7 @@ const RestaurantList: React.FC = () => {
           "
         >
           {restaurants.map((restaurant) => (
-            <RestaurantCard key={restaurant.info.id} restaurant={restaurant} />
+            <RestaurantCard key={restaurant.id} restaurant={restaurant} />
           ))}
         </div>
       </div>

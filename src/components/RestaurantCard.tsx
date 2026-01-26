@@ -17,8 +17,8 @@ const RestaurantCard = ({ restaurant }: { restaurant: IRestaurant }) => {
       {/* Image */}
       <div className="relative">
         <img
-          src={IMAGE_URL + restaurant.info.cloudinaryImageId}
-          alt={restaurant.info.name}
+          src={IMAGE_URL + restaurant.cloudinaryImageId}
+          alt={restaurant.name}
           className="
               w-full h-44 object-cover
               transition-transform duration-300
@@ -36,15 +36,15 @@ const RestaurantCard = ({ restaurant }: { restaurant: IRestaurant }) => {
               flex items-center gap-1
             "
         >
-          ⭐ {restaurant.info.avgRatingString}
+          ⭐ {restaurant.avgRatingString}
         </div>
       </div>
       <div className="p-4 space-y-1">
-        <h3 className="font-semibold text-gray-900 dark:text-white truncate">{restaurant.info.name}</h3>
-        <p className="text-sm text-gray-500 truncate">{restaurant.info.cuisines.join(", ")}</p>
+        <h3 className="font-semibold text-gray-900 dark:text-white truncate">{restaurant.name}</h3>
+        <p className="text-sm text-gray-500 truncate">{restaurant.cuisines.join(", ")}</p>
         <div className="flex items-center justify-between text-sm text-gray-600 mt-2">
-          <span>{restaurant.info.sla.slaString}</span>
-          <span>{restaurant.info.costForTwo}</span>
+          <span>{restaurant.sla.slaString}</span>
+          <span>{restaurant.costForTwo}</span>
         </div>
       </div>
     </div>
