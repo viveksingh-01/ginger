@@ -8,10 +8,12 @@ const BASE_URL = import.meta.env.VITE_GINGER_API_URL;
 const RestaurantList: React.FC = () => {
   const [restaurants, setRestaurants] = useState<IRestaurant[]>([]);
   const [loading, setLoading] = useState<boolean>();
+  const [error, setError] = useState<string | null>(null);
 
   const getRestaurantList = async () => {
     try {
       setLoading(true);
+      setError(null);
       const res = await fetch(`${BASE_URL}/restaurants`);
       if (!res.ok) {
         throw new Error("Failed to fetch restaurant data");
@@ -20,6 +22,7 @@ const RestaurantList: React.FC = () => {
       const { data } = await res.json();
       setRestaurants(data || []);
     } catch (err) {
+      setError(err instanceof Error ? err.message : "An error occurred");
       console.error("Error fetching restaurants:", err);
     } finally {
       setLoading(false);
@@ -47,6 +50,19 @@ const RestaurantList: React.FC = () => {
             {Array.from({ length: 8 }).map((_, index) => (
               <RestaurantListSkeleton key={index} />
             ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="bg-gray-50 dark:bg-gray-950 min-h-screen">
+        <div className="container mx-auto px-6 py-10">
+          <div className="text-center">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Error loading restaurants</h2>
+            <p className="text-red-600 dark:text-red-400">{error}</p>
           </div>
         </div>
       </section>
