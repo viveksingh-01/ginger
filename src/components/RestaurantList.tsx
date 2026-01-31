@@ -63,6 +63,12 @@ const RestaurantList: React.FC = () => {
           <div className="text-center">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Error loading restaurants</h2>
             <p className="text-red-600 dark:text-red-400">{error}</p>
+            <button
+              onClick={getRestaurantList}
+              className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+            >
+              Retry
+            </button>
           </div>
         </div>
       </section>
