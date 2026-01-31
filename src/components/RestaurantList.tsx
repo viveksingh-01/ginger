@@ -18,7 +18,6 @@ const RestaurantList: React.FC = () => {
       if (!res.ok) {
         throw new Error("Failed to fetch restaurant data");
       }
-
       const { data } = await res.json();
       setRestaurants(data || []);
     } catch (err) {
@@ -35,7 +34,7 @@ const RestaurantList: React.FC = () => {
 
   if (loading) {
     return (
-      <section className="min-h-screen">
+      <section className="bg-gray-50 dark:bg-gray-950 min-h-screen">
         <div className="container mx-auto px-6 py-10">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Restaurants near you</h2>
           <div
@@ -76,7 +75,7 @@ const RestaurantList: React.FC = () => {
   }
 
   return (
-    <section className="min-h-screen">
+    <section className="bg-gray-50 dark:bg-gray-950 min-h-screen">
       <div className="container mx-auto px-6 py-10">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Restaurants near you</h2>
         <div
