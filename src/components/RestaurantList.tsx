@@ -34,7 +34,7 @@ const RestaurantList: React.FC = () => {
 
   if (loading) {
     return (
-      <section className="bg-gray-50 dark:bg-gray-950 min-h-screen">
+      <section className="mt-16 bg-gray-50 dark:bg-gray-950 min-h-screen">
         <div className="container mx-auto px-6 py-10">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Restaurants near you</h2>
           <div
@@ -57,7 +57,7 @@ const RestaurantList: React.FC = () => {
 
   if (error) {
     return (
-      <section className="bg-gray-50 dark:bg-gray-950 min-h-screen">
+      <section className="mt-16 bg-gray-50 dark:bg-gray-950 min-h-screen">
         <div className="container mx-auto px-6 py-10">
           <div className="text-center">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Error loading restaurants</h2>
@@ -75,7 +75,7 @@ const RestaurantList: React.FC = () => {
   }
 
   return (
-    <section className="bg-gray-50 dark:bg-gray-950 min-h-screen">
+    <section className="mt-16 bg-gray-50 dark:bg-gray-950 min-h-screen">
       <div className="container mx-auto px-6 py-10">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Restaurants near you</h2>
         <div
