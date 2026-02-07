@@ -14,19 +14,24 @@ const RestaurantMenu: React.FC = () => {
         <h2 className="mb-12 text-3xl font-bold text-gray-900 dark:text-white">Test Restaurant</h2>
         <ul className="space-y-6">
           {menu?.items.map(item => (
-            <li key={item.id} className="flex justify-between items-start">
-              <div className="pr-4">
-                <h3 className="font-semibold text-lg text-gray-900 dark:text-white">{item.name}</h3>
-                <p className="text-gray-600 dark:text-gray-400 mt-1">Rs. {item.price}</p>
-              </div>
-              {item.imageId && (
-                <img
-                  src={IMAGE_URL + item.imageId}
-                  alt={item.name}
-                  className="w-32 h-24 object-cover rounded-lg"
-                />
-              )}
-            </li>
+            <>
+              <li key={item.id} className="flex justify-between items-start">
+                <div className="pr-4">
+                  <h3 className="font-semibold text-lg text-gray-900 dark:text-white">
+                    {item.name}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 mt-1">Rs. {item.price}</p>
+                </div>
+                {item.imageId && (
+                  <img
+                    src={IMAGE_URL + item.imageId}
+                    alt={item.name}
+                    className="w-32 h-24 object-cover rounded-lg"
+                  />
+                )}
+              </li>
+              <hr className="text-gray-300" />
+            </>
           ))}
         </ul>
       </div>
