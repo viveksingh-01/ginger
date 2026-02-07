@@ -1,8 +1,12 @@
 import { useParams } from 'react-router-dom';
+import useRestaurantMenu from '../hooks/useRestaurantMenu';
 
 const RestaurantMenu: React.FC = () => {
-  const params = useParams();
-  console.log(params.id);
+  const { restaurantId } = useParams();
+
+  if (!restaurantId) return;
+  const { menu } = useRestaurantMenu(restaurantId || '');
+  console.log(menu);
 
   return (
     <section className="mt-16 bg-gray-50 dark:bg-gray-950 min-h-screen">
