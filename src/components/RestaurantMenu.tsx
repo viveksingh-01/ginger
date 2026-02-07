@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+import { IMAGE_URL } from '../constants';
 import useRestaurantMenu from '../hooks/useRestaurantMenu';
 
 const RestaurantMenu: React.FC = () => {
@@ -6,12 +7,28 @@ const RestaurantMenu: React.FC = () => {
 
   if (!restaurantId) return;
   const { menu } = useRestaurantMenu(restaurantId || '');
-  console.log(menu);
 
   return (
     <section className="mt-16 bg-gray-50 dark:bg-gray-950 min-h-screen">
       <div className="container mx-auto px-6 py-10 max-w-3xl">
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Test Restaurant</h2>
+        <h2 className="mb-12 text-3xl font-bold text-gray-900 dark:text-white">Test Restaurant</h2>
+        <ul className="space-y-6">
+          {menu?.items.map(item => (
+            <li key={item.id} className="flex justify-between items-start">
+              <div className="pr-4">
+                <h3 className="font-semibold text-lg text-gray-900 dark:text-white">{item.name}</h3>
+                <p className="text-gray-600 dark:text-gray-400 mt-1">Rs. {item.price}</p>
+              </div>
+              {item.imageId && (
+                <img
+                  src={IMAGE_URL + item.imageId}
+                  alt={item.name}
+                  className="w-32 h-24 object-cover rounded-lg"
+                />
+              )}
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
