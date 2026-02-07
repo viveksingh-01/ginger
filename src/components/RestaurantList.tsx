@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import type IRestaurant from "../models/restaurant";
-import RestaurantCard from "./RestaurantCard";
-import RestaurantListSkeleton from "./RestaurantListSkeleton";
+import { useEffect, useState } from 'react';
+import type IRestaurant from '../models/restaurant';
+import RestaurantCard from './RestaurantCard';
+import RestaurantListSkeleton from './RestaurantListSkeleton';
 
 const BASE_URL = import.meta.env.VITE_GINGER_API_URL;
 
@@ -16,13 +16,13 @@ const RestaurantList: React.FC = () => {
       setError(null);
       const res = await fetch(`${BASE_URL}/restaurants`);
       if (!res.ok) {
-        throw new Error("Failed to fetch restaurant data");
+        throw new Error('Failed to fetch restaurant data');
       }
       const { data } = await res.json();
       setRestaurants(data || []);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "An error occurred");
-      console.error("Error fetching restaurants:", err);
+      setError(err instanceof Error ? err.message : 'An error occurred');
+      console.error('Error fetching restaurants:', err);
     } finally {
       setLoading(false);
     }
@@ -36,7 +36,9 @@ const RestaurantList: React.FC = () => {
     return (
       <section className="mt-16 bg-gray-50 dark:bg-gray-950 min-h-screen">
         <div className="container mx-auto px-6 py-10">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Restaurants near you</h2>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+            Restaurants near you
+          </h2>
           <div
             className="
               grid gap-6
@@ -60,7 +62,9 @@ const RestaurantList: React.FC = () => {
       <section className="mt-16 bg-gray-50 dark:bg-gray-950 min-h-screen">
         <div className="container mx-auto px-6 py-10">
           <div className="text-center">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Error loading restaurants</h2>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+              Error loading restaurants
+            </h2>
             <p className="text-red-600 dark:text-red-400">{error}</p>
             <button
               onClick={getRestaurantList}
@@ -77,7 +81,9 @@ const RestaurantList: React.FC = () => {
   return (
     <section className="mt-16 bg-gray-50 dark:bg-gray-950 min-h-screen">
       <div className="container mx-auto px-6 py-10">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Restaurants near you</h2>
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+          Restaurants near you
+        </h2>
         <div
           className="
             grid gap-6
@@ -87,7 +93,7 @@ const RestaurantList: React.FC = () => {
             lg:grid-cols-4
           "
         >
-          {restaurants.map((restaurant) => (
+          {restaurants.map(restaurant => (
             <RestaurantCard key={restaurant.id} restaurant={restaurant} />
           ))}
         </div>
