@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import type IRestaurant from '../models/restaurant';
 import RestaurantCard from './RestaurantCard';
 import RestaurantListSkeleton from './RestaurantListSkeleton';
@@ -94,7 +95,9 @@ const RestaurantList: React.FC = () => {
           "
         >
           {restaurants.map(restaurant => (
-            <RestaurantCard key={restaurant.id} restaurant={restaurant} />
+            <Link to={`/restaurant/${restaurant.id}`}>
+              <RestaurantCard key={restaurant.id} restaurant={restaurant} />
+            </Link>
           ))}
         </div>
       </div>
