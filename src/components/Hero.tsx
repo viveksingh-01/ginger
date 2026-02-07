@@ -1,5 +1,5 @@
-import React from "react";
-import { FaFire, FaLeaf, FaMotorcycle } from "react-icons/fa";
+import React from 'react';
+import { FaFire, FaLeaf, FaMotorcycle } from 'react-icons/fa';
 
 const Hero = () => {
   return (
@@ -36,8 +36,8 @@ const Hero = () => {
           Delicious meals, <span className="text-ginger">delivered fast!</span>
         </h1>
         <p className="text-gray-700 dark:text-gray-300 text-lg sm:text-2xl">
-          Order from your favorite restaurants and get food delivered right to your doorstep. Fresh, hot, and ready to
-          eat.
+          Order from your favorite restaurants and get food delivered right to your doorstep. Fresh,
+          hot, and ready to eat.
         </p>
 
         {/* Feature Cards */}

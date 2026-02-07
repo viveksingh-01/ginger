@@ -8,7 +8,14 @@ const Logo = () => (
     <circle cx="20" cy="20" r="12" fill="#F97316" filter="url(#shadow)" />
     <circle cx="16" cy="16" r="3" fill="white" />
     <circle cx="24" cy="22" r="2" fill="white" />
-    <text x="36" y="27" fontFamily="Poppins, sans-serif" fontSize="20" fontWeight="700" fill="#F97316">
+    <text
+      x="36"
+      y="27"
+      fontFamily="Poppins, sans-serif"
+      fontSize="20"
+      fontWeight="700"
+      fill="#F97316"
+    >
       ginger
     </text>
   </svg>

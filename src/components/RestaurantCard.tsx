@@ -1,5 +1,5 @@
-import { IMAGE_URL } from "../constants";
-import type IRestaurant from "../models/restaurant";
+import { IMAGE_URL } from '../constants';
+import type IRestaurant from '../models/restaurant';
 
 const RestaurantCard = ({ restaurant }: { restaurant: IRestaurant }) => {
   return (
@@ -41,7 +41,7 @@ const RestaurantCard = ({ restaurant }: { restaurant: IRestaurant }) => {
       </div>
       <div className="p-4 space-y-1">
         <h3 className="font-semibold text-gray-900 dark:text-white truncate">{restaurant.name}</h3>
-        <p className="text-sm text-gray-500 truncate">{restaurant.cuisines.join(", ")}</p>
+        <p className="text-sm text-gray-500 truncate">{restaurant.cuisines.join(', ')}</p>
         <div className="flex items-center justify-between text-sm text-gray-600 mt-2">
           <span>{restaurant.sla.slaString}</span>
           <span>{restaurant.costForTwo}</span>

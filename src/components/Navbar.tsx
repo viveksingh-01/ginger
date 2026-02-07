@@ -1,6 +1,6 @@
-import { HelpCircle, MapPin, Percent, Search, ShoppingCart, User } from "lucide-react";
-import Logo from "./Logo";
-import NavItem from "./NavItem";
+import { HelpCircle, MapPin, Percent, Search, ShoppingCart, User } from 'lucide-react';
+import Logo from './Logo';
+import NavItem from './NavItem';
 
 const Navbar = () => {
   return (
@@ -24,7 +24,10 @@ const Navbar = () => {
           {/* Search */}
           <div className="hidden lg:flex flex-1 mx-8">
             <div className="relative w-full max-w-md">
-              <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-(--text-muted)" />
+              <Search
+                size={18}
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-(--text-muted)"
+              />
               <input
                 type="text"
                 placeholder="Search for restaurants or food"
