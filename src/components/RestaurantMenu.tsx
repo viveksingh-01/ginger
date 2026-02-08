@@ -20,7 +20,7 @@ const RestaurantMenu: React.FC = () => {
                   <h3 className="font-semibold text-lg text-gray-900 dark:text-white">
                     {item.name}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-400 mt-1">Rs. {item.price}</p>
+                  <p className="text-gray-900 dark:text-gray-400 mt-1">₹{item.price / 100}</p>
                 </div>
                 {item.imageId && (
                   <img
