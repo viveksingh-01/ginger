@@ -26,7 +26,7 @@ const RestaurantMenu: React.FC = () => {
                   <img
                     src={IMAGE_URL + item.imageId}
                     alt={item.name}
-                    className="w-32 h-24 object-cover rounded-lg"
+                    className="w-40 h-36 object-cover rounded-xl"
                   />
                 )}
               </li>
