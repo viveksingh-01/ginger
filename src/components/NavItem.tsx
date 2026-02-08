@@ -16,9 +16,7 @@ const NavItem = ({ icon, label, badge, mobile = false }: NavItemProps) => {
       <span className="text-sm font-medium">{label}</span>
 
       {badge && (
-        <span className="absolute -right-3 -top-2 rounded-full bg-ginger px-1.5 text-xs text-white">
-          {badge}
-        </span>
+        <span className="absolute -right-3 -top-2 rounded-full bg-ginger px-1.5 text-xs text-white">{badge}</span>
       )}
     </div>
   );

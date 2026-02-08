@@ -37,9 +37,7 @@ const RestaurantList: React.FC = () => {
     return (
       <section className="mt-16 bg-gray-50 dark:bg-gray-950 min-h-screen">
         <div className="container mx-auto px-6 py-10">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-            Restaurants near you
-          </h2>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Restaurants near you</h2>
           <div
             className="
               grid gap-6
@@ -63,9 +61,7 @@ const RestaurantList: React.FC = () => {
       <section className="mt-16 bg-gray-50 dark:bg-gray-950 min-h-screen">
         <div className="container mx-auto px-6 py-10">
           <div className="text-center">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              Error loading restaurants
-            </h2>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Error loading restaurants</h2>
             <p className="text-red-600 dark:text-red-400">{error}</p>
             <button
               onClick={getRestaurantList}
@@ -82,9 +78,7 @@ const RestaurantList: React.FC = () => {
   return (
     <section className="mt-16 bg-gray-50 dark:bg-gray-950 min-h-screen">
       <div className="container mx-auto px-6 py-10">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-          Restaurants near you
-        </h2>
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Restaurants near you</h2>
         <div
           className="
             grid gap-6
