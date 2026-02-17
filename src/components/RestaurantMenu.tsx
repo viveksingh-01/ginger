@@ -1,4 +1,4 @@
-import { FaStar } from 'react-icons/fa';
+import { FaCircle, FaStar } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
 import { IMAGE_URL } from '../constants';
 import useRestaurantDetails from '../hooks/useRestaurantDetails';
@@ -18,6 +18,8 @@ const RestaurantMenu: React.FC = () => {
             <div className="font-semibold px-2 py-1 flex items-center gap-1">
               <FaStar className="text-green-700" />
               {restaurant?.details.avgRatingString} ({restaurant?.details.totalRatingsString} ratings){' '}
+              <FaCircle size={4} className="mx-2 text-gray-500" />
+              {restaurant?.details.costForTwo}
             </div>
           </div>
         </div>
