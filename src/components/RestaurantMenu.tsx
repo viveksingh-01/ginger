@@ -12,7 +12,7 @@ const RestaurantMenu: React.FC = () => {
   return (
     <section className="mt-16 bg-gray-50 dark:bg-gray-950 min-h-screen">
       <div className="container mx-auto px-6 py-10 max-w-3xl">
-        <h2 className="mb-12 text-3xl font-bold text-gray-900 dark:text-white">Test Restaurant</h2>
+        <h2 className="mb-12 text-3xl font-bold text-gray-900 dark:text-white">{restaurant?.details.name}</h2>
         <ul className="space-y-6">
           {restaurant?.menu?.map(
             ({ id, name, description, price, finalPrice, itemPriceStrikeOff, imageId, ratings }) => (
