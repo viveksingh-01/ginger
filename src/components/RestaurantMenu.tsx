@@ -21,6 +21,9 @@ const RestaurantMenu: React.FC = () => {
               <FaCircle size={4} className="mx-2 text-gray-500" />
               {restaurant?.details.costForTwo}
             </div>
+            <div className="px-2 py-1 text-ginger text-sm font-semibold">
+              <span>{restaurant?.details.cuisines.join(', ')}</span>
+            </div>
           </div>
         </div>
         <ul className="space-y-6">
