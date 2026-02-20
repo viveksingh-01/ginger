@@ -24,6 +24,8 @@ const RestaurantMenu: React.FC = () => {
             <div className="mb-1 text-ginger text-sm font-semibold">{restaurant?.details.cuisines.join(', ')}</div>
             <div className="mb-1 text-sm text-gray-700 font-semibold flex items-center gap-1">
               {restaurant?.details.locality}
+              <FaCircle size={4} className="mx-2 text-gray-500" />
+              {restaurant?.details.sla.slaString}
             </div>
           </div>
         </div>
