@@ -10,6 +10,10 @@ function SearchBox() {
   console.log(results);
 
   useEffect(() => {
+    if (!query) {
+      setResults([]);
+      return;
+    }
     fetchResults();
   }, [query]);
 
