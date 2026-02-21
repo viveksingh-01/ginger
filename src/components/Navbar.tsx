@@ -11,7 +11,9 @@ const Navbar = () => {
           {/* Left */}
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2 cursor-pointer">
-              <Logo />
+              <Link to="/">
+                <Logo />
+              </Link>
             </div>
 
             {/* Location */}
