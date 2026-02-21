@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App.tsx';
 import RestaurantList from './components/RestaurantList.tsx';
 import RestaurantMenu from './components/RestaurantMenu.tsx';
+import SearchBox from './components/SearchBox.tsx';
 import './index.css';
 
 const router = createBrowserRouter([
@@ -12,6 +13,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: '/', element: <RestaurantList /> },
+      { path: 'search', element: <SearchBox /> },
       { path: 'restaurant/:restaurantId', element: <RestaurantMenu /> },
     ],
   },
