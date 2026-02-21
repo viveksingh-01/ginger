@@ -1,8 +1,27 @@
 import { Search } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import type IRestaurant from '../models/restaurant';
+
+const BASE_URL = import.meta.env.VITE_GINGER_API_URL;
 
 function SearchBox() {
   const [query, setQuery] = useState('');
+  const [results, setResults] = useState<IRestaurant[]>([]);
+  console.log(results);
+
+  useEffect(() => {
+    fetchResults();
+  }, [query]);
+
+  const fetchResults = async () => {
+    try {
+      const res = await fetch(`${BASE_URL}/restaurants/search?q=${query}`);
+      const data = await res.json();
+      setResults(data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const handleChange: React.ChangeEventHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
