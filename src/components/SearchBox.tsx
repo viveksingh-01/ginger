@@ -43,6 +43,15 @@ function SearchBox() {
           className="w-full border border-(--border-light) py-3 px-6 pl-12 focus:outline-none focus:ring-2 ring-ginger"
         />
       </div>
+      {/* Results */}
+      <div className="mt-4 p-4 space-y-4">
+        {results?.map(item => (
+          <div key={item.id} className="bg-white p-4 rounded-lg shadow hover:shadow-md transition">
+            <h2 className="font-semibold">{item.name}</h2>
+            <p className="text-gray-500 text-sm">{item.cuisines.join(', ')}</p>
+          </div>
+        ))}
+      </div>
     </section>
   );
 }
