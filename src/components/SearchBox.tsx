@@ -1,5 +1,6 @@
 import { Search } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { IMAGE_URL } from '../constants';
 import type IRestaurant from '../models/restaurant';
 
 const BASE_URL = import.meta.env.VITE_GINGER_API_URL;
@@ -43,13 +44,15 @@ function SearchBox() {
           className="w-full border border-(--border-light) py-3 px-6 pl-12 focus:outline-none focus:ring-2 ring-ginger"
         />
       </div>
-      {/* Results */}
       <div className="mt-4 p-4 space-y-4">
         {query && results.length === 0 && <p className="text-gray-500 text-center">No restaurants found.</p>}
-        {results?.map(item => (
-          <div key={item.id} className="bg-white p-4 rounded-lg shadow hover:shadow-md transition">
-            <h2 className="font-semibold">{item.name}</h2>
-            <p className="text-gray-500 text-sm">{item.cuisines.join(', ')}</p>
+        {results?.map(({ id, name, cuisines, cloudinaryImageId }) => (
+          <div key={id} className="bg-white p-4 flex items-center gap-4 rounded-lg shadow hover:shadow-md transition">
+            <img src={IMAGE_URL + cloudinaryImageId} alt={name} className="w-24 h-24 object-cover" />
+            <div>
+              <h2 className="font-semibold">{name}</h2>
+              <p className="text-gray-500 text-sm">{cuisines.join(', ')}</p>
+            </div>
           </div>
         ))}
       </div>
