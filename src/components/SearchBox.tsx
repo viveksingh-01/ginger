@@ -45,6 +45,7 @@ function SearchBox() {
       </div>
       {/* Results */}
       <div className="mt-4 p-4 space-y-4">
+        {query && results.length === 0 && <p className="text-gray-500 text-center">No restaurants found.</p>}
         {results?.map(item => (
           <div key={item.id} className="bg-white p-4 rounded-lg shadow hover:shadow-md transition">
             <h2 className="font-semibold">{item.name}</h2>
