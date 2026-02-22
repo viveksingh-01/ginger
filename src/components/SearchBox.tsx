@@ -47,13 +47,16 @@ function SearchBox() {
       <div className="mt-4 p-4 space-y-4">
         {query && results.length === 0 && <p className="text-gray-500 text-center">No restaurants found.</p>}
         {results?.map(({ id, name, cuisines, cloudinaryImageId }) => (
-          <div key={id} className="bg-white p-4 flex items-center gap-4 rounded-lg shadow hover:shadow-md transition">
-            <img src={IMAGE_URL + cloudinaryImageId} alt={name} className="w-24 h-24 object-cover" />
-            <div>
-              <h2 className="font-semibold">{name}</h2>
-              <p className="text-gray-500 text-sm">{cuisines.join(', ')}</p>
+          <>
+            <div key={id} className="flex items-center gap-4 transition">
+              <img src={IMAGE_URL + cloudinaryImageId} alt={name} className="min-w-24 h-24 object-cover" />
+              <div>
+                <h2 className="font-semibold">{name}</h2>
+                <p className="text-gray-500 text-sm">{cuisines.join(', ')}</p>
+              </div>
             </div>
-          </div>
+            <hr className="mt-4 text-gray-300" />
+          </>
         ))}
       </div>
     </section>
