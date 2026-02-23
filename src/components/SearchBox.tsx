@@ -7,20 +7,28 @@ const BASE_URL = import.meta.env.VITE_GINGER_API_URL;
 
 function SearchBox() {
   const [query, setQuery] = useState('');
+  const [debouncedQuery, setDebouncedQuery] = useState('');
   const [results, setResults] = useState<IRestaurant[]>([]);
-  console.log(results);
 
   useEffect(() => {
-    if (!query) {
+    const timer = setTimeout(() => {
+      setDebouncedQuery(query);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [query]);
+
+  useEffect(() => {
+    if (!debouncedQuery) {
       setResults([]);
       return;
     }
     fetchResults();
-  }, [query]);
+  }, [debouncedQuery]);
 
   const fetchResults = async () => {
     try {
-      const res = await fetch(`${BASE_URL}/restaurants/search?q=${query}`);
+      const res = await fetch(`${BASE_URL}/restaurants/search?q=${debouncedQuery}`);
       const data = await res.json();
       setResults(data);
     } catch (err) {
