@@ -25,14 +25,14 @@ function SearchBox() {
     }
 
     const controller = new AbortController();
-    fetchResults(controller);
+    fetchResults(debouncedQuery, controller);
 
     return () => controller.abort();
   }, [debouncedQuery]);
 
-  const fetchResults = async ({ signal }: AbortController) => {
+  const fetchResults = async (query: string, { signal }: AbortController) => {
     try {
-      const res = await fetch(`${BASE_URL}/restaurants/search?q=${debouncedQuery}`, { signal });
+      const res = await fetch(`${BASE_URL}/restaurants/search?q=${query}`, { signal });
       const data = await res.json();
       setResults(data);
     } catch (err) {
