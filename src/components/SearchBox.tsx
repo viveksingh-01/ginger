@@ -46,8 +46,8 @@ function SearchBox() {
   };
 
   return (
-    <section className="mx-auto w-6/12 mt-24 p-3">
-      <div className="relative w-full">
+    <main className="mx-auto w-6/12 mt-24 p-3">
+      <section className="relative w-full">
         <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-(--text-muted)" />
         <input
           type="text"
@@ -56,23 +56,25 @@ function SearchBox() {
           placeholder="Search for restaurants"
           className="w-full border border-(--border-light) py-3 px-6 pl-12 focus:outline-none focus:ring-2 ring-ginger"
         />
-      </div>
-      <div className="mt-4 p-4 space-y-4">
+      </section>
+      <section className="mt-4 p-4 space-y-4">
         {query && results.length === 0 && <p className="text-gray-500 text-center">No restaurants found.</p>}
         {results?.map(({ id, name, cuisines, cloudinaryImageId }) => (
-          <Link to={`/restaurant/${id}`}>
-            <div key={id} className="flex items-center gap-4 transition">
-              <img src={IMAGE_URL + cloudinaryImageId} alt={name} className="min-w-24 h-24 object-cover" />
-              <div>
-                <h2 className="font-semibold">{name}</h2>
-                <p className="text-gray-500 text-sm">{cuisines.join(', ')}</p>
-              </div>
-            </div>
+          <>
+            <Link to={`/restaurant/${id}`}>
+              <article key={id} className="flex items-center gap-4 transition">
+                <img src={IMAGE_URL + cloudinaryImageId} alt={name} className="min-w-24 h-24 object-cover" />
+                <div>
+                  <h2 className="font-semibold">{name}</h2>
+                  <p className="text-gray-500 text-sm">{cuisines.join(', ')}</p>
+                </div>
+              </article>
+            </Link>
             <hr className="mt-4 text-gray-300" />
-          </Link>
+          </>
         ))}
-      </div>
-    </section>
+      </section>
+    </main>
   );
 }
 
