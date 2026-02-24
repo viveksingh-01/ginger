@@ -1,5 +1,6 @@
 import { Search } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { IMAGE_URL } from '../constants';
 import type IRestaurant from '../models/restaurant';
 
@@ -59,7 +60,7 @@ function SearchBox() {
       <div className="mt-4 p-4 space-y-4">
         {query && results.length === 0 && <p className="text-gray-500 text-center">No restaurants found.</p>}
         {results?.map(({ id, name, cuisines, cloudinaryImageId }) => (
-          <>
+          <Link to={`/restaurant/${id}`}>
             <div key={id} className="flex items-center gap-4 transition">
               <img src={IMAGE_URL + cloudinaryImageId} alt={name} className="min-w-24 h-24 object-cover" />
               <div>
@@ -68,7 +69,7 @@ function SearchBox() {
               </div>
             </div>
             <hr className="mt-4 text-gray-300" />
-          </>
+          </Link>
         ))}
       </div>
     </section>
