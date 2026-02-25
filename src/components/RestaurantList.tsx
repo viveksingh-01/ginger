@@ -89,8 +89,8 @@ const RestaurantList: React.FC = () => {
           "
         >
           {restaurants.map(restaurant => (
-            <Link to={`/restaurant/${restaurant.id}`}>
-              <RestaurantCard key={restaurant.id} restaurant={restaurant} />
+            <Link to={`/restaurant/${restaurant.id}`} key={restaurant.id}>
+              <RestaurantCard restaurant={restaurant} />
             </Link>
           ))}
         </div>
