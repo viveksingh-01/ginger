@@ -46,7 +46,7 @@ function SearchBox() {
   };
 
   return (
-    <main className="mx-auto w-6/12 mt-24 p-3">
+    <main className="mx-auto w-full max-w-[720px] mt-24 p-3">
       <section className="relative w-full">
         <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-(--text-muted)" />
         <input
