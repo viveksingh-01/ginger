@@ -8,10 +8,6 @@ function SearchBox() {
   const [query, setQuery] = useState('');
   const results = useSearch(query);
 
-  const handleChange: React.ChangeEventHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(e.target.value);
-  };
-
   return (
     <main className="mx-auto w-full max-w-[720px] mt-24 p-3">
       <section className="relative w-full">
@@ -19,7 +15,7 @@ function SearchBox() {
         <input
           type="text"
           value={query}
-          onChange={handleChange}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value)}
           placeholder="Search for restaurants"
           className="w-full border border-(--border-light) py-3 px-6 pl-12 focus:outline-none focus:ring-2 ring-ginger"
         />
