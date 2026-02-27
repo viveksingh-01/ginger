@@ -1,45 +1,12 @@
 import { Search } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { IMAGE_URL } from '../constants';
-import type IRestaurant from '../models/restaurant';
-
-const BASE_URL = import.meta.env.VITE_GINGER_API_URL;
+import useSearch from '../hooks/useSearch';
 
 function SearchBox() {
   const [query, setQuery] = useState('');
-  const [debouncedQuery, setDebouncedQuery] = useState('');
-  const [results, setResults] = useState<IRestaurant[]>([]);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebouncedQuery(query);
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, [query]);
-
-  useEffect(() => {
-    if (!debouncedQuery) {
-      setResults([]);
-      return;
-    }
-
-    const controller = new AbortController();
-    fetchResults(debouncedQuery, controller);
-
-    return () => controller.abort();
-  }, [debouncedQuery]);
-
-  const fetchResults = async (query: string, { signal }: AbortController) => {
-    try {
-      const res = await fetch(`${BASE_URL}/restaurants/search?q=${query}`, { signal });
-      const data = await res.json();
-      setResults(data);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  const results = useSearch(query);
 
   const handleChange: React.ChangeEventHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
@@ -63,7 +30,7 @@ function SearchBox() {
           <>
             <Link to={`/restaurant/${id}`}>
               <article key={id} className="flex items-center gap-4 transition">
-                <img src={IMAGE_URL + cloudinaryImageId} alt={name} className="min-w-24 h-24 object-cover" />
+                <img src={IMAGE_URL + cloudinaryImageId} alt={name} className="min-w-24 h-24 object-cover rounded-lg" />
                 <div>
                   <h2 className="font-semibold">{name}</h2>
                   <p className="text-gray-500 text-sm">{cuisines.join(', ')}</p>
