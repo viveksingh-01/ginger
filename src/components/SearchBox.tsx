@@ -6,7 +6,7 @@ import useSearch from '../hooks/useSearch';
 
 function SearchBox() {
   const [query, setQuery] = useState('');
-  const results = useSearch(query);
+  const { results, isLoading } = useSearch(query);
 
   return (
     <main className="mx-auto w-full max-w-[720px] mt-24 p-3">
@@ -21,7 +21,9 @@ function SearchBox() {
         />
       </section>
       <section className="mt-4 p-4 space-y-4">
-        {query && results.length === 0 && <p className="text-gray-500 text-center">No restaurants found.</p>}
+        {query && !isLoading && results.length === 0 && (
+          <p className="text-gray-500 text-center">No restaurants found.</p>
+        )}
         {results?.map(({ id, name, cuisines, cloudinaryImageId }) => (
           <>
             <Link to={`/restaurant/${id}`}>
