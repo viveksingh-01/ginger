@@ -46,9 +46,14 @@ const RestaurantMenu: React.FC = () => {
                     </div>
                     <p className="mt-2 text-gray-600 text-sm">{description}</p>
                   </div>
-                  {imageId && (
-                    <img src={IMAGE_URL + imageId} alt={name} className="w-40 h-36 object-cover rounded-xl" />
-                  )}
+                  <div className="relative w-40 h-36 shrink-0">
+                    {imageId && (
+                      <img src={IMAGE_URL + imageId} alt={name} className="w-full h-full object-cover rounded-xl" />
+                    )}
+                    <button className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-white text-green-600 font-bold px-8 py-1 rounded-lg shadow-md border border-gray-200">
+                      ADD
+                    </button>
+                  </div>
                 </li>
                 <hr className="text-gray-300" />
               </>
