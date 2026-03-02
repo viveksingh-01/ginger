@@ -1,6 +1,8 @@
 import { FaStar } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
 import { IMAGE_URL } from '../constants';
 import type { IMenuItem } from '../models/menu';
+import { addItem } from '../store/cartSlice';
 
 type MenuItemProps = {
   item: IMenuItem;
@@ -8,6 +10,8 @@ type MenuItemProps = {
 
 const MenuItem: React.FC<MenuItemProps> = ({ item }) => {
   const { id, name, description, price, finalPrice, itemPriceStrikeOff, imageId, ratings } = item;
+  const dispatch = useDispatch();
+
   return (
     <>
       <li key={id} className="flex justify-between items-start">
@@ -25,7 +29,10 @@ const MenuItem: React.FC<MenuItemProps> = ({ item }) => {
         </div>
         <div className="relative w-40 h-36 shrink-0">
           {imageId && <img src={IMAGE_URL + imageId} alt={name} className="w-full h-full object-cover rounded-xl" />}
-          <button className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-white text-green-600 font-bold px-8 py-1 rounded-lg shadow-md border border-gray-200">
+          <button
+            onClick={() => dispatch(addItem(item))}
+            className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-white text-green-600 font-bold px-8 py-1 rounded-lg shadow-md border border-gray-200"
+          >
             ADD
           </button>
         </div>
