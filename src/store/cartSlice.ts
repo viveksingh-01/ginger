@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import type { IMenuItem } from '../models/menu';
 
 type CartState = {
@@ -12,7 +12,12 @@ const initialState: CartState = {
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
-  reducers: {},
+  reducers: {
+    addItem: (state: CartState, action: PayloadAction<IMenuItem>) => {
+      state.items.push(action.payload);
+    },
+  },
 });
 
+export const { addItem } = cartSlice.actions;
 export default cartSlice.reducer;
