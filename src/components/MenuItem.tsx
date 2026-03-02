@@ -31,7 +31,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ item }) => {
           {imageId && <img src={IMAGE_URL + imageId} alt={name} className="w-full h-full object-cover rounded-xl" />}
           <button
             onClick={() => dispatch(addItem(item))}
-            className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-white text-green-600 font-bold px-8 py-1 rounded-lg shadow-md border border-gray-200"
+            className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-8 py-1 bg-white text-green-600 font-bold rounded-lg shadow-md border border-gray-200 cursor-pointer hover:bg-gray-200 transition"
           >
             ADD
           </button>
