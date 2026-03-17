@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { IMAGE_URL } from '../constants';
@@ -10,7 +11,13 @@ type MenuItemProps = {
 
 const MenuItem: React.FC<MenuItemProps> = ({ item }) => {
   const { id, name, description, price, finalPrice, itemPriceStrikeOff, imageId, ratings } = item;
+  const [count, setCount] = useState(0);
   const dispatch = useDispatch();
+
+  const addItemToCart = (item: IMenuItem) => {
+    setCount(prevCount => prevCount + 1);
+    dispatch(addItem(item));
+  };
 
   return (
     <>
@@ -30,7 +37,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ item }) => {
         <div className="relative w-40 h-36 shrink-0">
           {imageId && <img src={IMAGE_URL + imageId} alt={name} className="w-full h-full object-cover rounded-xl" />}
           <button
-            onClick={() => dispatch(addItem(item))}
+            onClick={() => addItemToCart(item)}
             className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-8 py-1 bg-white text-green-600 font-bold rounded-lg shadow-md border border-gray-200 cursor-pointer hover:bg-gray-200 transition"
           >
             ADD
