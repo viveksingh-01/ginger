@@ -16,8 +16,14 @@ const cartSlice = createSlice({
     addItem: (state: CartState, action: PayloadAction<IMenuItem>) => {
       state.items.push(action.payload);
     },
+    removeItem: (state: CartState, action: PayloadAction<IMenuItem>) => {
+      const index = state.items.findIndex(item => item.id === action.payload.id);
+      if (index >= 0) {
+        state.items.splice(index, 1);
+      }
+    },
   },
 });
 
-export const { addItem } = cartSlice.actions;
+export const { addItem, removeItem } = cartSlice.actions;
 export default cartSlice.reducer;
