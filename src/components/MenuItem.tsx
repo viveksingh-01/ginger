@@ -36,12 +36,23 @@ const MenuItem: React.FC<MenuItemProps> = ({ item }) => {
         </div>
         <div className="relative w-40 h-36 shrink-0">
           {imageId && <img src={IMAGE_URL + imageId} alt={name} className="w-full h-full object-cover rounded-xl" />}
-          <button
-            onClick={() => addItemToCart(item)}
-            className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-8 py-1 bg-white text-green-600 font-bold rounded-lg shadow-md border border-gray-200 cursor-pointer hover:bg-gray-200 transition"
-          >
-            ADD
-          </button>
+          {count == 0 && (
+            <button
+              onClick={() => addItemToCart(item)}
+              className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-8 py-1 bg-white text-green-600 font-bold rounded-lg shadow-md border border-gray-200 cursor-pointer hover:bg-gray-200 transition"
+            >
+              ADD
+            </button>
+          )}
+          {count > 0 && (
+            <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-[96px] px-2 flex justify-between items-center rounded-md bg-green-500 text-white shadow-md text-lg font-semibold">
+              <span className="p-1 -mt-1 text-xl hover:cursor-pointer">-</span>
+              <span className="p-1">{count}</span>
+              <span className="p-1 -mt-1 text-xl hover:cursor-pointer" onClick={() => addItemToCart(item)}>
+                +
+              </span>
+            </div>
+          )}
         </div>
       </li>
       <hr className="text-gray-300" />
