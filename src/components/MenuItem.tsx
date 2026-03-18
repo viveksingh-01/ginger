@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { IMAGE_URL } from '../constants';
+import type ICartItem from '../models/cart-item';
 import type { IMenuItem } from '../models/menu';
 import { addItem, removeItem } from '../store/cartSlice';
 
@@ -14,12 +15,12 @@ const MenuItem: React.FC<MenuItemProps> = ({ item }) => {
   const [count, setCount] = useState(0);
   const dispatch = useDispatch();
 
-  const addItemToCart = (item: IMenuItem) => {
+  const addItemToCart = (item: ICartItem) => {
     setCount(prevCount => prevCount + 1);
     dispatch(addItem(item));
   };
 
-  const removeItemFromCart = (item: IMenuItem) => {
+  const removeItemFromCart = (item: ICartItem) => {
     setCount(prevCount => prevCount - 1);
     dispatch(removeItem(item));
   };
