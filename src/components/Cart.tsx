@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import type ICartItem from '../models/cart-item';
+import { addItem, removeItem } from '../store/cartSlice';
 import type store from '../store/store';
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState<ICartItem[]>([]);
 
   const items = useSelector((state: ReturnType<typeof store.getState>) => state.cart.items);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     populateCartItemsList();
@@ -29,6 +31,20 @@ const Cart = () => {
     return Array.from(new Map(itemsList.map(item => [item.id, item])).values());
   };
 
+  const incrementItemCount = (cartItem: ICartItem) => {
+    const menuItem = items.find(item => item.id === cartItem.id);
+    if (menuItem) {
+      dispatch(addItem(menuItem));
+    }
+  };
+
+  const decrementItemCount = (cartItem: ICartItem) => {
+    const menuItem = items.find(item => item.id === cartItem.id);
+    if (menuItem) {
+      dispatch(removeItem(menuItem));
+    }
+  };
+
   if (items.length === 0) return null;
   return (
     <main className="w-[480px] m-4 mx-auto p-2">
@@ -38,12 +54,20 @@ const Cart = () => {
           const { id, name, count, totalPrice } = item;
           return (
             <>
-              <article key={id} className="w-100 py-2 my-3 flex justify-between items-center">
+              <article key={id} className="w-full py-2 my-3 flex justify-between items-center">
                 <div className="flex flex-col">
                   <span className="text-gray">{name}</span>
                   <span className="text-lg font-semibold">&#8377;{(totalPrice || 0) / 100}</span>
                 </div>
-                <span className="p-1">{count}</span>
+                <div className="w-[96px] px-2 flex justify-between items-center rounded-md bg-green-500 text-white shadow-md text-lg font-semibold">
+                  <span className="p-1 -mt-1 text-xl hover:cursor-pointer" onClick={() => decrementItemCount(item)}>
+                    -
+                  </span>
+                  <span className="p-1">{count}</span>
+                  <span className="p-1 -mt-1 text-xl hover:cursor-pointer" onClick={() => incrementItemCount(item)}>
+                    +
+                  </span>
+                </div>
               </article>
               <hr className="text-gray-300" />
             </>
