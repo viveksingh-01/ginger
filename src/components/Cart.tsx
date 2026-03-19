@@ -6,6 +6,7 @@ import type store from '../store/store';
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState<ICartItem[]>([]);
+  const [cartTotal, setCartTotal] = useState(0);
 
   const items = useSelector((state: ReturnType<typeof store.getState>) => state.cart.items);
   const dispatch = useDispatch();
@@ -13,6 +14,10 @@ const Cart = () => {
   useEffect(() => {
     populateCartItemsList();
   }, [items]);
+
+  useEffect(() => {
+    calculateCartTotal();
+  }, [cartItems]);
 
   const populateCartItemsList = () => {
     const itemsList: ICartItem[] = [];
@@ -45,6 +50,14 @@ const Cart = () => {
     }
   };
 
+  const calculateCartTotal = () => {
+    let total = 0;
+    for (const item of cartItems) {
+      total += item.totalPrice || 0;
+    }
+    setCartTotal(total);
+  };
+
   if (items.length === 0) return null;
   return (
     <main className="w-[480px] m-4 mx-auto p-2">
@@ -73,6 +86,10 @@ const Cart = () => {
             </>
           );
         })}
+      </section>
+      <section className="flex justify-between">
+        <span className="text-md">Item Total</span>
+        <span className="font-semibold text-2xl">₹{cartTotal / 100}</span>
       </section>
     </main>
   );
