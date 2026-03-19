@@ -31,19 +31,22 @@ const Cart = () => {
 
   if (items.length === 0) return null;
   return (
-    <main className="w-[560px] m-4 mx-auto p-2">
+    <main className="w-[480px] m-4 mx-auto p-2">
       <h1 className="text-3xl">Cart</h1>
       <section className="my-5">
         {cartItems.map(item => {
-          const { id, name, count } = item;
+          const { id, name, count, totalPrice } = item;
           return (
-            <article
-              key={id}
-              className="w-100 p-2 px-3 mb-3 bg-gray-100 rounded-md flex justify-between items-center shadow-sm"
-            >
-              <span className="text-gray">{name}</span>
-              <span className="p-1">{count}</span>
-            </article>
+            <>
+              <article key={id} className="w-100 py-2 my-3 flex justify-between items-center">
+                <div className="flex flex-col">
+                  <span className="text-gray">{name}</span>
+                  <span className="text-lg font-semibold">&#8377;{(totalPrice || 0) / 100}</span>
+                </div>
+                <span className="p-1">{count}</span>
+              </article>
+              <hr className="text-gray-300" />
+            </>
           );
         })}
       </section>
