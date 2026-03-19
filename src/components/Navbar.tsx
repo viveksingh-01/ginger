@@ -37,7 +37,9 @@ const Navbar = () => {
             <NavItem icon={<Percent size={18} />} label="Offers" />
             <NavItem icon={<HelpCircle size={18} />} label="Help" />
             <NavItem icon={<User size={18} />} label="Sign In" />
-            <NavItem icon={<ShoppingCart size={18} />} label="Cart" badge={cartItems.length.toString()} />
+            <Link to={'/cart'}>
+              <NavItem icon={<ShoppingCart size={18} />} label="Cart" badge={cartItems.length.toString()} />
+            </Link>
           </div>
         </div>
       </div>
