@@ -37,7 +37,7 @@ const Navbar = () => {
             <NavItem icon={<Percent size={18} />} label="Offers" />
             <NavItem icon={<HelpCircle size={18} />} label="Help" />
             <NavItem icon={<User size={18} />} label="Sign In" />
-            <Link to={'/cart'}>
+            <Link to={'/checkout'}>
               <NavItem icon={<ShoppingCart size={18} />} label="Cart" badge={cartItems.length.toString()} />
             </Link>
           </div>

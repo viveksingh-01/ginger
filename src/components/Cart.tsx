@@ -61,7 +61,7 @@ const Cart = () => {
   if (items.length === 0) return null;
   return (
     <main className="w-[480px] m-4 mx-auto p-2">
-      <h1 className="text-3xl">Cart</h1>
+      <h1 className="mt-16 text-3xl text-gray-500">Checkout</h1>
       <section className="my-5">
         {cartItems.map(item => {
           const { id, name, count, totalPrice } = item;
