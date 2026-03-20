@@ -24,19 +24,27 @@ const Navbar = () => {
             <div className="hidden md:flex items-center gap-1 cursor-pointer">
               <MapPin size={18} className="text-ginger" />
               <span className="text-sm font-semibold text-(--text-primary)">Bangalore</span>
-              <span className="ml-1 text-xs text-(--text-muted)">Change</span>
+              <Link to={'/coming-soon'}>
+                <span className="ml-1 text-xs text-(--text-muted)">Change</span>
+              </Link>
             </div>
           </div>
 
           {/* Right */}
           <div className="flex items-center gap-6">
-            <NavItem icon={<Search size={18} />} label="Search" mobile />
             <Link to={'/search'}>
+              <NavItem icon={<Search size={18} />} label="Search" mobile />
               <NavItem icon={<Search size={18} />} label="Search" />
             </Link>
-            <NavItem icon={<Percent size={18} />} label="Offers" />
-            <NavItem icon={<HelpCircle size={18} />} label="Help" />
-            <NavItem icon={<User size={18} />} label="Sign In" />
+            <Link to={'/coming-soon'}>
+              <NavItem icon={<Percent size={18} />} label="Offers" />
+            </Link>
+            <Link to={'/coming-soon'}>
+              <NavItem icon={<HelpCircle size={18} />} label="Help" />
+            </Link>
+            <Link to={'/coming-soon'}>
+              <NavItem icon={<User size={18} />} label="Sign In" />
+            </Link>
             <Link to={'/checkout'}>
               <NavItem icon={<ShoppingCart size={18} />} label="Cart" badge={cartItems.length.toString()} />
             </Link>

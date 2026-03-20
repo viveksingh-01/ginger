@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App.tsx';
 import Cart from './components/Cart.tsx';
+import ComingSoon from './components/ComingSoon.tsx';
 import RestaurantList from './components/RestaurantList.tsx';
 import RestaurantMenu from './components/RestaurantMenu.tsx';
 import SearchBox from './components/SearchBox.tsx';
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
       { path: 'search', element: <SearchBox /> },
       { path: 'checkout', element: <Cart /> },
       { path: 'restaurant/:restaurantId', element: <RestaurantMenu /> },
+      { path: 'coming-soon', element: <ComingSoon /> },
     ],
   },
 ]);
