@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaStar } from 'react-icons/fa';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { IMAGE_URL } from '../constants';
 import type ICartItem from '../models/cart-item';
 import type { IMenuItem } from '../models/menu';
 import { addItem, removeItem } from '../store/cartSlice';
+import type store from '../store/store';
 
 type MenuItemProps = {
   item: IMenuItem;
@@ -13,7 +14,14 @@ type MenuItemProps = {
 const MenuItem: React.FC<MenuItemProps> = ({ item }) => {
   const { id, name, description, price, finalPrice, itemPriceStrikeOff, imageId, ratings } = item;
   const [count, setCount] = useState(0);
+
+  const cartItems = useSelector((state: ReturnType<typeof store.getState>) => state.cart.items);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const itemCount = cartItems.filter(item => item.id === id).length;
+    setCount(itemCount);
+  });
 
   const addItemToCart = (item: ICartItem) => {
     setCount(prevCount => prevCount + 1);
