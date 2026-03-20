@@ -1,6 +1,6 @@
 import { FaCircle, FaStar } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import useRestaurantDetails from '../hooks/useRestaurantDetails';
 import type store from '../store/store';
 import MenuItem from './MenuItem';
@@ -8,6 +8,7 @@ import MenuItem from './MenuItem';
 const RestaurantMenu: React.FC = () => {
   const { restaurantId } = useParams();
   const cartItems = useSelector((state: ReturnType<typeof store.getState>) => state.cart.items);
+  const navigate = useNavigate();
 
   if (!restaurantId) return;
   const { restaurant } = useRestaurantDetails(restaurantId || '');
@@ -39,7 +40,10 @@ const RestaurantMenu: React.FC = () => {
         </ul>
       </div>
       {cartItems.length > 0 && (
-        <div className="fixed bottom-0 w-full py-2 px-4 text-white bg-green-600 shadow-md">
+        <div
+          onClick={() => navigate('/checkout')}
+          className="fixed bottom-0 w-full py-2 px-4 text-white bg-green-600 shadow-md cursor-pointer"
+        >
           <div className="container mx-auto max-w-3xl px-6 flex justify-between">
             <span>{cartItems.length} item(s) added</span>
             <span className="font-bold">VIEW CART</span>
