@@ -12,9 +12,19 @@ const ComingSoon: React.FC<ComingSoonProps> = ({
   return (
     <div className="min-h-[70vh] flex items-center justify-center px-6">
       <div className="text-center max-w-md">
-        <ClockIcon className="w-16 h-16 mx-auto text-gray-400 mb-4 animate-pulse" />
-        <h1 className="text-2xl font-semibold text-gray-800 mb-2">{title}</h1>
+        {/* Icon */}
+        <ClockIcon className="w-16 h-16 mx-auto text-ginger mb-4 animate-pulse" />
+        {/* Title */}
+        <h1 className="text-2xl font-semibold text-gray-600 mb-2">{title}</h1>
+        {/* Description */}
         <p className="text-gray-500 mb-6">{description}</p>
+        {/* CTA */}
+        <button
+          onClick={() => window.history.back()}
+          className="px-8 py-3 bg-ginger text-white transition cursor-pointer"
+        >
+          Go Back
+        </button>
       </div>
     </div>
   );
