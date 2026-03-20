@@ -39,10 +39,13 @@ const RestaurantMenu: React.FC = () => {
           ))}
         </ul>
       </div>
-      {cartItemsCount > 0 && (
+      <div className="w-full fixed bottom-0 left-1/2 -translate-x-1/2 transition-all duration-500 ease-out">
         <div
           onClick={() => navigate('/checkout')}
-          className="fixed bottom-0 w-full py-2 px-4 text-white bg-green-600 shadow-md cursor-pointer"
+          className={`
+            py-2 px-4 shadow-lg text-white bg-green-600 cursor-pointer transition-all duration-500 ease-out
+            ${cartItemsCount > 0 ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0 pointer-events-none'}
+          `}
         >
           <div className="container mx-auto max-w-3xl px-6 flex justify-between">
             <span>
@@ -51,7 +54,7 @@ const RestaurantMenu: React.FC = () => {
             <span className="font-bold">VIEW CART</span>
           </div>
         </div>
-      )}
+      </div>
     </section>
   );
 };
