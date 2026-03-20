@@ -7,7 +7,7 @@ import MenuItem from './MenuItem';
 
 const RestaurantMenu: React.FC = () => {
   const { restaurantId } = useParams();
-  const cartItems = useSelector((state: ReturnType<typeof store.getState>) => state.cart.items);
+  const cartItemsCount = useSelector((state: ReturnType<typeof store.getState>) => state.cart.items).length;
   const navigate = useNavigate();
 
   if (!restaurantId) return;
@@ -39,13 +39,15 @@ const RestaurantMenu: React.FC = () => {
           ))}
         </ul>
       </div>
-      {cartItems.length > 0 && (
+      {cartItemsCount > 0 && (
         <div
           onClick={() => navigate('/checkout')}
           className="fixed bottom-0 w-full py-2 px-4 text-white bg-green-600 shadow-md cursor-pointer"
         >
           <div className="container mx-auto max-w-3xl px-6 flex justify-between">
-            <span>{cartItems.length} item(s) added</span>
+            <span>
+              {cartItemsCount} {cartItemsCount > 1 ? 'items' : 'item'} added
+            </span>
             <span className="font-bold">VIEW CART</span>
           </div>
         </div>
