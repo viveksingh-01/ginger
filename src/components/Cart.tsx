@@ -23,38 +23,54 @@ const Cart = () => {
   const cartTotal = uniqueItems.reduce((sum: number, item: ICartItem) => sum + (item.totalPrice ?? 0), 0);
 
   return (
-    <main className="w-[480px] m-4 mx-auto p-2">
-      <h1 className="mt-16 text-3xl text-gray-500">Checkout</h1>
-      <section className="my-5">
-        {uniqueItems.map(item => {
-          const { id, name, count, totalPrice } = item;
-          return (
-            <>
-              <article key={id} className="w-full py-2 my-3 flex justify-between items-center">
-                <div className="flex flex-col">
-                  <span className="text-gray">{name}</span>
-                  <span className="text-lg font-semibold">&#8377;{(totalPrice || 0) / 100}</span>
-                </div>
-                <div className="w-[96px] px-2 flex justify-between items-center rounded-md bg-green-500 text-white shadow-md text-lg font-semibold">
-                  <span className="p-1 -mt-1 text-xl hover:cursor-pointer" onClick={() => dispatch(removeItem(item))}>
-                    -
-                  </span>
-                  <span className="p-1">{count}</span>
-                  <span className="p-1 -mt-1 text-xl hover:cursor-pointer" onClick={() => dispatch(addItem(item))}>
-                    +
-                  </span>
-                </div>
-              </article>
-              <hr className="text-gray-300" />
-            </>
-          );
-        })}
-      </section>
-      <section className="flex justify-between">
-        <span className="text-md">Item Total</span>
-        <span className="font-semibold text-2xl">₹{cartTotal / 100}</span>
-      </section>
-    </main>
+    <div className="max-w-md mt-24 mx-auto pb-24 px-4">
+      {/* Header */}
+      <h1 className="text-2xl font-semibold text-gray-600 py-4">Your cart</h1>
+
+      {/* Items */}
+      <div className="divide-y divide-gray-100">
+        {uniqueItems.map(item => (
+          <div key={item.id} className="flex items-center justify-between py-4">
+            {/* Left */}
+            <div className="flex-1 pr-3 min-w-0">
+              <p className="text-sm font-medium text-gray-800 truncate">{item.name}</p>
+              <p className="text-sm text-gray-600 mt-1">₹{item.price / 100}</p>
+            </div>
+
+            {/* Stepper */}
+            <div className="flex items-center border border-gray-300 rounded-md overflow-hidden shrink-0">
+              <button
+                onClick={() => dispatch(removeItem(item))}
+                className="px-3 py-1 text-gray-600 hover:bg-gray-100 active:scale-95 transition"
+              >
+                -
+              </button>
+              <span className="px-3 text-ginger font-medium min-w-[24px] text-center">{item.count}</span>
+              <button
+                onClick={() => dispatch(addItem(item))}
+                className="px-3 py-1 text-ginger hover:bg-gray-100 active:scale-95 transition"
+              >
+                +
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Sticky Bottom Bar */}
+      <div className="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 p-4">
+        <div className="px-4 max-w-md mx-auto flex items-center justify-between">
+          <div>
+            <p className="text-xs text-ginger">Item Total</p>
+            <p className="text-xl font-semibold text-gray-900">₹{cartTotal / 100}</p>
+          </div>
+
+          <button className="px-8 py-2 bg-green-600 text-white rounded-sm font-medium hover:bg-green-700 cursor-pointer transition">
+            Proceed to checkout
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };
 
