@@ -7,8 +7,10 @@ import MenuItem from './MenuItem';
 
 const RestaurantMenu: React.FC = () => {
   const { restaurantId } = useParams();
-  const cartItemsCount = useSelector((state: ReturnType<typeof store.getState>) => state.cart.items).length;
   const navigate = useNavigate();
+
+  const cartItems = useSelector((state: ReturnType<typeof store.getState>) => state.cart.items);
+  const cartItemsCount = Array.from(new Map(cartItems.map(item => [item.id, item])).values()).length;
 
   if (!restaurantId) return;
   const { restaurant } = useRestaurantDetails(restaurantId || '');
