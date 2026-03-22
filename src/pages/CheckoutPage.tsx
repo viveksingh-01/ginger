@@ -1,3 +1,5 @@
+import { PAYMENT_LABELS } from '../constants/payment-method';
+
 const CheckoutPage = () => {
   return (
     <main className="bg-gray-50 min-h-screen">
@@ -8,9 +10,9 @@ const CheckoutPage = () => {
           {/* ================= LEFT SIDE ================= */}
           <div className="lg:col-span-2 space-y-6">
             {/* ADDRESS */}
-            <div className="bg-white shadow-sm p-8 hover:shadow-md transition-shadow duration-200">
+            <div className="p-8 bg-white shadow-sm">
               <h2 className="font-medium text-gray-500 mb-4">Delivery Address</h2>
-              <div className="space-y-1 text-sm text-gray-700">
+              <div className="py-4 px-6 bg-gray-50 space-y-1 text-sm text-gray-700">
                 <p className="text-lg font-medium text-gray-900">Home</p>
                 <p>A-123, Signature Apartments,</p>
                 <p>Electronic City Phase-1,</p>
@@ -18,7 +20,14 @@ const CheckoutPage = () => {
               </div>
             </div>
             {/* PAYMENT (UPDATED) */}
-            {/* TO-DO: Display Payment Method section */}
+            <div className="p-8 bg-white shadow-sm">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="font-medium text-gray-500">Payment Method</h2>
+              </div>
+
+              {/* SELECTED METHOD DISPLAY */}
+              <div className="py-4 px-6 bg-gray-50 text-sm text-gray-800 font-medium">{PAYMENT_LABELS['COD']}</div>
+            </div>
           </div>
           {/* ================= RIGHT SIDE (RECEIPT) ================= */}
           {/* TO-DO: Display Cart section with final amount */}
