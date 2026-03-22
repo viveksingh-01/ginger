@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* ===== Brand Theme ===== */
 :root {
@@ -16,6 +16,10 @@
 
   .bg-ginger {
     background-color: var(--ginger);
+  }
+
+  .border-ginger {
+    border-color: var(--ginger);
   }
 
   .hover\:text-ginger:hover {
