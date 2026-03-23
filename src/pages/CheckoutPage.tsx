@@ -7,7 +7,9 @@ import type store from '../store/store';
 const CheckoutPage = () => {
   const items = useSelector((state: ReturnType<typeof store.getState>) => state.cart.items);
   const dispatch = useDispatch();
-  const { cartItems } = useCartDetails(items);
+  const { cartItems, cartTotal } = useCartDetails(items);
+  const taxes = Math.round(cartTotal * 0.05);
+  const total = cartTotal + taxes;
 
   return (
     <main className="bg-gray-50 min-h-screen">
@@ -70,6 +72,22 @@ const CheckoutPage = () => {
                   </div>
                 </div>
               ))}
+            </div>
+            <div className="border-t border-dashed border-gray-300 my-3" />
+            <div className="space-y-2 text-sm">
+              <div className="flex justify-between text-gray-600">
+                <span>Subtotal</span>
+                <span>₹{cartTotal / 100}</span>
+              </div>
+              <div className="flex justify-between text-gray-600">
+                <span>GST (5%)</span>
+                <span>₹{taxes / 100}</span>
+              </div>
+              <div className="border-t border-dashed border-gray-300 my-3" />
+              <div className="flex justify-between text-base font-semibold text-gray-900">
+                <span>Total</span>
+                <span className="text-ginger">₹{total / 100}</span>
+              </div>
             </div>
           </div>
         </div>
