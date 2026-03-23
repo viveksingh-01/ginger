@@ -11,6 +11,18 @@ const CheckoutPage = () => {
   const taxes = Math.round(cartTotal * 0.05);
   const total = cartTotal + taxes;
 
+  const handleClick = () => {
+    // mimic Order payload creation
+    const orderId = Date.now().toString();
+    const orderPayload = {
+      id: orderId,
+      items: cartItems,
+      total,
+      status: 'PLACED',
+    };
+    console.log('Order: ', orderPayload);
+  };
+
   return (
     <main className="bg-gray-50 min-h-screen">
       <div className="max-w-7xl mx-auto px-6 py-6 pb-24">
@@ -40,55 +52,62 @@ const CheckoutPage = () => {
             </div>
           </div>
           {/* ================= RIGHT SIDE (RECEIPT) ================= */}
-          {/* TO-DO: Display Cart section with final amount */}
-          <div className="bg-white shadow-sm p-6 mb-4">
-            <h2 className="text-sm font-medium text-gray-500 mb-2 uppercase tracking-wide">YOUR CART</h2>
+          <div className="lg:col-span-1">
+            <div className="bg-white shadow-sm p-6 mb-4">
+              <h2 className="text-sm font-medium text-gray-500 mb-2 uppercase tracking-wide">YOUR CART</h2>
+              {/* Items */}
+              <div className="divide-y divide-gray-100">
+                {cartItems.map(item => (
+                  <div key={item.id} className="flex items-center justify-between py-4">
+                    {/* Left */}
+                    <div className="flex-1 pr-3 min-w-0">
+                      <p className="text-sm font-medium text-gray-800 truncate">{item.name}</p>
+                      <p className="text-sm text-gray-600 mt-1">₹{item.price / 100}</p>
+                    </div>
 
-            {/* Items */}
-            <div className="divide-y divide-gray-100">
-              {cartItems.map(item => (
-                <div key={item.id} className="flex items-center justify-between py-4">
-                  {/* Left */}
-                  <div className="flex-1 pr-3 min-w-0">
-                    <p className="text-sm font-medium text-gray-800 truncate">{item.name}</p>
-                    <p className="text-sm text-gray-600 mt-1">₹{item.price / 100}</p>
+                    {/* Stepper */}
+                    <div className="flex items-center border border-gray-300 rounded-md overflow-hidden shrink-0">
+                      <button
+                        onClick={() => dispatch(removeItem(item))}
+                        className="px-3 py-1 text-gray-600 hover:bg-gray-100 active:scale-95 transition"
+                      >
+                        -
+                      </button>
+                      <span className="px-3 text-ginger font-medium min-w-[24px] text-center">{item.count}</span>
+                      <button
+                        onClick={() => dispatch(addItem(item))}
+                        className="px-3 py-1 text-ginger hover:bg-gray-100 active:scale-95 transition"
+                      >
+                        +
+                      </button>
+                    </div>
                   </div>
-
-                  {/* Stepper */}
-                  <div className="flex items-center border border-gray-300 rounded-md overflow-hidden shrink-0">
-                    <button
-                      onClick={() => dispatch(removeItem(item))}
-                      className="px-3 py-1 text-gray-600 hover:bg-gray-100 active:scale-95 transition"
-                    >
-                      -
-                    </button>
-                    <span className="px-3 text-ginger font-medium min-w-[24px] text-center">{item.count}</span>
-                    <button
-                      onClick={() => dispatch(addItem(item))}
-                      className="px-3 py-1 text-ginger hover:bg-gray-100 active:scale-95 transition"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="border-t border-dashed border-gray-300 my-3" />
-            <div className="space-y-2 text-sm">
-              <div className="flex justify-between text-gray-600">
-                <span>Subtotal</span>
-                <span>₹{cartTotal / 100}</span>
-              </div>
-              <div className="flex justify-between text-gray-600">
-                <span>GST (5%)</span>
-                <span>₹{taxes / 100}</span>
+                ))}
               </div>
               <div className="border-t border-dashed border-gray-300 my-3" />
-              <div className="flex justify-between text-base font-semibold text-gray-900">
-                <span>Total</span>
-                <span className="text-ginger">₹{total / 100}</span>
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between text-gray-600">
+                  <span>Subtotal</span>
+                  <span>₹{cartTotal / 100}</span>
+                </div>
+                <div className="flex justify-between text-gray-600">
+                  <span>GST (5%)</span>
+                  <span>₹{taxes / 100}</span>
+                </div>
+                <div className="border-t border-dashed border-gray-300 my-3" />
+                <div className="flex justify-between text-base font-semibold text-gray-900">
+                  <span>Total</span>
+                  <span className="text-ginger">₹{total / 100}</span>
+                </div>
               </div>
             </div>
+            {/* PLACE ORDER Button */}
+            <button
+              onClick={handleClick}
+              className="w-full py-3 px-6 shadow-sm bg-green-600 text-white font-medium hover:bg-green-700 cursor-pointer transition"
+            >
+              Place Order
+            </button>
           </div>
         </div>
       </div>
