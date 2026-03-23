@@ -5,8 +5,10 @@ import { addItem, removeItem } from '../store/cartSlice';
 import type store from '../store/store';
 
 const CheckoutPage = () => {
+  const address = useSelector((state: ReturnType<typeof store.getState>) => state.checkout.address);
   const items = useSelector((state: ReturnType<typeof store.getState>) => state.cart.items);
   const dispatch = useDispatch();
+
   const { cartItems, cartTotal } = useCartDetails(items);
   const taxes = Math.round(cartTotal * 0.05);
   const total = cartTotal + taxes;
@@ -34,12 +36,20 @@ const CheckoutPage = () => {
             {/* ADDRESS */}
             <div className="p-6 bg-white shadow-sm">
               <h2 className="font-medium text-gray-500 mb-4">Delivery Address</h2>
-              <div className="py-4 px-6 bg-gray-50 space-y-1 text-sm text-gray-700">
-                <p className="text-lg font-medium text-gray-900">Home</p>
-                <p>A-123, Signature Apartments,</p>
-                <p>Electronic City Phase-1,</p>
-                <p>Bangalore, Karnataka - 560100</p>
-              </div>
+              {address ? (
+                <div className="py-4 px-6 bg-gray-50 space-y-1 text-sm text-gray-700">
+                  <p className="text-lg font-medium text-gray-900">{address.annotation}</p>
+                  <p>{address.house}</p>
+                  <p>{address.area}</p>
+                  <p>
+                    {address.city}, {address.state} - {address.pincode}
+                  </p>
+                </div>
+              ) : (
+                <button className="py-3 px-8 shadow-sm bg-green-600 text-white font-medium hover:bg-green-700 cursor-pointer transition">
+                  Add new address
+                </button>
+              )}
             </div>
             {/* PAYMENT (UPDATED) */}
             <div className="p-6 bg-white shadow-sm">
