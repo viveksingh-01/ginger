@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { PAYMENT_LABELS } from '../constants/payment-method';
 import useCartDetails from '../hooks/useCartDetails';
 import { addItem, removeItem } from '../store/cartSlice';
@@ -8,6 +9,8 @@ const CheckoutPage = () => {
   const address = useSelector((state: ReturnType<typeof store.getState>) => state.checkout.address);
   const items = useSelector((state: ReturnType<typeof store.getState>) => state.cart.items);
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   const { cartItems, cartTotal } = useCartDetails(items);
   const taxes = Math.round(cartTotal * 0.05);
@@ -46,7 +49,10 @@ const CheckoutPage = () => {
                   </p>
                 </div>
               ) : (
-                <button className="py-3 px-8 shadow-sm bg-green-600 text-white font-medium hover:bg-green-700 cursor-pointer transition">
+                <button
+                  onClick={() => navigate('/manage-address')}
+                  className="py-3 px-8 shadow-sm bg-green-600 text-white font-medium hover:bg-green-700 cursor-pointer transition"
+                >
                   Add new address
                 </button>
               )}
