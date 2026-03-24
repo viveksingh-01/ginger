@@ -36,7 +36,15 @@ const CheckoutPage = () => {
           <div className="lg:col-span-2 space-y-6">
             {/* ADDRESS */}
             <div className="p-6 bg-white shadow-sm">
-              <h2 className="font-medium text-gray-500 mb-4">Delivery Address</h2>
+              <div className="flex justify-between items-center">
+                <h2 className="font-medium text-gray-900 mb-4">Delivery Address</h2>
+                <span
+                  onClick={() => navigate('/manage-address')}
+                  className="p-2 mb-2 text-sm font-bold text-ginger uppercase cursor-pointer"
+                >
+                  CHANGE
+                </span>
+              </div>
               {address ? (
                 <div className="py-4 px-6 bg-gray-50 space-y-1 text-sm text-gray-700">
                   <p className="text-lg font-medium text-gray-900">{address.annotation}</p>
@@ -58,7 +66,7 @@ const CheckoutPage = () => {
             {/* PAYMENT (UPDATED) */}
             <div className="p-6 bg-white shadow-sm">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="font-medium text-gray-500">Payment Method</h2>
+                <h2 className="font-medium text-gray-900">Payment Method</h2>
               </div>
 
               {/* SELECTED METHOD DISPLAY */}
