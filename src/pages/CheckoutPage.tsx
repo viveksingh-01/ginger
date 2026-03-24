@@ -12,9 +12,7 @@ const CheckoutPage = () => {
 
   const navigate = useNavigate();
 
-  const { cartItems, cartTotal } = useCartDetails(items);
-  const taxes = Math.round(cartTotal * 0.05);
-  const total = cartTotal + taxes;
+  const { cartItems, cartTotal, taxes, total } = useCartDetails(items);
 
   const handleClick = () => {
     // mimic Order payload creation

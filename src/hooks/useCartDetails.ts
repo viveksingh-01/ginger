@@ -12,11 +12,15 @@ const useCartDetails = (items: ICartItem[]) => {
     return acc;
   }, []);
 
-  const total = uniqueItems.reduce((sum: number, item: ICartItem) => sum + (item.totalPrice ?? 0), 0);
+  const cartTotal = uniqueItems.reduce((sum: number, item: ICartItem) => sum + (item.totalPrice ?? 0), 0);
+  const taxes = Math.round(cartTotal * 0.05);
+  const total = cartTotal + taxes;
 
   return {
     cartItems: uniqueItems,
-    cartTotal: total,
+    cartTotal,
+    taxes,
+    total,
   };
 };
 
