@@ -10,6 +10,7 @@ import RestaurantList from './components/RestaurantList.tsx';
 import RestaurantMenu from './components/RestaurantMenu.tsx';
 import SearchBox from './components/SearchBox.tsx';
 import './index.css';
+import AddCardPage from './pages/AddCardPage.tsx';
 import CheckoutPage from './pages/CheckoutPage.tsx';
 import PaymentPage from './pages/PaymentPage.tsx';
 import store from './store/store.ts';
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
       { path: 'manage-address', element: <AddressPage /> },
       { path: 'checkout', element: <CheckoutPage /> },
       { path: 'payments', element: <PaymentPage /> },
+      { path: 'payments/add-card', element: <AddCardPage /> },
       { path: 'coming-soon', element: <ComingSoon /> },
     ],
   },

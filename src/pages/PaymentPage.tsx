@@ -43,7 +43,7 @@ const PaymentPage = () => {
           {/* Add New Card */}
           <div className="bg-white rounded-2xl shadow-sm cursor-pointer hover:shadow-md transition mb-4">
             <div
-              onClick={() => navigate('/add-card')}
+              onClick={() => navigate('add-card')}
               className="p-4 rounded-2xl bg-white flex items-center gap-3 cursor-pointer transition"
             >
               <span className="w-10 h-10 bg-gray-100 rounded-md flex items-center justify-center text-lg text-ginger">
