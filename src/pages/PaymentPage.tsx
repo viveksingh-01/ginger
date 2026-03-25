@@ -1,5 +1,6 @@
 import { ArrowLeft } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { SiMastercard, SiVisa } from 'react-icons/si';
 import { useNavigate } from 'react-router-dom';
 import { PAYMENT_CARDS } from '../data/payment-cards';
 import type IPaymentCard from '../models/payment-card';
@@ -20,6 +21,14 @@ const PaymentPage = () => {
 
   const handlePaymentClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
+  };
+
+  const getCardIcon = ({ merchant }: IPaymentCard) => {
+    if (merchant == 'MASTERCARD') {
+      return <SiMastercard size={28} color="#EB001B" />;
+    } else if (merchant == 'VISA') {
+      return <SiVisa size={28} color="#1A1F71" />;
+    }
   };
 
   return (
@@ -64,45 +73,46 @@ const PaymentPage = () => {
                   return (
                     <div
                       key={card.id}
-                      className="px-4 py-4 cursor-pointer"
+                      className="px-4 py-4 flex items-start justify-between gap-4 cursor-pointer"
                       onClick={() => {
                         setSelectedCardId(card.id);
                         setCvv('');
                       }}
                     >
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 bg-gray-100 rounded-md flex items-center justify-center">💳</div>
+                      <div className="w-10 h-10 bg-gray-100 rounded-md flex items-center justify-center">
+                        {getCardIcon(card)}
+                      </div>
+                      <div className="mt-1 flex flex-col flex-1">
+                        <div className="flex justify-between items-center">
                           <div className="font-medium text-gray-800 flex items-center">
                             {card.nickname || card.name}
                             <span className="text-gray-300 font-extralight text-lg mx-2">|</span>
                             <span className="text-sm">•••• {card.last4}</span>
                           </div>
-                        </div>
-                        <div
-                          className={`w-6 h-6 rounded-full flex items-center justify-center ${isSelected ? 'bg-green-600 text-white' : 'border border-gray-300'}`}
-                        >
-                          {isSelected && '✓'}
-                        </div>
-                      </div>
-
-                      {isSelected && (
-                        <div className="flex items-center gap-3 mt-4">
-                          <input
-                            placeholder="CVV"
-                            value={cvv}
-                            onChange={e => setCvv(e.target.value.replace(/\D/g, '').slice(0, 3))}
-                            className="w-20 border border-green-600 rounded-xl p-3 text-sm text-center focus:outline-none"
-                          />
-                          <button
-                            onClick={e => handlePaymentClick(e)}
-                            disabled={cvv.length !== 3}
-                            className={`flex-1 py-3 rounded-xl text-white font-medium ${cvv.length === 3 ? 'bg-green-600 cursor-pointer hover:bg-green-800 transition' : 'bg-gray-300 cursor-not-allowed'}`}
+                          <div
+                            className={`w-6 h-6 rounded-full flex items-center justify-center ${isSelected ? 'bg-green-600 text-white' : 'border border-gray-300'}`}
                           >
-                            Pay ₹{totalAmount}
-                          </button>
+                            {isSelected && '✓'}
+                          </div>
                         </div>
-                      )}
+                        {isSelected && (
+                          <div className="flex items-center gap-3 mt-4">
+                            <input
+                              placeholder="CVV"
+                              value={cvv}
+                              onChange={e => setCvv(e.target.value.replace(/\D/g, '').slice(0, 3))}
+                              className="w-20 border border-green-600 rounded-xl p-3 text-sm text-center focus:outline-none"
+                            />
+                            <button
+                              onClick={e => handlePaymentClick(e)}
+                              disabled={cvv.length !== 3}
+                              className={`flex-1 py-3 rounded-xl text-white font-medium ${cvv.length === 3 ? 'bg-green-600 cursor-pointer hover:bg-green-800 transition' : 'bg-gray-300 cursor-not-allowed'}`}
+                            >
+                              Pay ₹{totalAmount}
+                            </button>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   );
                 })
