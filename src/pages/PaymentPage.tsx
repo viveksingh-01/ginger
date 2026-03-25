@@ -1,0 +1,120 @@
+import { ArrowLeft } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { PAYMENT_CARDS } from '../data/payment-cards';
+import type IPaymentCard from '../models/payment-card';
+
+const PaymentPage = () => {
+  const navigate = useNavigate();
+
+  const [cards, setCards] = useState<IPaymentCard[]>([]);
+  const [selectedCardId, setSelectedCardId] = useState<number | null>(null);
+  const [cvv, setCvv] = useState('');
+
+  const totalAmount = 214;
+
+  useEffect(() => {
+    const savedCards = PAYMENT_CARDS;
+    setCards(savedCards);
+  }, []);
+
+  const handlePaymentClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+  };
+
+  return (
+    <main className="bg-gray-100 min-h-screen">
+      <div className="max-w-3xl mx-auto p-4 pb-24">
+        {/* HEADER */}
+        <div className="flex items-center gap-3 mb-8">
+          <ArrowLeft className="w-5 h-5 cursor-pointer text-gray-700" onClick={() => navigate(-1)} />
+          <div>
+            <h1 className="text-lg font-semibold text-gray-900">Payment Options</h1>
+            {/* TO-DO: Replace hard-coded info with dynamic data */}
+            <p className="text-sm text-gray-500">
+              1 item · Total: ₹{totalAmount} · <span className="text-green-600 font-medium">Savings of ₹20</span>
+            </p>
+          </div>
+        </div>
+
+        {/* ================= CARDS SECTION ================= */}
+        <section className="mb-6">
+          <h2 className="font-semibold text-gray-800 mb-4">Credit & Debit Cards</h2>
+          {/* Add New Card */}
+          <div className="bg-white rounded-2xl shadow-sm cursor-pointer hover:shadow-md transition mb-4">
+            <div
+              onClick={() => navigate('/add-card')}
+              className="p-4 rounded-2xl bg-white flex items-center gap-3 cursor-pointer transition"
+            >
+              <span className="w-10 h-10 bg-gray-100 rounded-md flex items-center justify-center text-lg text-ginger">
+                +
+              </span>
+              <div>
+                <p className="text-sm font-medium text-ginger">Add New Card</p>
+                <p className="text-xs text-gray-500">Save and Pay via Cards.</p>
+              </div>
+            </div>
+            <div className="border-t border-gray-100" />
+
+            {/* List of saved cards */}
+            <div className="bg-white rounded-2xl shadow-sm divide-y divide-gray-200">
+              {cards.length > 0 ? (
+                cards.map(card => {
+                  const isSelected = selectedCardId === card.id;
+                  return (
+                    <div
+                      key={card.id}
+                      className="px-4 py-4 cursor-pointer"
+                      onClick={() => {
+                        setSelectedCardId(card.id);
+                        setCvv('');
+                      }}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 bg-gray-100 rounded-md flex items-center justify-center">💳</div>
+                          <div className="font-medium text-gray-800 flex items-center">
+                            {card.nickname || card.name}
+                            <span className="text-gray-300 font-extralight text-lg mx-2">|</span>
+                            <span className="text-sm">•••• {card.last4}</span>
+                          </div>
+                        </div>
+                        <div
+                          className={`w-6 h-6 rounded-full flex items-center justify-center ${isSelected ? 'bg-green-600 text-white' : 'border border-gray-300'}`}
+                        >
+                          {isSelected && '✓'}
+                        </div>
+                      </div>
+
+                      {isSelected && (
+                        <div className="flex items-center gap-3 mt-4">
+                          <input
+                            placeholder="CVV"
+                            value={cvv}
+                            onChange={e => setCvv(e.target.value.replace(/\D/g, '').slice(0, 3))}
+                            className="w-20 border border-green-600 rounded-xl p-3 text-sm text-center focus:outline-none"
+                          />
+                          <button
+                            onClick={e => handlePaymentClick(e)}
+                            disabled={cvv.length !== 3}
+                            className={`flex-1 py-3 rounded-xl text-white font-medium ${cvv.length === 3 ? 'bg-green-600 cursor-pointer hover:bg-green-800 transition' : 'bg-gray-300 cursor-not-allowed'}`}
+                          >
+                            Pay ₹{totalAmount}
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })
+              ) : (
+                <div className="px-4 py-4 text-sm text-gray-500">No saved cards</div>
+              )}
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  );
+};
+
+export default PaymentPage;

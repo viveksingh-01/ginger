@@ -5,11 +5,13 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App.tsx';
 import AddressPage from './components/AddressPage.tsx';
 import ComingSoon from './components/ComingSoon.tsx';
+
 import RestaurantList from './components/RestaurantList.tsx';
 import RestaurantMenu from './components/RestaurantMenu.tsx';
 import SearchBox from './components/SearchBox.tsx';
 import './index.css';
 import CheckoutPage from './pages/CheckoutPage.tsx';
+import PaymentPage from './pages/PaymentPage.tsx';
 import store from './store/store.ts';
 
 const router = createBrowserRouter([
@@ -18,10 +20,11 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: '/', element: <RestaurantList /> },
-      { path: 'search', element: <SearchBox /> },
-      { path: 'checkout', element: <CheckoutPage /> },
-      { path: 'manage-address', element: <AddressPage /> },
       { path: 'restaurant/:restaurantId', element: <RestaurantMenu /> },
+      { path: 'search', element: <SearchBox /> },
+      { path: 'manage-address', element: <AddressPage /> },
+      { path: 'checkout', element: <CheckoutPage /> },
+      { path: 'payments', element: <PaymentPage /> },
       { path: 'coming-soon', element: <ComingSoon /> },
     ],
   },
