@@ -1,4 +1,4 @@
-export type CardMerchant = 'VISA' | 'MASTERCARD';
+export type CardMerchant = 'VISA' | 'MASTERCARD' | 'RUPAY' | 'AMEX';
 
 export default interface IPaymentCard {
   id: number;
