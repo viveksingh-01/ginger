@@ -56,13 +56,13 @@ const PaymentPage = () => {
         <section className="mb-6">
           <h2 className="font-semibold text-gray-800 mb-4">UPI Payment</h2>
 
-          <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
-            {UPI_OPTIONS.map((upi, idx) => {
+          <div className="bg-white rounded-2xl shadow-sm divide-y divide-gray-100 overflow-hidden">
+            {UPI_OPTIONS.map(upi => {
               const isSelected = selectedPaymentId === upi.id;
               return (
                 <div key={upi.id}>
                   <div
-                    className={`px-4 py-4 cursor-pointer flex items-start gap-3 hover:bg-gray-50 transition`}
+                    className={`px-4 py-4 cursor-pointer flex items-start gap-4 hover:bg-gray-50 transition`}
                     onClick={() => {
                       setSelectedPaymentId(upi.id);
                       setCvv('');
@@ -70,12 +70,12 @@ const PaymentPage = () => {
                     }}
                   >
                     {/* Header row */}
-                    <div className="w-10 h-10 bg-gray-100 rounded-md flex items-center justify-center text-lg">
-                      <img src={upi.icon} alt={upi.name} className="w-6 h-6" />
+                    <div className="w-10 h-10 border border-gray-200 rounded-md flex items-center justify-center text-lg">
+                      <img src={upi.icon} alt={upi.name} className="w-7 h-7" />
                     </div>
-                    <div className="mt-1 flex flex-col flex-1">
+                    <div className="mt-2 flex flex-col flex-1">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="font-medium text-gray-600">{upi.name}</span>
+                        <span className=" text-gray-900">{upi.name}</span>
                         <span
                           className={`w-6 h-6 rounded-full flex items-center justify-center ${isSelected ? 'bg-green-600 text-white' : 'border border-gray-300'}`}
                         >
@@ -105,9 +105,6 @@ const PaymentPage = () => {
                       )}
                     </div>
                   </div>
-
-                  {/* Divider except last item */}
-                  {idx !== 2 && <div className="border-t border-gray-100" />}
                 </div>
               );
             })}
@@ -134,7 +131,7 @@ const PaymentPage = () => {
             <div className="border-t border-gray-100" />
 
             {/* List of saved cards */}
-            <div className="bg-white rounded-2xl shadow-sm divide-y divide-gray-200">
+            <div className="bg-white rounded-2xl shadow-sm divide-y divide-gray-100">
               {cards.length > 0 ? (
                 cards.map(card => {
                   const isSelected = selectedPaymentId === card.id;
@@ -147,10 +144,10 @@ const PaymentPage = () => {
                         setCvv('');
                       }}
                     >
-                      <div className="w-10 h-10 bg-gray-100 rounded-md flex items-center justify-center">
+                      <div className="w-10 h-10 border border-gray-200 rounded-md flex items-center justify-center">
                         {getCardIcon(card)}
                       </div>
-                      <div className="mt-1 flex flex-col flex-1">
+                      <div className="mt-2 flex flex-col flex-1">
                         <div className="flex justify-between items-center">
                           <div className="font-medium text-gray-800 flex items-center">
                             {card.nickname || card.name}
