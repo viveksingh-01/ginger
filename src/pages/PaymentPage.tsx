@@ -2,15 +2,18 @@ import { ArrowLeft } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { SiMastercard, SiVisa } from 'react-icons/si';
 import { useNavigate } from 'react-router-dom';
+import { UPI_OPTIONS } from '../constants/payment-method';
 import { PAYMENT_CARDS } from '../data/payment-cards';
 import type IPaymentCard from '../models/payment-card';
+import type { PaymentMethod } from '../models/payment-method';
 
 const PaymentPage = () => {
   const navigate = useNavigate();
 
   const [cards, setCards] = useState<IPaymentCard[]>([]);
-  const [selectedCardId, setSelectedCardId] = useState<number | null>(null);
   const [cvv, setCvv] = useState('');
+  const [upiId, setUpiId] = useState('');
+  const [selectedPaymentId, setSelectedPaymentId] = useState<number | string | null>(null);
 
   const totalAmount = 214;
 
@@ -19,8 +22,8 @@ const PaymentPage = () => {
     setCards(savedCards);
   }, []);
 
-  const handlePaymentClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
+  const handlePaymentClick = (paymentMethod: PaymentMethod) => {
+    console.log(paymentMethod);
   };
 
   const getCardIcon = ({ merchant }: IPaymentCard) => {
@@ -46,6 +49,68 @@ const PaymentPage = () => {
           </div>
         </div>
 
+        {/* ================= UPI PAYMENT (Polished) ================= */}
+        <section className="mb-6">
+          <h2 className="font-semibold text-gray-800 mb-4">UPI Payment</h2>
+
+          <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
+            {UPI_OPTIONS.map((upi, idx) => {
+              const isSelected = selectedPaymentId === upi.id;
+              return (
+                <div key={upi.id}>
+                  <div
+                    className={`px-4 py-4 cursor-pointer flex items-start gap-3 hover:bg-gray-50 transition`}
+                    onClick={() => {
+                      setSelectedPaymentId(upi.id);
+                      setCvv('');
+                      setUpiId('');
+                    }}
+                  >
+                    {/* Header row */}
+                    <div className="w-10 h-10 bg-gray-100 rounded-md flex items-center justify-center text-lg">
+                      <img src={upi.icon} alt={upi.name} className="w-6 h-6" />
+                    </div>
+                    <div className="mt-1 flex flex-col flex-1">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="font-medium text-gray-600">{upi.name}</span>
+                        <span
+                          className={`w-6 h-6 rounded-full flex items-center justify-center ${isSelected ? 'bg-green-600 text-white' : 'border border-gray-300'}`}
+                        >
+                          {isSelected && '✓'}
+                        </span>
+                      </div>
+
+                      {/* UPI ID input + Pay button */}
+                      {isSelected && (
+                        <div className="flex items-center gap-3 mt-3">
+                          <input
+                            placeholder="Enter UPI ID"
+                            value={upiId}
+                            onChange={e => setUpiId(e.target.value)}
+                            className="flex-1 border border-green-600 rounded-xl px-3 py-3 text-sm focus:outline-none"
+                          />
+                          <button
+                            disabled={upiId.trim() === ''}
+                            onClick={() => handlePaymentClick('UPI')}
+                            className={`py-3 px-8 rounded-xl text-white font-medium transition ${
+                              upiId.trim() !== '' ? 'bg-green-600 hover:bg-green-800' : 'bg-gray-300 cursor-not-allowed'
+                            }`}
+                          >
+                            Pay ₹{totalAmount}
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Divider except last item */}
+                  {idx !== 2 && <div className="border-t border-gray-100" />}
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
         {/* ================= CARDS SECTION ================= */}
         <section className="mb-6">
           <h2 className="font-semibold text-gray-800 mb-4">Credit & Debit Cards</h2>
@@ -69,13 +134,13 @@ const PaymentPage = () => {
             <div className="bg-white rounded-2xl shadow-sm divide-y divide-gray-200">
               {cards.length > 0 ? (
                 cards.map(card => {
-                  const isSelected = selectedCardId === card.id;
+                  const isSelected = selectedPaymentId === card.id;
                   return (
                     <div
                       key={card.id}
                       className="px-4 py-4 flex items-start justify-between gap-4 cursor-pointer"
                       onClick={() => {
-                        setSelectedCardId(card.id);
+                        setSelectedPaymentId(card.id);
                         setCvv('');
                       }}
                     >
@@ -104,7 +169,7 @@ const PaymentPage = () => {
                               className="w-20 border border-green-600 rounded-xl p-3 text-sm text-center focus:outline-none"
                             />
                             <button
-                              onClick={e => handlePaymentClick(e)}
+                              onClick={() => handlePaymentClick('CARD')}
                               disabled={cvv.length !== 3}
                               className={`flex-1 py-3 rounded-xl text-white font-medium ${cvv.length === 3 ? 'bg-green-600 cursor-pointer hover:bg-green-800 transition' : 'bg-gray-300 cursor-not-allowed'}`}
                             >
