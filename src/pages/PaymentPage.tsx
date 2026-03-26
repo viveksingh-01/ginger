@@ -1,14 +1,17 @@
 import { ArrowLeft } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { SiMastercard, SiVisa } from 'react-icons/si';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { UPI_OPTIONS } from '../constants/payment-method';
 import { PAYMENT_CARDS } from '../data/payment-cards';
 import type IPaymentCard from '../models/payment-card';
 import type { PaymentMethod } from '../models/payment-method';
+import { setPaymentMethod } from '../store/checkoutSlice';
 
 const PaymentPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [cards, setCards] = useState<IPaymentCard[]>([]);
   const [cvv, setCvv] = useState('');
@@ -23,7 +26,7 @@ const PaymentPage = () => {
   }, []);
 
   const handlePaymentClick = (paymentMethod: PaymentMethod) => {
-    console.log(paymentMethod);
+    dispatch(setPaymentMethod(paymentMethod));
   };
 
   const getCardIcon = ({ merchant }: IPaymentCard) => {
@@ -49,7 +52,7 @@ const PaymentPage = () => {
           </div>
         </div>
 
-        {/* ================= UPI PAYMENT (Polished) ================= */}
+        {/* ================= UPI PAYMENT ================= */}
         <section className="mb-6">
           <h2 className="font-semibold text-gray-800 mb-4">UPI Payment</h2>
 
