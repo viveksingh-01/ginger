@@ -26,6 +26,7 @@ const PaymentPage = () => {
 
   const handlePaymentClick = (paymentMethod: PaymentMethod) => {
     dispatch(setPaymentMethod(paymentMethod));
+    navigate('/order/success');
   };
 
   return (
