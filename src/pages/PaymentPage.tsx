@@ -1,9 +1,8 @@
 import { ArrowLeft } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { SiMastercard, SiVisa } from 'react-icons/si';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { UPI_OPTIONS } from '../constants/payment-method';
+import { CARD_ICON_MAP, UPI_OPTIONS } from '../constants/payment-method';
 import { PAYMENT_CARDS } from '../data/payment-cards';
 import type IPaymentCard from '../models/payment-card';
 import type { PaymentMethod } from '../models/payment-method';
@@ -29,17 +28,9 @@ const PaymentPage = () => {
     dispatch(setPaymentMethod(paymentMethod));
   };
 
-  const getCardIcon = ({ merchant }: IPaymentCard) => {
-    if (merchant == 'MASTERCARD') {
-      return <SiMastercard size={28} color="#EB001B" />;
-    } else if (merchant == 'VISA') {
-      return <SiVisa size={28} color="#1A1F71" />;
-    }
-  };
-
   return (
     <main className="bg-gray-100 min-h-screen">
-      <div className="max-w-3xl mx-auto p-4 pb-24">
+      <div className="max-w-2xl mx-auto p-4 pb-24">
         {/* HEADER */}
         <div className="flex items-center gap-3 mb-8">
           <ArrowLeft className="w-5 h-5 cursor-pointer text-gray-700" onClick={() => navigate(-1)} />
@@ -70,12 +61,12 @@ const PaymentPage = () => {
                     }}
                   >
                     {/* Header row */}
-                    <div className="w-10 h-10 border border-gray-200 rounded-md flex items-center justify-center text-lg">
-                      <img src={upi.icon} alt={upi.name} className="w-7 h-7" />
+                    <div className="w-10 h-10 flex items-center justify-center border border-gray-200 rounded-md">
+                      <img src={upi.icon} alt={upi.name} className="w-7 h-7 object-contain" />
                     </div>
                     <div className="mt-2 flex flex-col flex-1">
                       <div className="flex items-center justify-between mb-2">
-                        <span className=" text-gray-900">{upi.name}</span>
+                        <span className="text-sm font-medium text-gray-800">{upi.name}</span>
                         <span
                           className={`w-6 h-6 rounded-full flex items-center justify-center ${isSelected ? 'bg-green-600 text-white' : 'border border-gray-300'}`}
                         >
@@ -118,9 +109,9 @@ const PaymentPage = () => {
           <div className="bg-white rounded-2xl shadow-sm cursor-pointer hover:shadow-md transition mb-4">
             <div
               onClick={() => navigate('add-card')}
-              className="p-4 rounded-2xl bg-white flex items-center gap-3 cursor-pointer transition"
+              className="p-4 rounded-2xl bg-white flex items-start gap-4 cursor-pointer hover:bg-gray-50 transition"
             >
-              <span className="w-10 h-10 bg-gray-100 rounded-md flex items-center justify-center text-lg text-ginger">
+              <span className="w-10 h-8 flex items-center justify-center text-xl font-bold text-ginger border border-gray-200 rounded-md">
                 +
               </span>
               <div>
@@ -138,18 +129,18 @@ const PaymentPage = () => {
                   return (
                     <div
                       key={card.id}
-                      className="px-4 py-4 flex items-start justify-between gap-4 cursor-pointer"
+                      className="px-4 py-4 flex items-start justify-between gap-4 cursor-pointer hover:bg-gray-50 transition"
                       onClick={() => {
                         setSelectedPaymentId(card.id);
                         setCvv('');
                       }}
                     >
-                      <div className="w-10 h-10 border border-gray-200 rounded-md flex items-center justify-center">
-                        {getCardIcon(card)}
+                      <div className="w-10 h-10 flex items-center justify-center border border-gray-200 rounded-md">
+                        <img src={CARD_ICON_MAP[card.merchant]} alt={card.name} className="w-7 h-7 object-contain" />
                       </div>
                       <div className="mt-2 flex flex-col flex-1">
                         <div className="flex justify-between items-center">
-                          <div className="font-medium text-gray-800 flex items-center">
+                          <div className="text-sm font-medium text-gray-800 flex items-center">
                             {card.nickname || card.name}
                             <span className="text-gray-300 font-extralight text-lg mx-2">|</span>
                             <span className="text-sm">•••• {card.last4}</span>
