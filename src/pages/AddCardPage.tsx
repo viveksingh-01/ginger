@@ -44,7 +44,7 @@ const AddCardPage = () => {
 
   return (
     <main className="bg-white min-h-screen">
-      <div className="max-w-3xl mx-auto px-4 py-4 pb-28">
+      <div className="max-w-xl mx-auto px-4 py-4 pb-28">
         {/* HEADER */}
         <div className="flex items-center gap-3 mb-6">
           <ArrowLeft className="w-5 h-5 cursor-pointer" onClick={() => navigate(-1)} />
@@ -59,6 +59,7 @@ const AddCardPage = () => {
           {/* CARD NUMBER */}
           <input
             placeholder="Card Number"
+            maxLength={19}
             value={form.cardNumber}
             onChange={e =>
               handleChange(
