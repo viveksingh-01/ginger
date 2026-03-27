@@ -127,7 +127,7 @@ const AddCardPage = () => {
         <button
           disabled={!isValid}
           onClick={handleSave}
-          className={`fixed bottom-4 left-1/2 -translate-x-1/2 w-[92%] max-w-3xl py-3 rounded-xl font-medium
+          className={`w-full mt-8 py-3 rounded-xl font-medium cursor-pointer
           ${isValid ? 'bg-ginger text-white' : 'bg-gray-300 text-gray-500'}`}
         >
           Proceed
