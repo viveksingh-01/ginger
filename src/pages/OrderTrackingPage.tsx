@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import CountdownTimer from '../components/CountdownTimer';
 import type { OrderStatus } from '../models/order';
 
 const steps = [
@@ -19,10 +20,10 @@ const OrderTrackingPage = () => {
     <main className="bg-gray-50 min-h-screen">
       <div className="max-w-5xl mx-auto px-6 py-6 pb-24">
         {/* HEADER CARD */}
-        <div className="bg-white shadow-sm p-5 mb-6">
-          <p className="text-xs text-gray-500 mb-1">ORDER #{orderId}</p>
-          <h1 className="text-xl font-semibold text-gray-900">{steps[currentIndex].label}</h1>
-          <p className="text-sm text-gray-600 mt-1">{eta > 0 ? `Arriving in ${eta} mins` : 'Your food has arrived'}</p>
+        <div className="p-5 mb-6 bg-green-600 text-white rounded-2xl shadow">
+          <p className="text-xs mb-1">ORDER #{orderId}</p>
+          <h1 className="text-xl font-semibold">{steps[currentIndex].label}</h1>
+          <CountdownTimer eta={eta} />
         </div>
 
         {/* GRID LAYOUT */}
