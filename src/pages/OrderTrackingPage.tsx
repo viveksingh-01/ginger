@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CountdownTimer from '../components/CountdownTimer';
 import ItemsSummary from '../components/ItemsSummary';
 import Timeline from '../components/Timeline';
@@ -14,10 +14,19 @@ const OrderTrackingPage = () => {
   const orderId = 1290381;
   const [eta, setEta] = useState(30);
 
+  // Simulate ETA countdown
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setEta(prev => Math.max(prev - 1, 0));
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   const getStepIndex = () => {
     if (eta === 0) return 3; // Delivered
-    if (eta <= 12) return 2; // Out for delivery
-    if (eta <= 16) return 1; // Preparing
+    if (eta <= 16) return 2; // Out for delivery
+    if (eta <= 28) return 1; // Preparing
     return 0; // Confirmed
   };
   const currentStepIndex = getStepIndex();
@@ -33,7 +42,7 @@ const OrderTrackingPage = () => {
             <h1 className="text-xl font-semibold">{steps[currentStepIndex].label}</h1>
             <CountdownTimer eta={eta} />
           </div>
-          {/* TO-DO: ORDER TIMELINE */}
+          {/* ORDER TIMELINE */}
           <Timeline currentStep={currentStepIndex} />
         </section>
 
