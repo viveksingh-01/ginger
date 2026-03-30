@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import CountdownTimer from '../components/CountdownTimer';
 import ItemsSummary from '../components/ItemsSummary';
-import type { OrderStatus } from '../models/order';
 
 const steps = [
   { key: 'CONFIRMED', label: 'Order is confirmed' },
@@ -12,10 +11,15 @@ const steps = [
 
 const OrderTrackingPage = () => {
   const orderId = 1290381;
-  const [status, setStatus] = useState<OrderStatus>('CONFIRMED');
   const [eta, setEta] = useState(30);
 
-  const currentIndex = steps.findIndex(s => s.key === status);
+  const getStepIndex = () => {
+    if (eta === 0) return 3; // Delivered
+    if (eta <= 12) return 2; // Out for delivery
+    if (eta <= 16) return 1; // Preparing
+    return 0; // Confirmed
+  };
+  const currentStepIndex = getStepIndex();
 
   return (
     <main className="bg-gray-50 min-h-screen">
@@ -25,7 +29,7 @@ const OrderTrackingPage = () => {
           {/* HEADER CARD */}
           <div className="p-5 mb-6 bg-green-600 text-white rounded-2xl shadow">
             <p className="text-xs mb-1">ORDER #{orderId}</p>
-            <h1 className="text-xl font-semibold">{steps[currentIndex].label}</h1>
+            <h1 className="text-xl font-semibold">{steps[currentStepIndex].label}</h1>
             <CountdownTimer eta={eta} />
           </div>
           {/* TO-DO: ORDER TIMELINE */}
