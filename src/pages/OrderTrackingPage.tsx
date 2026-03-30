@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import CountdownTimer from '../components/CountdownTimer';
 import ItemsSummary from '../components/ItemsSummary';
+import Timeline from '../components/Timeline';
 
 const steps = [
   { key: 'CONFIRMED', label: 'Order is confirmed' },
@@ -24,7 +25,7 @@ const OrderTrackingPage = () => {
   return (
     <main className="bg-gray-50 min-h-screen">
       {/* GRID LAYOUT */}
-      <section className="max-w-5xl mx-auto px-6 py-6 grid grid-cols-1 lg:grid-cols-5 gap-6">
+      <section className="max-w-5xl mx-auto px-6 py-6 grid grid-cols-1 lg:grid-cols-5 gap-12">
         <section className="lg:col-span-3 space-y-6">
           {/* HEADER CARD */}
           <div className="p-5 mb-6 bg-green-600 text-white rounded-2xl shadow">
@@ -33,6 +34,7 @@ const OrderTrackingPage = () => {
             <CountdownTimer eta={eta} />
           </div>
           {/* TO-DO: ORDER TIMELINE */}
+          <Timeline currentStep={currentStepIndex} />
         </section>
 
         {/* Order Details */}
