@@ -3,7 +3,7 @@ import { DELIVERY_PARTNER } from '../data/delivery-partner';
 import type { IDeliveryPartner } from '../models/delivery-partner';
 
 const RiderCard = () => {
-  const { name, vehicle }: IDeliveryPartner = DELIVERY_PARTNER;
+  const { name, phone, vehicle }: IDeliveryPartner = DELIVERY_PARTNER;
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -17,6 +17,12 @@ const RiderCard = () => {
         <p className="text-[14px] font-medium text-gray-900">{name}</p>
         <p className="text-[12px] text-gray-500">{vehicle}</p>
       </div>
+      <a
+        href={`tel:${phone}`}
+        className="px-4 py-2 text-sm border border-ginger text-ginger rounded-md hover:bg-ginger transition"
+      >
+        Call
+      </a>
     </motion.div>
   );
 };
