@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import CountdownTimer from '../components/CountdownTimer';
 import ItemsSummary from '../components/ItemsSummary';
+import LiveMap from '../components/LiveMap';
 import Timeline from '../components/Timeline';
 
 const steps = [
@@ -42,8 +43,16 @@ const OrderTrackingPage = () => {
             <h1 className="text-xl font-semibold">{steps[currentStepIndex].label}</h1>
             <CountdownTimer eta={eta} />
           </div>
+
           {/* ORDER TIMELINE */}
           <Timeline currentStep={currentStepIndex} />
+
+          {/* LIVE DELIVERY TRACKER */}
+          {currentStepIndex >= 2 && (
+            <section className="rounded-2xl overflow-hidden border border-gray-100 shadow-sm">
+              <LiveMap duration={eta} />
+            </section>
+          )}
         </section>
 
         {/* Order Details */}

@@ -37,7 +37,7 @@ function FitBounds({ route }: { route: LatLngTuple[] }) {
 }
 
 // Accept duration in seconds
-export default function LiveMap({ duration = 48 }: { duration: number }) {
+export default function LiveMap({ duration = 16 }: { duration: number }) {
   const [route, setRoute] = useState<LatLngTuple[]>([]);
   const [markerIndex, setMarkerIndex] = useState(0);
 
@@ -63,7 +63,7 @@ export default function LiveMap({ duration = 48 }: { duration: number }) {
     const totalPoints = route.length;
 
     // time per step
-    const intervalTime = (duration * 1000) / totalPoints;
+    const intervalTime = (duration * 3000) / totalPoints;
 
     const interval = setInterval(() => {
       setMarkerIndex(prev => (prev < totalPoints - 1 ? prev + 1 : prev));
