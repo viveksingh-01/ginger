@@ -4,13 +4,7 @@ import ItemsSummary from '../components/ItemsSummary';
 import LiveMap from '../components/LiveMap';
 import RiderCard from '../components/RiderCard';
 import Timeline from '../components/Timeline';
-
-const steps = [
-  { key: 'CONFIRMED', label: 'Order is confirmed' },
-  { key: 'PREPARING', label: 'Preparing your food' },
-  { key: 'OUT_FOR_DELIVERY', label: 'Out for delivery' },
-  { key: 'DELIVERED', label: 'Delivered' },
-];
+import { ORDER_STEPS } from '../constants/order-steps';
 
 const OrderTrackingPage = () => {
   const orderId = 1290381;
@@ -41,7 +35,7 @@ const OrderTrackingPage = () => {
           {/* HEADER CARD */}
           <div className="p-5 mb-6 bg-green-600 text-white rounded-2xl shadow">
             <p className="text-xs mb-1">ORDER #{orderId}</p>
-            <h1 className="text-xl font-semibold">{steps[currentStepIndex].label}</h1>
+            <h1 className="text-xl font-semibold">{ORDER_STEPS[currentStepIndex].message}</h1>
             <CountdownTimer eta={eta} />
           </div>
 
