@@ -1,11 +1,27 @@
-import cookingIcon from '../assets/icons/cooking.png';
-import deliveryIcon from '../assets/icons/delivery.png';
+import deliveryManIcon from '../assets/icons/delivery-man.png';
+import outForDeliveryIcon from '../assets/icons/delivery.png';
 import foodIcon from '../assets/icons/food.png';
 import orderIcon from '../assets/icons/order.png';
 
 export const ORDER_STEPS = [
-  { key: 'PLACED', label: 'Order Placed', icon: orderIcon },
-  { key: 'PREPARING', label: 'Preparing your food', icon: cookingIcon },
-  { key: 'OUT_FOR_DELIVERY', label: 'Out for delivery', icon: deliveryIcon },
-  { key: 'DELIVERED', label: 'Delivered', icon: foodIcon },
+  {
+    key: 'CONFIRMED',
+    label: 'Order Confirmed',
+    icon: orderIcon,
+  },
+  {
+    key: 'PREPARING',
+    label: 'Preparing Your Food',
+    icon: foodIcon,
+  },
+  {
+    key: 'ON_THE_WAY',
+    label: 'On the Way',
+    icon: outForDeliveryIcon,
+  },
+  {
+    key: 'ARRIVED',
+    label: 'Order has arrived',
+    icon: deliveryManIcon,
+  },
 ];
