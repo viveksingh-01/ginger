@@ -6,21 +6,28 @@ import { MapContainer, Marker, Polyline, TileLayer, useMap } from 'react-leaflet
 
 import scooterIcon from '../assets/icons/delivery-scooter.png';
 import destinationIcon from '../assets/icons/destination-pin.png';
+import restaurantIcon from '../assets/icons/restaurant.png';
 
-const containerStyle = { width: '100%', height: '220px' };
+const containerStyle = { width: '100%', height: '250px' };
 
 const start: LatLngTuple = [12.84122, 77.66402];
 const destination: LatLngTuple = [12.84655, 77.6695];
 
 const scooter = new L.Icon({
   iconUrl: scooterIcon,
+  iconSize: [36, 36],
+  iconAnchor: [20, 20],
+});
+
+const sourceMarker = new L.Icon({
+  iconUrl: restaurantIcon,
   iconSize: [40, 40],
   iconAnchor: [20, 20],
 });
 
 const destinationMarker = new L.Icon({
   iconUrl: destinationIcon,
-  iconSize: [30, 30],
+  iconSize: [32, 32],
   iconAnchor: [15, 30],
 });
 
@@ -81,6 +88,8 @@ export default function LiveMap({ duration = 16 }: { duration: number }) {
       <FitBounds route={route} />
 
       {route.length > 0 && <Polyline positions={route} pathOptions={{ color: '#f97316', weight: 4 }} />}
+
+      <Marker position={start} icon={sourceMarker} />
 
       <Marker position={markerPos} icon={scooter} />
 
