@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react';
 import CountdownTimer from '../components/CountdownTimer';
+import DeliveryProgress from '../components/DeliveryProgress';
 import ItemsSummary from '../components/ItemsSummary';
 import LiveMap from '../components/LiveMap';
 import RiderCard from '../components/RiderCard';
 import Timeline from '../components/Timeline';
 import { ORDER_STEPS } from '../constants/order-steps';
 
+const TOTAL_ETA = 30;
+
 const OrderTrackingPage = () => {
   const orderId = 1290381;
-  const [eta, setEta] = useState(30);
+  const [eta, setEta] = useState(TOTAL_ETA);
 
   // Simulate ETA countdown
   useEffect(() => {
@@ -37,6 +40,7 @@ const OrderTrackingPage = () => {
             <p className="text-xs mb-1">ORDER #{orderId}</p>
             <h1 className="text-xl font-semibold">{ORDER_STEPS[currentStepIndex].message}</h1>
             <CountdownTimer eta={eta} />
+            {currentStepIndex < 3 && <DeliveryProgress eta={eta} totalEta={TOTAL_ETA} />}
           </div>
 
           {/* ORDER TIMELINE */}
