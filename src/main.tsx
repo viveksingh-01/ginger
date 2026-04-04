@@ -13,6 +13,7 @@ import './index.css';
 import AddCardPage from './pages/AddCardPage.tsx';
 import CheckoutPage from './pages/CheckoutPage.tsx';
 import OrderSuccessPage from './pages/OrderSuccessPage.tsx';
+import OrderTrackingPage from './pages/OrderTrackingPage.tsx';
 import PaymentPage from './pages/PaymentPage.tsx';
 import store from './store/store.ts';
 
@@ -29,6 +30,7 @@ const router = createBrowserRouter([
       { path: 'payments', element: <PaymentPage /> },
       { path: 'payments/add-card', element: <AddCardPage /> },
       { path: 'order/success', element: <OrderSuccessPage /> },
+      { path: 'order/track', element: <OrderTrackingPage /> },
       { path: 'coming-soon', element: <ComingSoon /> },
     ],
   },
