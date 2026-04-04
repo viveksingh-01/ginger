@@ -27,6 +27,7 @@ const AddressPage = () => {
     if (!selectedAddress) return;
 
     dispatch(setAddress(selectedAddress));
+    localStorage.setItem('address', JSON.stringify(selectedAddress));
     navigate('/checkout');
   };
 
