@@ -7,8 +7,8 @@ import phonepeIcon from '../assets/icons/phonepe.png';
 import rupayIcon from '../assets/icons/rupay.png';
 import visaIcon from '../assets/icons/visa.png';
 
-import type { CardMerchant } from '../models/payment-card';
-import type { PaymentMethod } from '../models/payment-method';
+import type { CardMerchant } from '../features/payment/models/payment-card';
+import type { PaymentMethod } from '../features/payment/models/payment-method';
 
 export const PAYMENT_LABELS: Record<PaymentMethod, string> = {
   COD: 'Cash on Delivery',

@@ -3,18 +3,18 @@ import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App.tsx';
-import AddressPage from './components/AddressPage.tsx';
-import ComingSoon from './components/ComingSoon.tsx';
-
-import RestaurantList from './components/RestaurantList.tsx';
-import RestaurantMenu from './components/RestaurantMenu.tsx';
-import SearchBox from './components/SearchBox.tsx';
 import './index.css';
-import AddCardPage from './pages/AddCardPage.tsx';
-import CheckoutPage from './pages/CheckoutPage.tsx';
-import OrderSuccessPage from './pages/OrderSuccessPage.tsx';
-import OrderTrackingPage from './pages/OrderTrackingPage.tsx';
-import PaymentPage from './pages/PaymentPage.tsx';
+
+import AddressPage from './features/address/pages/AddressPage.tsx';
+import CheckoutPage from './features/checkout/pages/CheckoutPage.tsx';
+import MenuPage from './features/menu/pages/MenuPage.tsx';
+import OrderTrackingPage from './features/order-tracking/pages/OrderTrackingPage.tsx';
+import AddCardPage from './features/payment/pages/AddCardPage.tsx';
+import PaymentPage from './features/payment/pages/PaymentPage.tsx';
+import RestaurantPage from './features/restaurant/pages/RestaurantPage.tsx';
+import ComingSoonPage from './features/standalone/pages/ComingSoonPage.tsx';
+import OrderSuccessPage from './features/standalone/pages/OrderSuccessPage.tsx';
+import SearchBoxPage from './features/standalone/pages/SearchBoxPage.tsx';
 import store from './store/store.ts';
 
 const router = createBrowserRouter([
@@ -22,16 +22,16 @@ const router = createBrowserRouter([
     path: '/',
     element: <App />,
     children: [
-      { path: '/', element: <RestaurantList /> },
-      { path: 'restaurant/:restaurantId', element: <RestaurantMenu /> },
-      { path: 'search', element: <SearchBox /> },
+      { path: '/', element: <RestaurantPage /> },
+      { path: 'restaurant/:restaurantId', element: <MenuPage /> },
+      { path: 'search', element: <SearchBoxPage /> },
       { path: 'manage-address', element: <AddressPage /> },
       { path: 'checkout', element: <CheckoutPage /> },
       { path: 'payments', element: <PaymentPage /> },
       { path: 'payments/add-card', element: <AddCardPage /> },
       { path: 'order/success', element: <OrderSuccessPage /> },
       { path: 'order/track', element: <OrderTrackingPage /> },
-      { path: 'coming-soon', element: <ComingSoon /> },
+      { path: 'coming-soon', element: <ComingSoonPage /> },
     ],
   },
 ]);
