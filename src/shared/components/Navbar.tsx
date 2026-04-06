@@ -42,7 +42,7 @@ const Navbar = () => {
             <Link to={'/coming-soon'}>
               <NavItem icon={<HelpCircle size={18} />} label="Help" />
             </Link>
-            <Link to={'/coming-soon'}>
+            <Link to={'/auth/login'}>
               <NavItem icon={<User size={18} />} label="Sign In" />
             </Link>
             <Link to={'/checkout'}>

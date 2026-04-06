@@ -6,6 +6,8 @@ import App from './App.tsx';
 import './index.css';
 
 import AddressPage from './features/address/pages/AddressPage.tsx';
+import LoginPage from './features/auth/pages/LoginPage.tsx';
+import SignupPage from './features/auth/pages/SignupPage.tsx';
 import CheckoutPage from './features/checkout/pages/CheckoutPage.tsx';
 import MenuPage from './features/menu/pages/MenuPage.tsx';
 import OrderTrackingPage from './features/order-tracking/pages/OrderTrackingPage.tsx';
@@ -23,6 +25,8 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: '/', element: <RestaurantPage /> },
+      { path: 'auth/login', element: <LoginPage /> },
+      { path: 'auth/signup', element: <SignupPage /> },
       { path: 'restaurant/:restaurantId', element: <MenuPage /> },
       { path: 'search', element: <SearchBoxPage /> },
       { path: 'manage-address', element: <AddressPage /> },
