@@ -6,6 +6,7 @@ import App from './App.tsx';
 import './index.css';
 
 import AddressPage from './features/address/pages/AddressPage.tsx';
+import ProtectedRoutes from './features/auth/components/ProtectedRoutes.tsx';
 import LoginPage from './features/auth/pages/LoginPage.tsx';
 import SignupPage from './features/auth/pages/SignupPage.tsx';
 import CheckoutPage from './features/checkout/pages/CheckoutPage.tsx';
@@ -29,13 +30,18 @@ const router = createBrowserRouter([
       { path: 'auth/signup', element: <SignupPage /> },
       { path: 'restaurant/:restaurantId', element: <MenuPage /> },
       { path: 'search', element: <SearchBoxPage /> },
-      { path: 'manage-address', element: <AddressPage /> },
       { path: 'checkout', element: <CheckoutPage /> },
-      { path: 'payments', element: <PaymentPage /> },
-      { path: 'payments/add-card', element: <AddCardPage /> },
-      { path: 'order/success', element: <OrderSuccessPage /> },
-      { path: 'order/track', element: <OrderTrackingPage /> },
       { path: 'coming-soon', element: <ComingSoonPage /> },
+      {
+        element: <ProtectedRoutes />,
+        children: [
+          { path: 'manage-address', element: <AddressPage /> },
+          { path: 'payments', element: <PaymentPage /> },
+          { path: 'payments/add-card', element: <AddCardPage /> },
+          { path: 'order/success', element: <OrderSuccessPage /> },
+          { path: 'order/track', element: <OrderTrackingPage /> },
+        ],
+      },
     ],
   },
 ]);
