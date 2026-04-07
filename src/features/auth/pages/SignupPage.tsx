@@ -1,7 +1,8 @@
-import Input from '@/shared/components/Input';
+import { Loader2 } from 'lucide-react';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import Input from '../../../shared/components/Input';
 import { signup } from '../api/auth';
 import type { ISignupPayload } from '../models/payload';
 import type IAuthResponse from '../models/response';
@@ -144,9 +145,16 @@ const SignupPage = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full py-4 text-sm font-semibold text-white bg-ginger hover:bg-ginger-dark"
+              className="w-full py-4 text-sm font-semibold text-white bg-ginger hover:bg-ginger-dark cursor-pointer"
             >
-              {isSubmitting ? 'Please wait...' : 'CREATE ACCOUNT'}
+              {isSubmitting ? (
+                <div className="flex justify-center items-center gap-2">
+                  <Loader2 className="animate-spin" size={20} />
+                  <span>Creating your account</span>
+                </div>
+              ) : (
+                'CREATE ACCOUNT'
+              )}
             </button>
           </div>
 

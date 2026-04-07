@@ -1,3 +1,4 @@
+import { Loader2 } from 'lucide-react';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import Input from '../../../shared/components/Input';
@@ -87,10 +88,17 @@ const LoginPage = () => {
           <div className="mt-6">
             <button
               type="submit"
-              className="w-full py-4 text-sm font-semibold text-white bg-ginger hover:bg-ginger-dark"
+              className="w-full py-4 text-sm font-semibold text-white bg-ginger hover:bg-ginger-dark cursor-pointer"
               disabled={isSubmitting}
             >
-              {isSubmitting ? 'Please wait...' : 'LOGIN'}
+              {isSubmitting ? (
+                <div className="flex justify-center items-center gap-2">
+                  <Loader2 className="animate-spin" size={20} />
+                  <span>Logging in</span>
+                </div>
+              ) : (
+                'LOGIN'
+              )}
             </button>
           </div>
         </form>
