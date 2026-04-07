@@ -1,14 +1,10 @@
+import Input from '@/shared/components/Input';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import Input from '../../../shared/components/Input';
-
-type FormData = {
-  phone: string;
-  name: string;
-  email: string;
-  password: string;
-};
+import { signup } from '../api/auth';
+import type { ISignupPayload } from '../models/payload';
+import type IAuthResponse from '../models/response';
 
 const SignupPage = () => {
   const navigate = useNavigate();
@@ -18,10 +14,16 @@ const SignupPage = () => {
     control,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<FormData>();
+  } = useForm<ISignupPayload>();
 
-  const onSubmit = (data: FormData) => {
-    console.log('Signup success', data);
+  const onSubmit = async (formData: ISignupPayload) => {
+    try {
+      const { data }: IAuthResponse = await signup(formData);
+      localStorage.setItem('token', data.token);
+      navigate('/');
+    } catch (err: any) {
+      console.error(err.message);
+    }
   };
 
   return (
