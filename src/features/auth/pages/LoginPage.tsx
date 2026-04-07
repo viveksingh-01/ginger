@@ -1,13 +1,15 @@
+import Input from '@/shared/components/Input';
 import { Loader2 } from 'lucide-react';
 import { Controller, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import Input from '../../../shared/components/Input';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { login } from '../api/auth';
 import type { ILoginPayload } from '../models/payload';
 import type IAuthResponse from '../models/response';
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/';
 
   const {
     control,
@@ -19,7 +21,7 @@ const LoginPage = () => {
     try {
       const { data }: IAuthResponse = await login(formData);
       localStorage.setItem('token', data.token);
-      navigate('/');
+      navigate(from, { replace: true });
     } catch (err: any) {
       console.error(err.message);
     }
