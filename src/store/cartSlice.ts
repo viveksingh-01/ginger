@@ -1,6 +1,6 @@
+import type ICartItem from '@/features/checkout/models/cart-item';
+import type { IMenuItem } from '@/features/menu/models/menu';
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import type ICartItem from '../features/checkout/models/cart-item';
-import type { IMenuItem } from '../features/menu/models/menu';
 
 type CartState = {
   items: IMenuItem[];
