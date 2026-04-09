@@ -1,6 +1,8 @@
+import { setAuth } from '@/store/authSlice';
 import { Loader2 } from 'lucide-react';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Input from '../../../shared/components/Input';
 import { signup } from '../api/auth';
@@ -8,6 +10,7 @@ import type { ISignupPayload } from '../models/payload';
 import type IAuthResponse from '../models/response';
 
 const SignupPage = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -20,7 +23,7 @@ const SignupPage = () => {
   const onSubmit = async (formData: ISignupPayload) => {
     try {
       const { data }: IAuthResponse = await signup(formData);
-      localStorage.setItem('token', data.token);
+      dispatch(setAuth(data));
       navigate('/');
     } catch (err: any) {
       console.error(err.message);

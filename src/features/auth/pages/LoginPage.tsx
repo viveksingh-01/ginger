@@ -1,12 +1,15 @@
 import Input from '@/shared/components/Input';
+import { setAuth } from '@/store/authSlice';
 import { Loader2 } from 'lucide-react';
 import { Controller, useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { login } from '../api/auth';
 import type { ILoginPayload } from '../models/payload';
 import type IAuthResponse from '../models/response';
 
 const LoginPage = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || '/';
@@ -20,7 +23,7 @@ const LoginPage = () => {
   const onSubmit = async (formData: ILoginPayload) => {
     try {
       const { data }: IAuthResponse = await login(formData);
-      localStorage.setItem('token', data.token);
+      dispatch(setAuth(data));
       navigate(from, { replace: true });
     } catch (err: any) {
       console.error(err.message);
