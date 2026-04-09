@@ -1,12 +1,14 @@
+import type store from '@/store/store';
+import { isAuthenticated } from '@/utils/auth';
 import { HelpCircle, MapPin, Percent, Search, ShoppingCart, User } from 'lucide-react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import type store from '../../store/store';
 import Logo from './Logo';
 import NavItem from './NavItem';
 
 const Navbar = () => {
   const cartItems = useSelector((state: ReturnType<typeof store.getState>) => state.cart.items);
+  const user = useSelector((state: ReturnType<typeof store.getState>) => state.auth.user);
 
   return (
     <nav className="fixed top-0 z-50 w-full bg-white border-b border-(--border-light)">
@@ -42,9 +44,13 @@ const Navbar = () => {
             <Link to={'/coming-soon'}>
               <NavItem icon={<HelpCircle size={18} />} label="Help" />
             </Link>
-            <Link to={'/auth/login'}>
-              <NavItem icon={<User size={18} />} label="Sign In" />
-            </Link>
+            {isAuthenticated() ? (
+              <NavItem icon={<User size={18} />} label={user?.name.split(' ')[0] ?? 'Me'} />
+            ) : (
+              <Link to={'/auth/login'}>
+                <NavItem icon={<User size={18} />} label="Sign In" />
+              </Link>
+            )}
             <Link to={'/checkout'}>
               <NavItem icon={<ShoppingCart size={18} />} label="Cart" badge={cartItems.length.toString()} />
             </Link>
