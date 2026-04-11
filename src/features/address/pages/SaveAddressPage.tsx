@@ -1,0 +1,84 @@
+import Input from '@/shared/components/Input';
+import { ArrowLeft } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { reverseGeocode } from '../api/reverse-geocode';
+import MapPicker from '../components/MapPicker';
+import { useDebounce } from '../hooks/useDebounce';
+import type { ISaveAddressPayload } from '../models/address';
+
+export default function SaveAddressPage() {
+  const [position, setPosition] = useState({
+    lat: 12.84529,
+    lng: 77.64422,
+  });
+
+  const debouncedPosition = useDebounce(position, 700);
+  const [loadingAddress, setLoadingAddress] = useState(false);
+  const [form, setForm] = useState<ISaveAddressPayload>({
+    name: '',
+    phone: '',
+    address: '',
+    house: '',
+    area: '',
+    city: '',
+    landmark: '',
+    annotation: 'Home',
+    lat: position.lat,
+    lng: position.lng,
+  });
+
+  // Fetch address when position changes (debounced)
+  useEffect(() => {
+    const fetchAddress = async () => {
+      setLoadingAddress(true);
+      const data = await reverseGeocode(debouncedPosition.lat, debouncedPosition.lng);
+
+      if (data) {
+        setForm(prev => ({
+          ...prev,
+          address: data.displayName,
+        }));
+      }
+      setLoadingAddress(false);
+    };
+
+    fetchAddress();
+  }, [debouncedPosition]);
+
+  return (
+    <main className="min-h-screen">
+      <section className="max-w-5xl mx-auto px-6 py-6 flex flex-col">
+        {/* HEADER */}
+        <div className="flex items-center gap-3 mb-6">
+          <ArrowLeft className="w-5 h-5 cursor-pointer" />
+          <h1 className="text-lg font-semibold">Add Address</h1>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+          {/* ================= LEFT SIDE ================= */}
+          <section className="lg:col-span-3">
+            {/* Map */}
+            <div className="relative">
+              <MapPicker position={position} onChange={setPosition} />
+              <div className="absolute top-3 left-1/2 -translate-x-1/2 bg-blue-500 text-white text-sm px-3 py-1 rounded">
+                Drag map
+              </div>
+            </div>
+
+            <section className="border border-gray-300 border-b-0 bg-white text-sm">
+              {/* Address */}
+              <Input
+                label="Address"
+                value={loadingAddress ? 'Fetching location...' : form.address}
+                onChange={() => {}}
+              />
+            </section>
+          </section>
+
+          {/* ================= RIGHT SIDE ================= */}
+          <section className="lg:col-span-2">{/* TO-DO: Contact & Address form */}</section>
+        </div>
+      </section>
+    </main>
+  );
+}
