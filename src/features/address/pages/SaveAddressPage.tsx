@@ -45,6 +45,10 @@ export default function SaveAddressPage() {
     fetchAddress();
   }, [debouncedPosition]);
 
+  const handleChange = (key: string, value: string) => {
+    setForm(prev => ({ ...prev, [key]: value }));
+  };
+
   return (
     <main className="min-h-screen">
       <section className="max-w-5xl mx-auto px-6 py-6 flex flex-col">
@@ -76,7 +80,21 @@ export default function SaveAddressPage() {
           </section>
 
           {/* ================= RIGHT SIDE ================= */}
-          <section className="lg:col-span-2">{/* TO-DO: Contact & Address form */}</section>
+          <section className="lg:col-span-2">
+            <section className="border border-gray-300 bg-white text-sm">
+              {/* Name */}
+              <Input label="Name" value={form.name} onChange={v => handleChange('name', v)} />
+
+              {/* Phone */}
+              <Input label="Phone" value={form.phone} onChange={v => handleChange('phone', v)} />
+
+              {/* House */}
+              <Input label="House / Flat No." value={form.house} onChange={v => handleChange('house', v)} />
+
+              {/* Landmark */}
+              <Input label="Landmark" value={form.landmark} onChange={v => handleChange('landmark', v)} />
+            </section>
+          </section>
         </div>
       </section>
     </main>
