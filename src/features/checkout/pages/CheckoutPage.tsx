@@ -53,10 +53,10 @@ const CheckoutPage = () => {
                 <div className="py-4 px-6 bg-gray-50 space-y-1 text-sm text-gray-700">
                   <p className="text-lg font-medium text-gray-900">{address.annotation}</p>
                   <p>{address.house}</p>
-                  <p>{address.area}</p>
                   <p>
-                    {address.city}, {address.state} - {address.pincode}
+                    {address.area}, {address.city}
                   </p>
+                  <p>{address.address}</p>
                 </div>
               ) : addressList.length > 0 ? (
                 <button

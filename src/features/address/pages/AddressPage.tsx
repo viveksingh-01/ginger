@@ -2,16 +2,16 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { addressList } from '../../../data/address';
 import { setAddress } from '../../../store/checkoutSlice';
 import type store from '../../../store/store';
+import { getAddresses } from '../api/address';
 import type IAddress from '../models/address';
 
 const AddressPage = () => {
+  const [addressList, setAddressList] = useState<IAddress[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const storedAddress = useSelector((state: ReturnType<typeof store.getState>) => state.checkout.address);
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
 
   // Select and display stored address by default
@@ -21,10 +21,21 @@ const AddressPage = () => {
     }
   }, [storedAddress]);
 
+  useEffect(() => {
+    fetchAddress();
+  }, []);
+
+  const fetchAddress = async () => {
+    const { data } = await getAddresses();
+    if (data) {
+      setAddressList(data);
+    }
+  };
+
   const handleClick = () => {
     if (!selectedId) return;
 
-    const selectedAddress: IAddress | undefined = addressList.find(a => a.id === selectedId);
+    const selectedAddress: IAddress | undefined = addressList?.find(a => a.id === selectedId);
     if (!selectedAddress) return;
 
     dispatch(setAddress(selectedAddress));
@@ -37,7 +48,7 @@ const AddressPage = () => {
       <h1 className="text-xl font-semibold mb-4">Select Address</h1>
 
       <div className="space-y-3">
-        {addressList.map(({ id, annotation, house, area, city, state, pincode }) => (
+        {addressList?.map(({ id, annotation, house, area, city, address }) => (
           <div
             key={id}
             onClick={() => setSelectedId(id)}
@@ -46,8 +57,9 @@ const AddressPage = () => {
           >
             <p className="font-medium">{annotation}</p>
             <p className="text-sm text-gray-500">
-              {house}, {area} {city}, {state} - {pincode}
+              {house}, {area} {city}
             </p>
+            <p className="text-sm text-gray-500">{address}</p>
           </div>
         ))}
       </div>

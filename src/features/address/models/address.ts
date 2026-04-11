@@ -3,10 +3,17 @@ export default interface IAddress {
   name: string;
   phone: string;
   annotation: string;
+  address: string;
   house: string;
-  area: string;
-  city: string;
-  state: string;
-  pincode: string;
-  landmark?: string;
+  area?: string;
+  city?: string;
+  landmark: string;
+  lat: string;
+  lng: string;
+}
+
+export interface IAddressResponse {
+  statusCode: number;
+  statusMessage: string;
+  data: IAddress[];
 }
