@@ -2,6 +2,7 @@ import Input from '@/shared/components/Input';
 import { ArrowLeft } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { reverseGeocode } from '../api/reverse-geocode';
+import AnnotationPicker from '../components/AnnotationPicker';
 import MapPicker from '../components/MapPicker';
 import { useDebounce } from '../hooks/useDebounce';
 import type { ISaveAddressPayload } from '../models/address';
@@ -93,6 +94,9 @@ export default function SaveAddressPage() {
 
               {/* Landmark */}
               <Input label="Landmark" value={form.landmark} onChange={v => handleChange('landmark', v)} />
+
+              {/* Annotation */}
+              <AnnotationPicker annotation={form.annotation} onChange={handleChange} />
             </section>
           </section>
         </div>
