@@ -6,6 +6,7 @@ import App from './App.tsx';
 import './index.css';
 
 import AddressPage from './features/address/pages/AddressPage.tsx';
+import SaveAddressPage from './features/address/pages/SaveAddressPage.tsx';
 import ProtectedRoutes from './features/auth/components/ProtectedRoutes.tsx';
 import LoginPage from './features/auth/pages/LoginPage.tsx';
 import SignupPage from './features/auth/pages/SignupPage.tsx';
@@ -36,6 +37,7 @@ const router = createBrowserRouter([
         element: <ProtectedRoutes />,
         children: [
           { path: 'manage-address', element: <AddressPage /> },
+          { path: 'manage-address/add', element: <SaveAddressPage /> },
           { path: 'payments', element: <PaymentPage /> },
           { path: 'payments/add-card', element: <AddCardPage /> },
           { path: 'order/success', element: <OrderSuccessPage /> },

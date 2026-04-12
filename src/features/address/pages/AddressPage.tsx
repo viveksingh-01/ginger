@@ -45,7 +45,15 @@ const AddressPage = () => {
 
   return (
     <main className="max-w-md mx-auto px-4 py-6">
-      <h1 className="text-xl font-semibold mb-4">Select Address</h1>
+      <div className="flex justify-between items-center">
+        <h1 className="text-xl font-semibold mb-4">Select Address</h1>
+        <span
+          onClick={() => navigate('add')}
+          className="p-2 mb-2 text-sm font-bold text-ginger uppercase cursor-pointer"
+        >
+          ADD
+        </span>
+      </div>
 
       <div className="space-y-3">
         {addressList?.map(({ id, annotation, house, area, city, address }) => (
