@@ -1,6 +1,7 @@
 import Input from '@/shared/components/Input';
 import { ArrowLeft } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { saveAddress } from '../api/address';
 import { reverseGeocode } from '../api/reverse-geocode';
 import AnnotationPicker from '../components/AnnotationPicker';
@@ -9,6 +10,7 @@ import { useDebounce } from '../hooks/useDebounce';
 import type { IAddressResponse, ISaveAddressPayload } from '../models/address';
 
 export default function SaveAddressPage() {
+  const navigate = useNavigate();
   const [position, setPosition] = useState({
     lat: 12.84529,
     lng: 77.64422,
@@ -57,6 +59,7 @@ export default function SaveAddressPage() {
     try {
       const { data }: IAddressResponse = await saveAddress(form);
       console.log(data);
+      navigate(-1);
     } catch (err: any) {
       console.error(err.message);
     }
