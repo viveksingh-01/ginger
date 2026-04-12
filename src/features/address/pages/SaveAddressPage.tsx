@@ -1,11 +1,12 @@
 import Input from '@/shared/components/Input';
 import { ArrowLeft } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { saveAddress } from '../api/address';
 import { reverseGeocode } from '../api/reverse-geocode';
 import AnnotationPicker from '../components/AnnotationPicker';
 import MapPicker from '../components/MapPicker';
 import { useDebounce } from '../hooks/useDebounce';
-import type { ISaveAddressPayload } from '../models/address';
+import type { IAddressResponse, ISaveAddressPayload } from '../models/address';
 
 export default function SaveAddressPage() {
   const [position, setPosition] = useState({
@@ -48,6 +49,17 @@ export default function SaveAddressPage() {
 
   const handleChange = (key: string, value: string) => {
     setForm(prev => ({ ...prev, [key]: value }));
+  };
+
+  const isDisabled = !form.address || !form.house;
+
+  const submitForm = async () => {
+    try {
+      const { data }: IAddressResponse = await saveAddress(form);
+      console.log(data);
+    } catch (err: any) {
+      console.error(err.message);
+    }
   };
 
   return (
@@ -97,6 +109,17 @@ export default function SaveAddressPage() {
 
               {/* Annotation */}
               <AnnotationPicker annotation={form.annotation} onChange={handleChange} />
+            </section>
+
+            {/* CTA */}
+            <section className="py-4">
+              <button
+                onClick={() => submitForm()}
+                disabled={isDisabled}
+                className="w-full py-4 text-sm font-semibold text-white bg-ginger hover:bg-ginger-dark cursor-pointer"
+              >
+                SAVE ADDRESS
+              </button>
             </section>
           </section>
         </div>
