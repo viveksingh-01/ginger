@@ -12,3 +12,8 @@ export const signup = async (payload: ISignupPayload): Promise<IAuthResponse> =>
   const res = await axios.post('/auth/signup', payload);
   return handleAPIResponse<IAuthResponse>(res);
 };
+
+export const getProfile = async (): Promise<IAuthResponse> => {
+  const res = await axios.get('/me');
+  return handleAPIResponse<IAuthResponse>(res);
+};
