@@ -1,4 +1,4 @@
-import { setLoading, setUser } from '@/store/authSlice';
+import { logout, setLoading, setUser } from '@/store/authSlice';
 import type { AppDispatch } from '@/store/store';
 import type IAuthResponse from '../models/response';
 import { getProfile } from './auth';
@@ -15,5 +15,6 @@ export const initAuth = () => async (dispatch: AppDispatch) => {
     dispatch(setUser(data.user));
   } catch (err) {
     console.error('Failed to fetch user');
+    dispatch(logout());
   }
 };
