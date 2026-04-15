@@ -3,10 +3,12 @@ import type { IMenuItem } from '@/features/menu/models/menu';
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 type CartState = {
+  restaurantId: string;
   items: IMenuItem[];
 };
 
 const initialState: CartState = {
+  restaurantId: '',
   items: [],
 };
 
@@ -23,8 +25,11 @@ const cartSlice = createSlice({
         state.items.splice(index, 1);
       }
     },
+    setRestaurant: (state: CartState, action: PayloadAction<string>) => {
+      state.restaurantId = action.payload;
+    },
   },
 });
 
-export const { addItem, removeItem } = cartSlice.actions;
+export const { addItem, removeItem, setRestaurant } = cartSlice.actions;
 export default cartSlice.reducer;

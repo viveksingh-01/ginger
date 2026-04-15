@@ -4,15 +4,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import type ICartItem from '../../checkout/models/cart-item';
 
 import { IMAGE_URL } from '../../../constants';
-import { addItem, removeItem } from '../../../store/cartSlice';
+import { addItem, removeItem, setRestaurant } from '../../../store/cartSlice';
 import type store from '../../../store/store';
 import type { IMenuItem } from '../models/menu';
 
 type MenuItemProps = {
   item: IMenuItem;
+  restaurantId: string;
 };
 
-const MenuItem: React.FC<MenuItemProps> = ({ item }) => {
+const MenuItem: React.FC<MenuItemProps> = ({ item, restaurantId }) => {
   const { id, name, description, price, finalPrice, itemPriceStrikeOff, imageId, ratings } = item;
   const [count, setCount] = useState(0);
 
@@ -27,6 +28,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ item }) => {
   const addItemToCart = (item: ICartItem) => {
     setCount(prevCount => prevCount + 1);
     dispatch(addItem(item));
+    dispatch(setRestaurant(restaurantId));
   };
 
   const removeItemFromCart = (item: ICartItem) => {

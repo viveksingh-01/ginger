@@ -38,7 +38,7 @@ const MenuPage: React.FC = () => {
         </div>
         <ul className="space-y-6">
           {restaurant?.menu?.map((item: IMenuItem) => (
-            <MenuItem item={item} key={item.id} />
+            <MenuItem item={item} key={item.id} restaurantId={restaurantId} />
           ))}
         </ul>
       </div>
