@@ -1,32 +1,17 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { addressList } from '@/data/address';
-import { addItem, removeItem } from '@/store/cartSlice';
 import type store from '@/store/store';
 
+import { isAuthenticated } from '@/utils/auth';
 import Cart from '../components/Cart';
-import useCartDetails from '../hooks/useCartDetails';
 
 const CheckoutPage = () => {
   const address = useSelector((state: ReturnType<typeof store.getState>) => state.checkout.address);
-  const items = useSelector((state: ReturnType<typeof store.getState>) => state.cart.items);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { cartItems, cartTotal, taxes, total } = useCartDetails(items);
-
   const handleClick = () => {
-    // mimic Order payload creation
-    const orderId = Date.now().toString();
-    const orderPayload = {
-      id: orderId,
-      items: cartItems,
-      total,
-      status: 'PLACED',
-    };
-    console.log('Order: ', orderPayload);
-
     navigate('/payments');
   };
 
@@ -86,14 +71,7 @@ const CheckoutPage = () => {
           </section>
 
           {/* ================= RIGHT SIDE (CART)================= */}
-          <Cart
-            cartItems={cartItems}
-            cartTotal={cartTotal}
-            taxes={taxes}
-            total={total}
-            onRemoveItem={item => dispatch(removeItem(item))}
-            onAddItem={item => dispatch(addItem(item))}
-          />
+          <Cart addressId={address?.id ?? ''} isSignedIn={isAuthenticated()} />
         </div>
       </div>
     </main>
