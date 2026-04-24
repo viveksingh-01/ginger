@@ -137,6 +137,10 @@ const Cart = ({ addressId, isSignedIn }: Props) => {
               <span>₹{(cartData?.cartDetails?.billDetails?.subtotal ?? 0) / 100}</span>
             </div>
             <div className="flex justify-between text-gray-600">
+              <span>Delivery charge</span>
+              <span>₹{(cartData?.cartDetails?.billDetails?.deliveryCharge ?? 0) / 100}</span>
+            </div>
+            <div className="flex justify-between text-gray-600">
               <span>GST</span>
               <span>₹{(cartData?.cartDetails?.billDetails?.GST ?? 0) / 100}</span>
             </div>
