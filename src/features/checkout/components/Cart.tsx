@@ -18,6 +18,7 @@ type Props = {
 
 const Cart = ({ addressId, isSignedIn }: Props) => {
   const [cartData, setCartData] = useState<ICartData>();
+  const [isLoading, setIsLoading] = useState(true);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const { restaurantId, items } = useSelector((state: ReturnType<typeof store.getState>) => state.cart);
@@ -39,6 +40,8 @@ const Cart = ({ addressId, isSignedIn }: Props) => {
           const saved = localStorage.getItem(CART_STORAGE_KEY);
           if (saved) dispatch(setItems(JSON.parse(saved)));
         }
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -122,21 +125,28 @@ const Cart = ({ addressId, isSignedIn }: Props) => {
         </div>
 
         <div className="border-t border-dashed border-gray-300 my-3" />
-        <div className="space-y-2 text-sm">
-          <div className="flex justify-between text-gray-600">
-            <span>Subtotal</span>
-            <span>₹{(cartData?.cartDetails?.billDetails?.subtotal ?? 0) / 100}</span>
+        {isLoading ? (
+          <div className="animate-pulse space-y-2">
+            <div className="h-4 bg-gray-100 rounded w-3/4" />
+            <div className="h-4 bg-gray-100 rounded w-1/2" />
           </div>
-          <div className="flex justify-between text-gray-600">
-            <span>GST</span>
-            <span>₹{(cartData?.cartDetails?.billDetails?.GST ?? 0) / 100}</span>
+        ) : (
+          <div className="space-y-2 text-sm">
+            <div className="flex justify-between text-gray-600">
+              <span>Subtotal</span>
+              <span>₹{(cartData?.cartDetails?.billDetails?.subtotal ?? 0) / 100}</span>
+            </div>
+            <div className="flex justify-between text-gray-600">
+              <span>GST</span>
+              <span>₹{(cartData?.cartDetails?.billDetails?.GST ?? 0) / 100}</span>
+            </div>
+            <div className="border-t border-dashed border-gray-300 my-3" />
+            <div className="flex justify-between text-base font-semibold text-gray-900">
+              <span>Total</span>
+              <span className="text-ginger">₹{(cartData?.cartDetails?.billDetails?.finalAmount ?? 0) / 100}</span>
+            </div>
           </div>
-          <div className="border-t border-dashed border-gray-300 my-3" />
-          <div className="flex justify-between text-base font-semibold text-gray-900">
-            <span>Total</span>
-            <span className="text-ginger">₹{(cartData?.cartDetails?.billDetails?.finalAmount ?? 0) / 100}</span>
-          </div>
-        </div>
+        )}
       </div>
     </section>
   );
