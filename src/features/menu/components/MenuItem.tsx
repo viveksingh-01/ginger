@@ -1,11 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import type ICartItem from '../../checkout/models/cart-item';
 
+import { isAuthenticated } from '@/utils/auth';
 import { IMAGE_URL } from '../../../constants';
 import { addItem, removeItem, setRestaurant } from '../../../store/cartSlice';
 import type store from '../../../store/store';
+import { addToCart } from '../../checkout/api/cart';
+import { buildCartPayload, CART_STORAGE_KEY } from '../../checkout/utils/cart';
 import type { IMenuItem } from '../models/menu';
 
 type MenuItemProps = {
@@ -16,24 +19,41 @@ type MenuItemProps = {
 const MenuItem: React.FC<MenuItemProps> = ({ item, restaurantId }) => {
   const { id, name, description, price, finalPrice, itemPriceStrikeOff, imageId, ratings } = item;
   const [count, setCount] = useState(0);
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const cartItems = useSelector((state: ReturnType<typeof store.getState>) => state.cart.items);
+  const { items: cartItems } = useSelector((state: ReturnType<typeof store.getState>) => state.cart);
+  const addressId = useSelector((state: ReturnType<typeof store.getState>) => state.checkout.address?.id ?? '');
   const dispatch = useDispatch();
 
   useEffect(() => {
     const itemCount = cartItems.filter(item => item.id === id).length;
     setCount(itemCount);
-  });
+  }, [cartItems, id]);
+
+  const syncCart = (updatedItems: ICartItem[]) => {
+    if (!isAuthenticated()) {
+      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(updatedItems));
+      return;
+    }
+
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(async () => {
+      await addToCart(buildCartPayload(updatedItems, restaurantId, addressId));
+    }, 300);
+  };
 
   const addItemToCart = (item: ICartItem) => {
-    setCount(prevCount => prevCount + 1);
     dispatch(addItem(item));
     dispatch(setRestaurant(restaurantId));
+    syncCart([...cartItems, item]);
   };
 
   const removeItemFromCart = (item: ICartItem) => {
-    setCount(prevCount => prevCount - 1);
+    if (count <= 0) return;
     dispatch(removeItem(item));
+    const index = cartItems.findIndex(i => i.id === item.id);
+    const next = index >= 0 ? [...cartItems.slice(0, index), ...cartItems.slice(index + 1)] : cartItems;
+    syncCart(next);
   };
 
   return (
