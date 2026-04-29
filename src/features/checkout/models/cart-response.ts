@@ -44,7 +44,7 @@ export interface ICartItem {
   strikeOffEnabled: number;
 }
 
-interface IBillDetails {
+export interface IBillDetails {
   subtotal: number;
   deliveryCharge: number;
   discountAmount: number;
