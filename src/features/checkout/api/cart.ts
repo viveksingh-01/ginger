@@ -1,5 +1,3 @@
-// LAtest CART API
-
 import axios from '@/shared/api/axios';
 import { handleAPIResponse } from '@/shared/api/utils';
 import type { ICartPayload } from '../models/cart-payload';
