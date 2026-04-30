@@ -4,6 +4,7 @@ import type { PaymentMethod } from '@/features/payment/models/payment-method';
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 const initialState: ICheckoutState = {
+  cartId: null,
   address: null,
   paymentMethod: 'COD',
 };
@@ -18,8 +19,11 @@ const checkoutSlice = createSlice({
     setPaymentMethod: (state: ICheckoutState, action: PayloadAction<PaymentMethod>) => {
       state.paymentMethod = action.payload;
     },
+    setCart: (state: ICheckoutState, action: PayloadAction<string>) => {
+      state.cartId = action.payload;
+    },
   },
 });
 
-export const { setAddress, setPaymentMethod } = checkoutSlice.actions;
+export const { setAddress, setPaymentMethod, setCart } = checkoutSlice.actions;
 export default checkoutSlice.reducer;
