@@ -1,4 +1,5 @@
 import { addItem, removeItem, setItems } from '@/store/cartSlice';
+import { setCart } from '@/store/checkoutSlice';
 import type store from '@/store/store';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -29,6 +30,7 @@ const Cart = ({ addressId, isSignedIn }: Props) => {
     const fetchInitialCart = async () => {
       try {
         const { data } = await getCart();
+        dispatch(setCart(data.cartMeta.cartId));
         setCartData(data);
 
         // Sync cart items into Redux from API response
@@ -68,6 +70,7 @@ const Cart = ({ addressId, isSignedIn }: Props) => {
     if (debounceRef.current) clearTimeout(debounceRef.current);
     debounceRef.current = setTimeout(async () => {
       const { data } = await addToCart(buildPayload(updatedItems));
+      setCart(data.cartMeta.cartId);
       setCartData(data);
       // Keep Redux in sync with server quantities/pricing.
       dispatch(setItems(flattenCartItems(data.cartDetails.items)));
