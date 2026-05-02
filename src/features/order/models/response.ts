@@ -1,13 +1,7 @@
-import type { IAddressResponse } from '@/features/address/models/address';
-import type ICartItem from '@/features/checkout/models/cart-item';
-import type { IBillDetails } from '@/features/checkout/models/cart-response';
+import type IOrderDetail from './order';
 
-export default interface IPlaceOrderResponse {
-  id: string;
-  restaurantId: string;
-  restaurantName: string;
-  address: IAddressResponse;
-  items: ICartItem[];
-  billDetails: IBillDetails;
-  status: string;
+export default interface IOrderResponse {
+  statusCode: number;
+  statusMessage: string;
+  data: IOrderDetail;
 }
