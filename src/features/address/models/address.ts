@@ -8,8 +8,8 @@ export default interface IAddress {
   area?: string;
   city?: string;
   landmark: string;
-  lat: string;
-  lng: string;
+  lat: number;
+  lng: number;
 }
 
 export interface IAddressResponse {

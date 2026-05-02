@@ -48,6 +48,6 @@ export interface IBillDetails {
   subtotal: number;
   deliveryCharge: number;
   discountAmount: number;
-  GST: number;
+  gst: number;
   finalAmount: number;
 }
