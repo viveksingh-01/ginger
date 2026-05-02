@@ -1,3 +1,4 @@
+import type IOrderDetail from '@/features/order/models/order';
 import { useEffect, useState } from 'react';
 import { ORDER_STEPS } from '../../../constants/order-steps';
 import CountdownTimer from '../components/CountdownTimer';
@@ -11,7 +12,13 @@ const TOTAL_ETA = 30;
 
 const OrderTrackingPage = () => {
   const orderId = 1290381;
+  const [orderDetails, setOrderDetails] = useState<IOrderDetail>();
   const [eta, setEta] = useState(TOTAL_ETA);
+
+  useEffect(() => {
+    const orderData = localStorage.getItem('order');
+    setOrderDetails(JSON.parse(orderData ?? ''));
+  }, []);
 
   // Simulate ETA countdown
   useEffect(() => {
@@ -63,7 +70,11 @@ const OrderTrackingPage = () => {
 
         {/* Order Details */}
         <aside className="lg:col-span-2 space-y-6">
-          <ItemsSummary />
+          <ItemsSummary
+            restaurant={orderDetails?.restaurantName}
+            items={orderDetails?.items}
+            billDetails={orderDetails?.billDetails}
+          />
         </aside>
       </section>
     </main>
