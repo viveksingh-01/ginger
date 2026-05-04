@@ -4,6 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import { useEffect, useState } from 'react';
 import { MapContainer, Marker, Polyline, TileLayer, useMap } from 'react-leaflet';
 
+import type IAddress from '@/features/address/models/address';
 import scooterIcon from '../../../assets/icons/delivery-scooter.png';
 import destinationIcon from '../../../assets/icons/destination-pin.png';
 import restaurantIcon from '../../../assets/icons/restaurant.png';
@@ -41,8 +42,13 @@ function FitBounds({ route }: { route: LatLngTuple[] }) {
   return null;
 }
 
+type LiveMapProps = {
+  address: IAddress;
+  duration: number;
+};
+
 // Accept duration in seconds
-export default function LiveMap({ duration = 16 }: { duration: number }) {
+const LiveMap: React.FC<LiveMapProps> = ({ duration = 16 }) => {
   const [route, setRoute] = useState<LatLngTuple[]>([]);
   const [markerIndex, setMarkerIndex] = useState(0);
 
@@ -98,4 +104,6 @@ export default function LiveMap({ duration = 16 }: { duration: number }) {
       {destination && <Marker position={destination} icon={destinationMarker} />}
     </MapContainer>
   );
-}
+};
+
+export default LiveMap;
