@@ -8,7 +8,6 @@ import type IAddress from '@/features/address/models/address';
 import scooterIcon from '../../../assets/icons/delivery-scooter.png';
 import destinationIcon from '../../../assets/icons/destination-pin.png';
 import restaurantIcon from '../../../assets/icons/restaurant.png';
-import useLatLong from '../hooks/useLatLong';
 
 const containerStyle = { width: '100%', height: '250px' };
 
@@ -48,12 +47,12 @@ type LiveMapProps = {
 };
 
 // Accept duration in seconds
-const LiveMap: React.FC<LiveMapProps> = ({ duration = 16 }) => {
+const LiveMap: React.FC<LiveMapProps> = ({ address, duration = 16 }) => {
   const [route, setRoute] = useState<LatLngTuple[]>([]);
   const [markerIndex, setMarkerIndex] = useState(0);
 
   const start: LatLngTuple = [12.84122, 77.66402];
-  const destination: LatLngTuple | null = useLatLong();
+  const destination: LatLngTuple = [address.lat, address.lng];
 
   // Fetch route
   useEffect(() => {
