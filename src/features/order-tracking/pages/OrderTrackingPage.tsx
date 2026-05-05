@@ -70,11 +70,18 @@ const OrderTrackingPage = () => {
 
         {/* Order Details */}
         <aside className="lg:col-span-2 space-y-6">
-          <ItemsSummary
-            restaurant={orderDetails?.restaurantName}
-            items={orderDetails?.items}
-            billDetails={orderDetails?.billDetails}
-          />
+          {orderDetails ? (
+            <ItemsSummary
+              restaurant={orderDetails.restaurantName}
+              items={orderDetails.items}
+              billDetails={orderDetails.billDetails}
+            />
+          ) : (
+            <div className="bg-white rounded-2xl shadow-sm p-5">
+              <h2 className="text-sm font-medium text-gray-500 mb-2 uppercase tracking-wide">Order Summary</h2>
+              <p className="text-sm text-gray-600">Loading order details…</p>
+            </div>
+          )}
         </aside>
       </section>
     </main>
