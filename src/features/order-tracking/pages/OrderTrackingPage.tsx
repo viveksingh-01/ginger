@@ -54,9 +54,9 @@ const OrderTrackingPage = () => {
           <Timeline currentStep={currentStepIndex} />
 
           {/* LIVE DELIVERY TRACKER */}
-          {currentStepIndex >= 2 && (
+          {currentStepIndex >= 2 && orderDetails?.address && (
             <section className="rounded-2xl overflow-hidden border border-gray-100 shadow-sm">
-              <LiveMap duration={eta} />
+              <LiveMap duration={eta} address={orderDetails?.address} />
             </section>
           )}
 
