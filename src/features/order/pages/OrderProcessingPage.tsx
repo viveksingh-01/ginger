@@ -1,5 +1,5 @@
 import { Loader2 } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const statusMessages = [
   'Confirming your order...',
@@ -10,6 +10,18 @@ const statusMessages = [
 
 const OrderProcessingPage = () => {
   const [statusIndex, setStatusIndex] = useState(0);
+
+  useEffect(() => {
+    // Rotate messages every 2 seconds
+    const interval = setInterval(() => {
+      setStatusIndex(prev => {
+        if (prev === statusMessages.length - 1) return prev;
+        return prev + 1;
+      });
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <main className="min-h-screen bg-white flex items-center justify-center px-6">
