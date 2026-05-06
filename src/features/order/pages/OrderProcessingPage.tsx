@@ -1,0 +1,34 @@
+import { Loader2 } from 'lucide-react';
+import { useState } from 'react';
+
+const statusMessages = [
+  'Confirming your order...',
+  'Sending it to the restaurant...',
+  'Preparing your bill...',
+  'Almost done...',
+];
+
+const OrderProcessingPage = () => {
+  const [statusIndex, setStatusIndex] = useState(0);
+
+  return (
+    <main className="min-h-screen bg-white flex items-center justify-center px-6">
+      <section className="max-w-md w-full flex flex-col items-center text-center">
+        {/* Spinner */}
+        <div className="w-20 h-20 rounded-full border border-orange-100 flex items-center justify-center mb-8">
+          <Loader2 className="w-10 h-10 animate-spin text-ginger" />
+        </div>
+
+        {/* Main heading */}
+        <h1 className="text-2xl font-bold text-gray-900">Placing your order</h1>
+
+        {/* Dynamic status */}
+        <p className="mt-4 text-sm text-gray-600 min-h-[24px] transition-all duration-300">
+          {statusMessages[statusIndex]}
+        </p>
+      </section>
+    </main>
+  );
+};
+
+export default OrderProcessingPage;
