@@ -13,6 +13,7 @@ const statusMessages = [
 
 const OrderProcessingPage = () => {
   const [statusIndex, setStatusIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
   const { cartId, address, paymentMethod } = useSelector((state: ReturnType<typeof store.getState>) => state.checkout);
 
   useEffect(() => {
@@ -28,22 +29,30 @@ const OrderProcessingPage = () => {
         console.log(res);
       } catch (error) {
         console.error(error);
+      } finally {
+        setIsLoading(false);
       }
     };
     placeOrder();
   }, []);
 
   useEffect(() => {
-    // Rotate messages every 2 seconds
-    const interval = setInterval(() => {
+    if (!isLoading) return;
+
+    setStatusIndex(0);
+
+    const intervalId = setInterval(() => {
       setStatusIndex(prev => {
-        if (prev === statusMessages.length - 1) return prev;
+        if (prev >= statusMessages.length - 1) {
+          clearInterval(intervalId);
+          return prev;
+        }
         return prev + 1;
       });
     }, 2000);
 
-    return () => clearInterval(interval);
-  }, []);
+    return () => clearInterval(intervalId);
+  }, [isLoading]);
 
   return (
     <main className="min-h-screen bg-white flex items-center justify-center px-6">
