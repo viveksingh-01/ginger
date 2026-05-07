@@ -2,6 +2,7 @@ import type store from '@/store/store';
 import { Loader2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { placeOrderRequest } from '../api/order';
 
 const statusMessages = [
@@ -15,6 +16,7 @@ const OrderProcessingPage = () => {
   const [statusIndex, setStatusIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const { cartId, address, paymentMethod } = useSelector((state: ReturnType<typeof store.getState>) => state.checkout);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!cartId || !address || !paymentMethod) return;
@@ -27,6 +29,7 @@ const OrderProcessingPage = () => {
       try {
         const res = await placeOrderRequest(payload);
         console.log(res);
+        navigate('/order/success');
       } catch (error) {
         console.error(error);
       } finally {
