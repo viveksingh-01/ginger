@@ -38,6 +38,11 @@ const OrderProcessingPage = () => {
         <p className="mt-4 text-sm text-gray-600 min-h-[24px] transition-all duration-300">
           {statusMessages[statusIndex]}
         </p>
+
+        {/* Note */}
+        <p className="mt-8 text-xs text-gray-400 leading-5 max-w-xs">
+          Please don’t refresh or close this page while we process your order.
+        </p>
       </section>
     </main>
   );
