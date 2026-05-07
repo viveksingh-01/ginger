@@ -28,7 +28,7 @@ const OrderProcessingPage = () => {
     const placeOrder = async () => {
       try {
         const res = await placeOrderRequest(payload);
-        console.log(res);
+        localStorage.setItem('orderDetails', JSON.stringify(res.data));
         navigate('/order/success');
       } catch (error) {
         console.error(error);

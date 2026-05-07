@@ -16,7 +16,7 @@ const OrderTrackingPage = () => {
   const [eta, setEta] = useState(TOTAL_ETA);
 
   useEffect(() => {
-    const orderData = localStorage.getItem('order');
+    const orderData = localStorage.getItem('orderDetails');
     setOrderDetails(JSON.parse(orderData ?? ''));
   }, []);
 
