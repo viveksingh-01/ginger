@@ -1,5 +1,8 @@
+import type store from '@/store/store';
 import { Loader2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { placeOrderRequest } from '../api/order';
 
 const statusMessages = [
   'Confirming your order...',
@@ -10,6 +13,25 @@ const statusMessages = [
 
 const OrderProcessingPage = () => {
   const [statusIndex, setStatusIndex] = useState(0);
+  const { cartId, address, paymentMethod } = useSelector((state: ReturnType<typeof store.getState>) => state.checkout);
+
+  useEffect(() => {
+    if (!cartId || !address || !paymentMethod) return;
+    const payload = {
+      cartId,
+      addressId: address.id,
+      paymentMethod,
+    };
+    const placeOrder = async () => {
+      try {
+        const res = await placeOrderRequest(payload);
+        console.log(res);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    placeOrder();
+  }, []);
 
   useEffect(() => {
     // Rotate messages every 2 seconds
