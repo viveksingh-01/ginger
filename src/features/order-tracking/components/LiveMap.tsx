@@ -69,7 +69,7 @@ const LiveMap: React.FC<LiveMapProps> = ({ address, duration = 16 }) => {
     };
 
     fetchRoute();
-  }, [destination]);
+  }, []);
 
   // Dynamic animation based on duration
   useEffect(() => {
