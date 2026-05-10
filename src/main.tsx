@@ -13,6 +13,7 @@ import SignupPage from './features/auth/pages/SignupPage.tsx';
 import CheckoutPage from './features/checkout/pages/CheckoutPage.tsx';
 import MenuPage from './features/menu/pages/MenuPage.tsx';
 import OrderTrackingPage from './features/order-tracking/pages/OrderTrackingPage.tsx';
+import OrderProcessingPage from './features/order/pages/OrderProcessingPage.tsx';
 import AddCardPage from './features/payment/pages/AddCardPage.tsx';
 import PaymentPage from './features/payment/pages/PaymentPage.tsx';
 import RestaurantPage from './features/restaurant/pages/RestaurantPage.tsx';
@@ -40,6 +41,7 @@ const router = createBrowserRouter([
           { path: 'manage-address/add', element: <SaveAddressPage /> },
           { path: 'payments', element: <PaymentPage /> },
           { path: 'payments/add-card', element: <AddCardPage /> },
+          { path: 'order/request', element: <OrderProcessingPage /> },
           { path: 'order/success', element: <OrderSuccessPage /> },
           { path: 'order/track', element: <OrderTrackingPage /> },
         ],
