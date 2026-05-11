@@ -26,6 +26,10 @@ const cartSlice = createSlice({
       }
     },
 
+    clearCart: (state: CartState) => {
+      state.items.length = 0;
+    },
+
     // needed for initial load + rollback
     setItems: (state, action: PayloadAction<ICartItem[]>) => {
       state.items = action.payload;
@@ -38,5 +42,5 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addItem, removeItem, setItems, setRestaurant } = cartSlice.actions;
+export const { addItem, removeItem, clearCart, setItems, setRestaurant } = cartSlice.actions;
 export default cartSlice.reducer;
