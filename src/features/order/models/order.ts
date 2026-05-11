@@ -3,6 +3,7 @@ import type { IBillDetails } from '@/features/checkout/models/cart-response';
 
 export default interface IOrderDetail {
   id: string;
+  orderId: number;
   restaurantId: string;
   restaurantName: string;
   address: IAddress;

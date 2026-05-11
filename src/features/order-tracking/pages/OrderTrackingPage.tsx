@@ -11,7 +11,6 @@ import Timeline from '../components/Timeline';
 const TOTAL_ETA = 30;
 
 const OrderTrackingPage = () => {
-  const orderId = 1290381;
   const [orderDetails, setOrderDetails] = useState<IOrderDetail>();
   const [eta, setEta] = useState(TOTAL_ETA);
 
@@ -44,7 +43,7 @@ const OrderTrackingPage = () => {
         <section className="lg:col-span-3 space-y-6">
           {/* HEADER CARD */}
           <div className="p-5 mb-6 bg-green-600 text-white rounded-2xl shadow">
-            <p className="text-xs mb-1">ORDER #{orderId}</p>
+            <p className="text-xs mb-1">ORDER #{orderDetails?.orderId}</p>
             <h1 className="text-xl font-semibold">{ORDER_STEPS[currentStepIndex].message}</h1>
             <CountdownTimer eta={eta} />
             {currentStepIndex < 3 && <DeliveryProgress eta={eta} totalEta={TOTAL_ETA} />}
