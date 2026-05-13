@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { FiTrash2 } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -60,14 +61,32 @@ const AddressPage = () => {
           <div
             key={id}
             onClick={() => setSelectedId(id)}
-            className={`p-4 border cursor-pointer transition
-              ${selectedId === id ? 'border-ginger' : 'border-gray-200'}`}
+            className={`
+              relative group overflow-hidden
+              p-4 border cursor-pointer transition rounded-lg
+              ${selectedId === id ? 'border-ginger' : 'border-gray-200'}
+            `}
           >
-            <p className="font-medium">{annotation}</p>
-            <p className="text-sm text-gray-500">
-              {house}, {area} {city}
-            </p>
-            <p className="text-sm text-gray-500">{address}</p>
+            <div className="pr-4">
+              <p className="font-medium">{annotation}</p>
+              <p className="text-sm text-gray-500">
+                {house}, {area} {city}
+              </p>
+              <p className="text-sm text-gray-500">{address}</p>
+            </div>
+
+            <div
+              className="
+                absolute inset-y-0 right-0
+                flex items-start gap-3 pr-4 pt-4
+                opacity-0 group-hover:opacity-100
+                transition-opacity duration-300
+              "
+            >
+              <button className="text-gray-500 hover:text-red-600 transition cursor-pointer">
+                <FiTrash2 size={18} />
+              </button>
+            </div>
           </div>
         ))}
       </div>
