@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { setAddress } from '../../../store/checkoutSlice';
 import type store from '../../../store/store';
-import { getAddresses } from '../api/address';
+import { deleteAddress, getAddresses } from '../api/address';
 import type IAddress from '../models/address';
 
 const AddressPage = () => {
@@ -44,6 +44,15 @@ const AddressPage = () => {
     navigate('/checkout');
   };
 
+  const handleDelete = async (addressId: string) => {
+    try {
+      await deleteAddress(addressId);
+      fetchAddress();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <main className="max-w-md mx-auto px-4 py-6">
       <div className="flex justify-between items-center">
@@ -62,8 +71,7 @@ const AddressPage = () => {
             key={id}
             onClick={() => setSelectedId(id)}
             className={`
-              relative group overflow-hidden
-              p-4 border cursor-pointer transition rounded-lg
+              relative group overflow-hidden p-4 border cursor-pointer transition rounded-lg
               ${selectedId === id ? 'border-ginger' : 'border-gray-200'}
             `}
           >
@@ -77,13 +85,14 @@ const AddressPage = () => {
 
             <div
               className="
-                absolute inset-y-0 right-0
-                flex items-start gap-3 pr-4 pt-4
-                opacity-0 group-hover:opacity-100
-                transition-opacity duration-300
+                absolute inset-y-0 right-0 flex items-start gap-3 pr-4 pt-4
+                opacity-0 group-hover:opacity-100 transition-opacity duration-300
               "
             >
-              <button className="text-gray-500 hover:text-red-600 transition cursor-pointer">
+              <button
+                onClick={() => handleDelete(id)}
+                className="text-gray-500 hover:text-red-600 transition cursor-pointer"
+              >
                 <FiTrash2 size={18} />
               </button>
             </div>
