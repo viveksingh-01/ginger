@@ -11,3 +11,8 @@ export const saveAddress = async (body: ISaveAddressPayload): Promise<IAddressRe
   const res = await axios.post('/address', body);
   return handleAPIResponse<IAddressResponse>(res);
 };
+
+export const deleteAddress = async (addressId: string): Promise<IAddressResponse> => {
+  const res = await axios.delete(`/address/${addressId}`);
+  return handleAPIResponse<IAddressResponse>(res);
+};
