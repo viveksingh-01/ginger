@@ -70,7 +70,7 @@ export default function SaveAddressPage() {
       <section className="max-w-5xl mx-auto px-6 py-6 flex flex-col">
         {/* HEADER */}
         <div className="flex items-center gap-3 mb-6">
-          <ArrowLeft className="w-5 h-5 cursor-pointer" />
+          <ArrowLeft className="w-5 h-5 cursor-pointer" onClick={() => navigate(-1)} />
           <h1 className="text-lg font-semibold">Add Address</h1>
         </div>
 
