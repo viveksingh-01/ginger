@@ -45,14 +45,14 @@ const CheckoutPage = () => {
               ) : addressList.length > 0 ? (
                 <button
                   onClick={() => navigate('/manage-address')}
-                  className="py-3 px-8 shadow-sm bg-green-600 text-white font-medium hover:bg-green-700 cursor-pointer transition"
+                  className="w-full py-3 px-8 shadow-sm bg-green-600 text-white font-medium hover:bg-green-700 cursor-pointer transition"
                 >
                   Select an address
                 </button>
               ) : (
                 <button
                   onClick={() => navigate('/manage-address')}
-                  className="py-3 px-8 shadow-sm bg-green-600 text-white font-medium hover:bg-green-700 cursor-pointer transition"
+                  className="w-full py-3 px-8 shadow-sm bg-green-600 text-white font-medium hover:bg-green-700 cursor-pointer transition"
                 >
                   Add new address
                 </button>
