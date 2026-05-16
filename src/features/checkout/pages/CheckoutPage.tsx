@@ -64,6 +64,7 @@ const CheckoutPage = () => {
               <button
                 onClick={handleClick}
                 className="w-full py-3 px-6 shadow-sm bg-green-600 text-white font-medium hover:bg-green-700 cursor-pointer transition"
+                disabled={!address?.id}
               >
                 Proceed to Pay
               </button>
