@@ -13,6 +13,7 @@ const AddressPage = () => {
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const [deleteTarget, setDeleteTarget] = useState<IAddress | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const storedAddress = useSelector((state: ReturnType<typeof store.getState>) => state.checkout.address);
 
@@ -51,6 +52,7 @@ const AddressPage = () => {
   const handleDelete = async () => {
     if (!deleteTarget) return;
     try {
+      setIsDeleting(true);
       await deleteAddress(deleteTarget.id);
       await fetchAddress();
 
@@ -62,6 +64,8 @@ const AddressPage = () => {
       setDeleteTarget(null);
     } catch (err) {
       console.error(err);
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -85,8 +89,8 @@ const AddressPage = () => {
               onClick={() => setSelectedId(address.id)}
               className={`
                 relative group overflow-hidden p-4 border cursor-pointer transition rounded-lg bg-white dark:bg-zinc-900
-                ${selectedId === address.id ? 'border-ginger' : 'border-gray-200 dark:border-zinc-700'}
-              `}
+                  ${selectedId === address.id ? 'border-ginger' : 'border-gray-200 dark:border-zinc-700'}
+                `}
             >
               <div className="pr-4">
                 <p className="font-medium text-black dark:text-white">{address.annotation}</p>
@@ -135,9 +139,10 @@ const AddressPage = () => {
 
               <button
                 onClick={handleDelete}
+                disabled={isDeleting}
                 className="px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white transition disabled:opacity-50"
               >
-                Delete
+                {isDeleting ? 'Deleting...' : 'Delete'}
               </button>
             </div>
           </div>
