@@ -49,10 +49,17 @@ const AddressPage = () => {
   };
 
   const handleDelete = async () => {
+    if (!deleteTarget) return;
     try {
-      if (!deleteTarget) return;
-      await deleteAddress(deleteTarget?.id);
-      fetchAddress();
+      await deleteAddress(deleteTarget.id);
+      await fetchAddress();
+
+      // remove selected state if deleted
+      if (selectedId === deleteTarget.id) {
+        setSelectedId(null);
+      }
+
+      setDeleteTarget(null);
     } catch (err) {
       console.error(err);
     }
