@@ -63,8 +63,11 @@ const CheckoutPage = () => {
               <h2 className="mb-4 font-medium text-gray-900">Choose Payment Method</h2>
               <button
                 onClick={handleClick}
-                className="w-full py-3 px-6 shadow-sm bg-green-600 text-white font-medium hover:bg-green-700 cursor-pointer transition"
                 disabled={!address?.id}
+                className="
+                  w-full py-3 px-6 shadow-sm bg-green-600 text-white font-medium hover:bg-green-700 cursor-pointer transition
+                  disabled:bg-gray-300 disabled:hover:bg-gray-300 disabled:cursor-not-allowed
+                "
               >
                 Proceed to Pay
               </button>
