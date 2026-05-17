@@ -48,9 +48,10 @@ const AddressPage = () => {
     navigate('/checkout');
   };
 
-  const handleDelete = async (addressId: string) => {
+  const handleDelete = async () => {
     try {
-      await deleteAddress(addressId);
+      if (!deleteTarget) return;
+      await deleteAddress(deleteTarget?.id);
       fetchAddress();
     } catch (err) {
       console.error(err);
@@ -125,7 +126,10 @@ const AddressPage = () => {
                 Cancel
               </button>
 
-              <button className="px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white transition disabled:opacity-50">
+              <button
+                onClick={handleDelete}
+                className="px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white transition disabled:opacity-50"
+              >
                 Delete
               </button>
             </div>
