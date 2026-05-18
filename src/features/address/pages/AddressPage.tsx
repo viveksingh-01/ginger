@@ -133,7 +133,10 @@ const AddressPage = () => {
             <h2 className="text-lg font-semibold text-black dark:text-white">Delete Address</h2>
             <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">Are you sure you want to delete?</p>
             <div className="mt-6 flex justify-end gap-3">
-              <button className="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 dark:text-gray-300 hover:bg-gray-100 transition">
+              <button
+                onClick={() => setDeleteTarget(null)}
+                className="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 dark:text-gray-300 hover:bg-gray-100 transition"
+              >
                 Cancel
               </button>
 
