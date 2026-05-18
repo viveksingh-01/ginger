@@ -89,8 +89,8 @@ const AddressPage = () => {
               onClick={() => setSelectedId(address.id)}
               className={`
                 relative group overflow-hidden p-4 border cursor-pointer transition rounded-lg bg-white dark:bg-zinc-900
-                  ${selectedId === address.id ? 'border-ginger' : 'border-gray-200 dark:border-zinc-700'}
-                `}
+                ${selectedId === address.id ? 'border-ginger' : 'border-gray-200 dark:border-zinc-700'}
+              `}
             >
               <div className="pr-4">
                 <p className="font-medium text-black dark:text-white">{address.annotation}</p>
@@ -131,7 +131,9 @@ const AddressPage = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">
           <div className="w-full max-w-sm rounded-xl p-6 shadow-xl bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700">
             <h2 className="text-lg font-semibold text-black dark:text-white">Delete Address</h2>
-            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">Are you sure you want to delete?</p>
+            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+              Are you sure you want to delete <span className="font-medium">{deleteTarget.annotation}</span>?
+            </p>
             <div className="mt-6 flex justify-end gap-3">
               <button
                 onClick={() => setDeleteTarget(null)}
