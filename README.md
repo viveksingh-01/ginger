@@ -1,3 +1,3 @@
 # ginger
 
-Food ordering app made using React + TypeScript
+Food ordering app, made using React & Tailwind.
