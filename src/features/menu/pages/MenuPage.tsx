@@ -14,7 +14,7 @@ const MenuPage: React.FC = () => {
   const cartItemsCount = Array.from(new Map(cartItems.map(item => [item.id, item])).values()).length;
 
   if (!restaurantId) return;
-  const { restaurant } = useRestaurantDetails(restaurantId || '');
+  const { data: restaurant } = useRestaurantDetails(restaurantId || '');
 
   return (
     <section className="mt-16 bg-gray-50 dark:bg-gray-950 min-h-screen">
