@@ -1,44 +1,19 @@
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import RestaurantCard from '../components/RestaurantCard';
-import type IRestaurant from '../models/restaurant';
 import RestaurantListSkeleton from './RestaurantListSkeleton';
 
-const BASE_URL = import.meta.env.VITE_GINGER_API_URL;
+import { useRestaurants } from '../hooks/useRestaurants';
 
 const RestaurantPage: React.FC = () => {
-  const [restaurants, setRestaurants] = useState<IRestaurant[]>([]);
-  const [loading, setLoading] = useState<boolean>();
-  const [error, setError] = useState<string | null>(null);
+  const { data: restaurants = [], isLoading, isError, error, refetch } = useRestaurants();
 
-  const getRestaurantList = async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      const res = await fetch(`${BASE_URL}/restaurants`);
-      if (!res.ok) {
-        throw new Error('Failed to fetch restaurant data');
-      }
-      const { data } = await res.json();
-      setRestaurants(data || []);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
-      console.error('Error fetching restaurants:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getRestaurantList();
-  }, []);
-
-  if (loading) {
+  if (isLoading) {
     return (
       <section className="mt-16 bg-gray-50 dark:bg-gray-950 min-h-screen">
         <div className="container mx-auto px-6 py-10">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Restaurants near you</h2>
+
           <div
             className="
               grid gap-6
@@ -57,15 +32,17 @@ const RestaurantPage: React.FC = () => {
     );
   }
 
-  if (error) {
+  if (isError) {
     return (
       <section className="mt-16 bg-gray-50 dark:bg-gray-950 min-h-screen">
         <div className="container mx-auto px-6 py-10">
           <div className="text-center">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Error loading restaurants</h2>
-            <p className="text-red-600 dark:text-red-400">{error}</p>
+
+            <p className="text-red-600 dark:text-red-400">{(error as Error).message}</p>
+
             <button
-              onClick={getRestaurantList}
+              onClick={() => refetch()}
               className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
             >
               Retry
@@ -80,6 +57,7 @@ const RestaurantPage: React.FC = () => {
     <section className="mt-16 bg-gray-50 dark:bg-gray-950 min-h-screen">
       <div className="container mx-auto px-6 py-10">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Restaurants near you</h2>
+
         <div
           className="
             grid gap-6
