@@ -145,7 +145,7 @@ const Cart = ({ addressId, isSignedIn }: Props) => {
             </div>
             <div className="flex justify-between text-gray-600">
               <span>GST</span>
-              <span>₹{(cartData?.cartDetails?.billDetails?.GST ?? 0) / 100}</span>
+              <span>₹{(cartData?.cartDetails?.billDetails?.gst ?? 0) / 100}</span>
             </div>
             <div className="border-t border-dashed border-gray-300 my-3" />
             <div className="flex justify-between text-base font-semibold text-gray-900">
