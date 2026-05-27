@@ -5,17 +5,19 @@ import { useNavigate } from 'react-router-dom';
 
 import { setAddress } from '../../../store/checkoutSlice';
 import type store from '../../../store/store';
-import { deleteAddress, getAddresses } from '../api/address';
+import { deleteAddress } from '../api/address';
+import { useAddress } from '../hooks/useAddress';
 import type IAddress from '../models/address';
 
 const AddressPage = () => {
-  const [addressList, setAddressList] = useState<IAddress[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const [deleteTarget, setDeleteTarget] = useState<IAddress | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
 
   const storedAddress = useSelector((state: ReturnType<typeof store.getState>) => state.checkout.address);
+  const { data: addressResponse } = useAddress();
+  const addressList: IAddress[] = addressResponse?.data ?? [];
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -26,17 +28,6 @@ const AddressPage = () => {
       setSelectedId(storedAddress.id);
     }
   }, [storedAddress]);
-
-  useEffect(() => {
-    fetchAddress();
-  }, []);
-
-  const fetchAddress = async () => {
-    const { data } = await getAddresses();
-    if (data) {
-      setAddressList(data);
-    }
-  };
 
   const handleClick = () => {
     if (!selectedId) return;
@@ -54,7 +45,6 @@ const AddressPage = () => {
     try {
       setIsDeleting(true);
       await deleteAddress(deleteTarget.id);
-      await fetchAddress();
 
       // remove selected state if deleted
       if (selectedId === deleteTarget.id) {
