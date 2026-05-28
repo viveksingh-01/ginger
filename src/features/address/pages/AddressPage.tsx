@@ -16,7 +16,7 @@ const AddressPage = () => {
   const [isDeleting, setIsDeleting] = useState(false);
 
   const storedAddress = useSelector((state: ReturnType<typeof store.getState>) => state.checkout.address);
-  const { data: addressResponse } = useAddress();
+  const { data: addressResponse, refetch } = useAddress();
   const addressList: IAddress[] = addressResponse?.data ?? [];
 
   const dispatch = useDispatch();
@@ -45,6 +45,7 @@ const AddressPage = () => {
     try {
       setIsDeleting(true);
       await deleteAddress(deleteTarget.id);
+      await refetch();
 
       // remove selected state if deleted
       if (selectedId === deleteTarget.id) {
