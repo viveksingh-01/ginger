@@ -1,15 +1,19 @@
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { addressList } from '@/data/address';
 import type store from '@/store/store';
 
+import { useAddress } from '@/features/address/hooks/useAddress';
+import type IAddress from '@/features/address/models/address';
 import { isAuthenticated } from '@/utils/auth';
 import Cart from '../components/Cart';
 
 const CheckoutPage = () => {
   const address = useSelector((state: ReturnType<typeof store.getState>) => state.checkout.address);
   const navigate = useNavigate();
+
+  const { data: addressResponse } = useAddress();
+  const addressList: IAddress[] = addressResponse?.data ?? [];
 
   const handleClick = () => {
     navigate('/payments');
