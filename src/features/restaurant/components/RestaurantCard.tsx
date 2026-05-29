@@ -1,3 +1,4 @@
+import { Star } from 'lucide-react';
 import { IMAGE_URL } from '../../../constants';
 import type IRestaurant from '../models/restaurant';
 
@@ -36,7 +37,8 @@ const RestaurantCard = ({ restaurant }: { restaurant: IRestaurant }) => {
               flex items-center gap-1
             "
         >
-          ⭐ {restaurant.avgRatingString}
+          <Star size={16} fill="#f99c16" style={{ color: 'ea580c' }} />
+          {restaurant.avgRatingString}
         </div>
       </div>
       <div className="p-4 space-y-1">
