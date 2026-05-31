@@ -60,7 +60,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ item, restaurantId }) => {
     <>
       <li key={id} className="flex justify-between items-start">
         <div className="pr-4">
-          <h3 className="font-semibold text-lg text-gray-900 dark:text-white">{name}</h3>
+          <h3 className="font-semibold md:text-lg text-gray-900 dark:text-white">{name}</h3>
           <p className="dark:text-gray-400 mt-1">
             {itemPriceStrikeOff && <span className="text-gray-400 line-through">₹{price / 100}</span>} ₹
             {finalPrice / 100}
@@ -71,7 +71,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ item, restaurantId }) => {
           </div>
           <p className="mt-2 text-gray-600 text-sm">{description}</p>
         </div>
-        <div className="relative w-40 h-36 shrink-0">
+        <div className="relative w-28 h-24 md:w-40 md:h-36 shrink-0">
           {imageId && <img src={IMAGE_URL + imageId} alt={name} className="w-full h-full object-cover rounded-xl" />}
           {count == 0 && (
             <button
