@@ -1,4 +1,6 @@
+import { redirectToLogin } from '@/lib/auth-navigation';
 import axios from 'axios';
+
 const BASE_URL = import.meta.env.VITE_GINGER_API_URL;
 
 const axiosInstance = axios.create({
@@ -30,9 +32,9 @@ axiosInstance.interceptors.response.use(
   error => {
     if (error.response?.status === 401) {
       localStorage.removeItem('token');
-      window.location.href = '/auth/login';
-      return Promise.reject(error);
+      redirectToLogin();
     }
+    return Promise.reject(error);
   }
 );
 
