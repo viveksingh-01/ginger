@@ -17,10 +17,12 @@ const MenuPage: React.FC = () => {
   const { data: restaurant } = useRestaurantDetails(restaurantId || '');
 
   return (
-    <section className="mt-16 bg-gray-50 dark:bg-gray-950 min-h-screen">
+    <section className="bg-gray-50 dark:bg-gray-950 min-h-screen">
       <div className="container mx-auto px-6 py-10 max-w-3xl">
         <div className="mb-12">
-          <h2 className="my-3 text-3xl font-bold text-gray-900 dark:text-white">{restaurant?.details?.name}</h2>
+          <h2 className="my-3 text-xl lg:text-3xl font-bold text-gray-900 dark:text-white">
+            {restaurant?.details?.name}
+          </h2>
           <div className="p-3 bg-white/70 backdrop-blur rounded-lg">
             <div className="mb-1 font-semibold flex items-center gap-1">
               <FaStar className="text-green-700" />
