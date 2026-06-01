@@ -1,5 +1,5 @@
 import { setAuth } from '@/store/authSlice';
-import { Loader2 } from 'lucide-react';
+import { Eye, EyeClosed, Loader2 } from 'lucide-react';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
@@ -137,7 +137,7 @@ const SignupPage = () => {
                   onClick={() => setShowPassword(prev => !prev)}
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-sm text-gray-500"
                 >
-                  {showPassword ? 'Hide' : 'Show'}
+                  {showPassword ? <Eye /> : <EyeClosed />}
                 </button>
               </div>
             </div>
