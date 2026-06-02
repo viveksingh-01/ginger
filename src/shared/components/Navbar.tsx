@@ -32,27 +32,26 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Right */}
-          <div className="flex items-center gap-6">
+          {/* Right — mobile: search, user, cart icons only; desktop: full nav with labels */}
+          <div className="flex items-center gap-4 lg:gap-6">
             <Link to={'/search'}>
-              <NavItem icon={<Search size={18} />} label="Search" mobile />
-              <NavItem icon={<Search size={18} />} label="Search" />
+              <NavItem icon={<Search size={18} />} label="Search" iconOnly />
             </Link>
-            <Link to={'/coming-soon'}>
+            <Link to={'/coming-soon'} className="hidden lg:block">
               <NavItem icon={<Percent size={18} />} label="Offers" />
             </Link>
-            <Link to={'/coming-soon'}>
+            <Link to={'/coming-soon'} className="hidden lg:block">
               <NavItem icon={<HelpCircle size={18} />} label="Help" />
             </Link>
             {isAuthenticated() ? (
-              <NavItem icon={<User size={18} />} label={user?.name.split(' ')[0] ?? 'Me'} />
+              <NavItem icon={<User size={18} />} label={user?.name.split(' ')[0] ?? 'Me'} iconOnly />
             ) : (
               <Link to={'/auth/login'}>
-                <NavItem icon={<User size={18} />} label="Sign In" />
+                <NavItem icon={<User size={18} />} label="Sign In" iconOnly />
               </Link>
             )}
             <Link to={'/checkout'}>
-              <NavItem icon={<ShoppingCart size={18} />} label="Cart" badge={cartItems.length.toString()} />
+              <NavItem icon={<ShoppingCart size={18} />} label="Cart" badge={cartItems.length.toString()} iconOnly />
             </Link>
           </div>
         </div>
