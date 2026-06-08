@@ -12,3 +12,8 @@ export interface OrderStatusEvent {
   isTerminal: boolean;
   updatedAt: string;
 }
+
+export interface ApiErrorBody {
+  statusCode: number;
+  statusMessage: string;
+}
