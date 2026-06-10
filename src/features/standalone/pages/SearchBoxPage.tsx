@@ -18,6 +18,7 @@ function SearchBoxPage() {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value)}
           placeholder="Search for restaurants"
           className="w-full border border-(--border-light) py-3 px-6 pl-12 focus:outline-none focus:ring-2 ring-ginger"
+          autoFocus
         />
       </section>
       <section className="mt-4 p-4 space-y-4">
