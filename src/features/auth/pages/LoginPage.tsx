@@ -1,6 +1,7 @@
 import Input from '@/shared/components/Input';
 import { setAuth } from '@/store/authSlice';
-import { Loader2 } from 'lucide-react';
+import { Eye, EyeClosed, Loader2 } from 'lucide-react';
+import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -9,6 +10,7 @@ import type { ILoginPayload } from '../models/payload';
 import type IAuthResponse from '../models/response';
 
 const LoginPage = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -67,26 +69,37 @@ const LoginPage = () => {
                 />
               )}
             />
-            <Controller
-              name="password"
-              control={control}
-              rules={{
-                required: 'Password is required',
-                minLength: {
-                  value: 6,
-                  message: 'Password must be at least 6 characters',
-                },
-              }}
-              render={({ field }) => (
-                <Input
-                  label="Password"
-                  type="password"
-                  value={field.value || ''}
-                  onChange={field.onChange}
-                  error={errors.password?.message}
-                />
-              )}
-            />
+
+            {/* Password */}
+            <div className="relative">
+              <Controller
+                name="password"
+                control={control}
+                rules={{
+                  required: 'Password is required',
+                  minLength: {
+                    value: 6,
+                    message: 'Password must be at least 6 characters',
+                  },
+                }}
+                render={({ field }) => (
+                  <Input
+                    label="Password"
+                    type="password"
+                    value={field.value || ''}
+                    onChange={field.onChange}
+                    error={errors.password?.message}
+                  />
+                )}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(prev => !prev)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-sm text-gray-500"
+              >
+                {showPassword ? <Eye /> : <EyeClosed />}
+              </button>
+            </div>
           </div>
 
           {/* CTA */}
