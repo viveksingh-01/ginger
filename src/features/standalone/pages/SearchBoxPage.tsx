@@ -29,7 +29,7 @@ function SearchBoxPage() {
           <>
             <Link to={`/restaurant/${id}`}>
               <article key={id} className="flex items-center gap-4 transition">
-                <img src={IMAGE_URL + cloudinaryImageId} alt={name} className="min-w-24 h-24 object-cover rounded-lg" />
+                <img src={IMAGE_URL + cloudinaryImageId} alt={name} className="w-24 h-24 object-cover rounded-lg" />
                 <div>
                   <h2 className="font-semibold">{name}</h2>
                   <p className="text-gray-500 text-sm">{cuisines.join(', ')}</p>
