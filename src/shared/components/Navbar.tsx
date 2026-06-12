@@ -33,7 +33,7 @@ const Navbar = () => {
           </div>
 
           {/* Right — mobile: search, user, cart icons only; desktop: full nav with labels */}
-          <div className="flex items-center gap-4 lg:gap-6">
+          <div className="flex items-center gap-6 lg:gap-8">
             <Link to={'/search'}>
               <NavItem icon={<Search size={18} />} label="Search" iconOnly />
             </Link>
