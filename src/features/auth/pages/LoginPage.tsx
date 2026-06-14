@@ -91,7 +91,7 @@ const LoginPage = () => {
               <button
                 type="button"
                 onClick={() => setShowPassword(prev => !prev)}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-sm text-gray-500"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-sm text-gray-500 cursor-pointer"
               >
                 {showPassword ? <Eye /> : <EyeClosed />}
               </button>
