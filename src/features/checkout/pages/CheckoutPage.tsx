@@ -9,6 +9,7 @@ import { isAuthenticated } from '@/utils/auth';
 import Cart from '../components/Cart';
 
 const CheckoutPage = () => {
+  const cartItems = useSelector((state: ReturnType<typeof store.getState>) => state.cart.items);
   const address = useSelector((state: ReturnType<typeof store.getState>) => state.checkout.address);
   const navigate = useNavigate();
 
@@ -49,6 +50,7 @@ const CheckoutPage = () => {
               ) : addressList.length > 0 ? (
                 <button
                   onClick={() => navigate('/manage-address')}
+                  disabled={cartItems.length == 0}
                   className="w-full py-3 px-8 shadow-sm bg-green-600 text-white font-medium hover:bg-green-700 cursor-pointer transition"
                 >
                   Select an address
