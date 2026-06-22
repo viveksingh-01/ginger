@@ -1,12 +1,13 @@
 import { motion } from 'framer-motion';
 
 type DeliveryProgressProps = {
-  eta: number;
-  totalEta: number;
+  step: number;
+  totalSteps: number;
 };
 
-const DeliveryProgress: React.FC<DeliveryProgressProps> = ({ eta, totalEta }) => {
-  const progress = (eta / totalEta) * 100;
+const DeliveryProgress: React.FC<DeliveryProgressProps> = ({ step, totalSteps }) => {
+  const progress = (step / totalSteps) * 100;
+
   return (
     <div className="w-full mt-2 bg-green-700 h-2 rounded-full overflow-hidden shadow-sm">
       <motion.div
