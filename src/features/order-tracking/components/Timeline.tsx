@@ -1,6 +1,15 @@
 import { motion } from 'framer-motion';
 import { ORDER_STEPS } from '../../../constants/order-steps';
 
+const ORDER_STEP_TO_TIMELINE_INDEX: Record<number, number> = {
+  2: 0,
+  3: 1,
+  4: 1,
+  5: 2,
+  6: 2,
+  7: 3,
+};
+
 const Timeline = ({ currentStep }: { currentStep: number }) => {
   const progress = (currentStep / 3) * 100;
 
