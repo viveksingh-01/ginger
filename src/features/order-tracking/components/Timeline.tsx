@@ -11,7 +11,7 @@ const ORDER_STEP_TO_TIMELINE_INDEX: Record<number, number> = {
 };
 
 const Timeline = ({ currentStep }: { currentStep: number }) => {
-  const progress = (currentStep / 3) * 100;
+  const progress = (ORDER_STEP_TO_TIMELINE_INDEX[currentStep] / 3) * 100;
 
   return (
     <div className="relative mt-2">
@@ -25,14 +25,14 @@ const Timeline = ({ currentStep }: { currentStep: number }) => {
 
       <div className="flex justify-between items-start relative z-10">
         {ORDER_STEPS.map((step, index) => {
-          const active = index == currentStep;
+          const active = index == ORDER_STEP_TO_TIMELINE_INDEX[currentStep];
           return (
             <div key={step.label} className="flex flex-col items-center">
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 className={`w-16 h-16 flex items-center justify-center rounded-full text-3xl bg-white border-2
-                  ${index < currentStep ? 'bg-white border-green-600' : 'border-gray-200'}
+                  ${index < ORDER_STEP_TO_TIMELINE_INDEX[currentStep] ? 'bg-white border-green-600' : 'border-gray-200'}
                   ${active && 'border-ginger'}
                 `}
               >
