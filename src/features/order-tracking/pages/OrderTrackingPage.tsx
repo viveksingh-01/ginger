@@ -1,40 +1,27 @@
 import type IOrderDetail from '@/features/order/models/order';
 import { useEffect, useState } from 'react';
-import { ORDER_STEPS } from '../../../constants/order-steps';
 import CountdownTimer from '../components/CountdownTimer';
 import DeliveryProgress from '../components/DeliveryProgress';
 import ItemsSummary from '../components/ItemsSummary';
 import LiveMap from '../components/LiveMap';
 import RiderCard from '../components/RiderCard';
 import Timeline from '../components/Timeline';
-
-const TOTAL_ETA = 30;
+import { useOrderStatusStream } from '../hooks/useOrderStatusStream';
 
 const OrderTrackingPage = () => {
   const [orderDetails, setOrderDetails] = useState<IOrderDetail>();
-  const [eta, setEta] = useState(TOTAL_ETA);
+
+  const { event, error, loading } = useOrderStatusStream(orderDetails?.orderId ?? null);
 
   useEffect(() => {
     const orderData = localStorage.getItem('orderDetails');
     setOrderDetails(JSON.parse(orderData ?? ''));
   }, []);
 
-  // Simulate ETA countdown
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setEta(prev => Math.max(prev - 1, 0));
-    }, 3000);
+  if (!orderDetails) return null;
 
-    return () => clearInterval(interval);
-  }, []);
-
-  const getStepIndex = () => {
-    if (eta === 0) return 3; // Delivered
-    if (eta <= 16) return 2; // Out for delivery
-    if (eta <= 28) return 1; // Preparing
-    return 0; // Confirmed
-  };
-  const currentStepIndex = getStepIndex();
+  if (error) return <p>Error: {error}</p>;
+  if (!event) return <p>{!loading ? 'Connecting…' : 'Loading…'}</p>;
 
   return (
     <main className="bg-gray-50 min-h-screen">
@@ -44,23 +31,23 @@ const OrderTrackingPage = () => {
           {/* HEADER CARD */}
           <div className="p-5 mb-6 bg-green-600 text-white rounded-2xl shadow">
             <p className="text-xs mb-1">ORDER #{orderDetails?.orderId}</p>
-            <h1 className="text-xl font-semibold">{ORDER_STEPS[currentStepIndex].message}</h1>
-            <CountdownTimer eta={eta} />
-            {currentStepIndex < 3 && <DeliveryProgress eta={eta} totalEta={TOTAL_ETA} />}
+            <h1 className="text-xl font-semibold">{event.title}</h1>
+            <CountdownTimer eta={event.eta} />
+            {!event.isTerminal && <DeliveryProgress step={event.eta} totalSteps={event.totalSteps} />}
           </div>
 
           {/* ORDER TIMELINE */}
-          <Timeline currentStep={currentStepIndex} />
+          <Timeline currentStep={event.step} />
 
           {/* LIVE DELIVERY TRACKER */}
-          {currentStepIndex >= 2 && orderDetails?.address && (
+          {event.step >= 5 && orderDetails?.address && (
             <section className="rounded-2xl overflow-hidden border border-gray-100 shadow-sm">
-              <LiveMap duration={eta} address={orderDetails?.address} />
+              <LiveMap duration={event.eta} address={orderDetails?.address} />
             </section>
           )}
 
           {/* DELIVERY PARTNER DETAIL */}
-          {currentStepIndex >= 2 && (
+          {event.step >= 4 && (
             <section className="rounded-2xl overflow-hidden shadow-sm">
               <RiderCard />
             </section>
