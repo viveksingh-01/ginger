@@ -1,6 +1,7 @@
+import type store from '@/store/store';
 import { ArrowLeft } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { CARD_ICON_MAP, UPI_OPTIONS } from '../../../constants/payment-method';
 import { PAYMENT_CARDS } from '../../../data/payment-cards';
@@ -16,6 +17,8 @@ const PaymentPage = () => {
   const [cvv, setCvv] = useState('');
   const [upiId, setUpiId] = useState('');
   const [selectedPaymentId, setSelectedPaymentId] = useState<number | string | null>(null);
+
+  const cartItems = useSelector((state: ReturnType<typeof store.getState>) => state.cart.items);
 
   const totalAmount = 214;
 
@@ -39,7 +42,8 @@ const PaymentPage = () => {
             <h1 className="text-lg font-semibold text-gray-900">Payment Options</h1>
             {/* TO-DO: Replace hard-coded info with dynamic data */}
             <p className="text-sm text-gray-500">
-              1 item · Total: ₹{totalAmount} · <span className="text-green-600 font-medium">Savings of ₹20</span>
+              {cartItems.length.toString()} item(s) · Total: ₹{totalAmount} ·{' '}
+              <span className="text-green-600 font-medium">Savings of ₹20</span>
             </p>
           </div>
         </div>
