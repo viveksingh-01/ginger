@@ -18,7 +18,7 @@ const PaymentPage = () => {
   const [upiId, setUpiId] = useState('');
   const [selectedPaymentId, setSelectedPaymentId] = useState<number | string | null>(null);
 
-  const { count, totalAmount } = useCartDetails();
+  const { count, totalAmount, savings } = useCartDetails();
 
   useEffect(() => {
     const savedCards = PAYMENT_CARDS;
@@ -41,7 +41,7 @@ const PaymentPage = () => {
             {/* TO-DO: Replace hard-coded info with dynamic data */}
             <p className="text-sm text-gray-500">
               {count} item(s) · Total: ₹{totalAmount} ·{' '}
-              <span className="text-green-600 font-medium">Savings of ₹20</span>
+              <span className="text-green-600 font-medium">Savings of ₹{savings}</span>
             </p>
           </div>
         </div>
