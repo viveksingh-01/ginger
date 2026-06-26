@@ -18,9 +18,7 @@ const PaymentPage = () => {
   const [upiId, setUpiId] = useState('');
   const [selectedPaymentId, setSelectedPaymentId] = useState<number | string | null>(null);
 
-  const { count } = useCartDetails();
-
-  const totalAmount = 214;
+  const { count, totalAmount } = useCartDetails();
 
   useEffect(() => {
     const savedCards = PAYMENT_CARDS;
