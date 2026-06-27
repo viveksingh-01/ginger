@@ -38,10 +38,14 @@ const PaymentPage = () => {
           <ArrowLeft className="w-5 h-5 cursor-pointer text-gray-700" onClick={() => navigate(-1)} />
           <div>
             <h1 className="text-lg font-semibold text-gray-900">Payment Options</h1>
-            {/* TO-DO: Replace hard-coded info with dynamic data */}
             <p className="text-sm text-gray-500">
-              {count} item(s) · Total: ₹{totalAmount} ·{' '}
-              <span className="text-green-600 font-medium">Savings of ₹{savings}</span>
+              {count} item(s) · Total: ₹{totalAmount}
+              {savings > 0 && (
+                <>
+                  {' '}
+                  · <span className="text-green-600 font-medium">Savings of ₹{savings}</span>
+                </>
+              )}
             </p>
           </div>
         </div>
