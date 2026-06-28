@@ -3,7 +3,7 @@ import React from 'react';
 
 const EmptyCartPage: React.FC = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-white px-6">
+    <div className="flex min-h-[calc(100vh-64px)] items-center justify-center bg-white px-6">
       <div className="w-full max-w-md text-center">
         {/* Illustration */}
         <div className="mb-10 flex justify-center">
