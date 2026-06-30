@@ -5,6 +5,7 @@ import type store from '@/store/store';
 
 import { useAddress } from '@/features/address/hooks/useAddress';
 import type IAddress from '@/features/address/models/address';
+import EmptyCartPage from '@/features/standalone/pages/EmptyCartPage';
 import { isAuthenticated } from '@/utils/auth';
 import Cart from '../components/Cart';
 
@@ -19,6 +20,8 @@ const CheckoutPage = () => {
   const handleClick = () => {
     navigate('/payments');
   };
+
+  if (cartItems?.length === 0) return <EmptyCartPage />;
 
   return (
     <main className="bg-gray-50 min-h-screen">
