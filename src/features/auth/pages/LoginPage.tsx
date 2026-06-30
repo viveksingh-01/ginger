@@ -81,7 +81,7 @@ const LoginPage = () => {
                 render={({ field }) => (
                   <Input
                     label="Password"
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
                     value={field.value || ''}
                     onChange={field.onChange}
                     error={errors.password?.message}
