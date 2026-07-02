@@ -1,8 +1,10 @@
 import Button from '@/shared/components/Button';
 import { ShoppingBag } from 'lucide-react';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const EmptyCartPage: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <div className="flex min-h-[calc(100vh-64px)] items-center justify-center bg-white px-6">
       <div className="w-full max-w-md text-center">
@@ -21,7 +23,7 @@ const EmptyCartPage: React.FC = () => {
 
         {/* Button */}
         <div className="w-[320px] mx-auto my-8">
-          <Button>SEE RESTAURANTS NEAR YOU</Button>
+          <Button onClickHandler={() => navigate('/')}>SEE RESTAURANTS NEAR YOU</Button>
         </div>
       </div>
     </div>
