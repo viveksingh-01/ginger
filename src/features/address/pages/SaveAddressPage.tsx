@@ -1,3 +1,4 @@
+import Button from '@/shared/components/Button';
 import Input from '@/shared/components/Input';
 import { ArrowLeft } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -116,13 +117,9 @@ export default function SaveAddressPage() {
 
             {/* CTA */}
             <section className="py-4">
-              <button
-                onClick={() => submitForm()}
-                disabled={isDisabled}
-                className="w-full py-4 text-sm font-semibold text-white bg-ginger hover:bg-ginger-dark cursor-pointer"
-              >
+              <Button onClickHandler={() => submitForm()} isDisabled={isDisabled}>
                 SAVE ADDRESS
-              </button>
+              </Button>
             </section>
           </section>
         </div>
