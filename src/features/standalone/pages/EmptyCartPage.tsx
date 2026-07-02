@@ -1,3 +1,4 @@
+import Button from '@/shared/components/Button';
 import { ShoppingBag } from 'lucide-react';
 import React from 'react';
 
@@ -17,6 +18,11 @@ const EmptyCartPage: React.FC = () => {
 
         {/* Subtitle */}
         <p className="mt-2 text-gray-500">You can go to home page to view more restaurants</p>
+
+        {/* Button */}
+        <div className="w-[320px] mx-auto my-8">
+          <Button>SEE RESTAURANTS NEAR YOU</Button>
+        </div>
       </div>
     </div>
   );
