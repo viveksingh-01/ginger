@@ -1,10 +1,10 @@
 type ButtonProps = {
   children: string;
-  isDisabled: boolean;
   onClickHandler: () => void;
+  isDisabled?: boolean;
 };
 
-const Button: React.FC<ButtonProps> = ({ children, isDisabled, onClickHandler }) => {
+const Button: React.FC<ButtonProps> = ({ children, onClickHandler, isDisabled = false }) => {
   return (
     <button
       onClick={onClickHandler}
