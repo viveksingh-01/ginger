@@ -8,7 +8,7 @@ import { reverseGeocode } from '../api/reverse-geocode';
 import AnnotationPicker from '../components/AnnotationPicker';
 import MapPicker from '../components/MapPicker';
 import { useDebounce } from '../hooks/useDebounce';
-import type { IAddressResponse, ISaveAddressPayload } from '../models/address';
+import type { ISaveAddressPayload } from '../models/address';
 
 export default function SaveAddressPage() {
   const navigate = useNavigate();
@@ -54,12 +54,11 @@ export default function SaveAddressPage() {
     setForm(prev => ({ ...prev, [key]: value }));
   };
 
-  const isDisabled = !form.address || !form.house;
+  const isDisabled = !form.name || !form.phone || !form.address || !form.house;
 
   const submitForm = async () => {
     try {
-      const { data }: IAddressResponse = await saveAddress(form);
-      console.log(data);
+      await saveAddress(form);
       navigate(-1);
     } catch (err: any) {
       console.error(err.message);
