@@ -8,7 +8,8 @@ const Button: React.FC<ButtonProps> = ({ children, onClickHandler, isDisabled = 
   return (
     <button
       onClick={onClickHandler}
-      className="w-full py-4 text-sm font-semibold text-white bg-ginger hover:bg-ginger-dark cursor-pointer transition"
+      className={`w-full py-4 text-sm font-semibold text-white transition
+        ${isDisabled ? 'bg-gray-300 cursor-not-allowed' : 'bg-ginger hover:bg-ginger-dark cursor-pointer'}`}
       disabled={isDisabled}
     >
       {children}
