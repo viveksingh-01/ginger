@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import RestaurantCard from '../components/RestaurantCard';
 import RestaurantListSkeleton from './RestaurantListSkeleton';
 
+import Button from '@/shared/components/Button';
 import { useRestaurants } from '../hooks/useRestaurants';
 
 const RestaurantPage: React.FC = () => {
@@ -38,15 +39,8 @@ const RestaurantPage: React.FC = () => {
         <div className="container mx-auto px-6 py-10">
           <div className="text-center">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Error loading restaurants</h2>
-
             <p className="text-red-600 dark:text-red-400">{(error as Error).message}</p>
-
-            <button
-              onClick={() => refetch()}
-              className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-            >
-              Retry
-            </button>
+            <Button onClickHandler={() => refetch()}>Retry</Button>
           </div>
         </div>
       </section>
