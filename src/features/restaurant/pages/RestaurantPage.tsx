@@ -40,7 +40,9 @@ const RestaurantPage: React.FC = () => {
           <div className="text-center">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Error loading restaurants</h2>
             <p className="text-red-600 dark:text-red-400">{(error as Error).message}</p>
-            <Button onClickHandler={() => refetch()}>Retry</Button>
+            <div className="max-w-[320px] mx-auto">
+              <Button onClickHandler={() => refetch()}>Retry</Button>
+            </div>
           </div>
         </div>
       </section>
