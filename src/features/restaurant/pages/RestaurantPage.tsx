@@ -35,7 +35,7 @@ const RestaurantPage: React.FC = () => {
 
   if (isError) {
     console.error((error as Error).message);
-    return <NoRestaurants />;
+    return <NoRestaurants refetch={refetch} />;
   }
 
   return (
