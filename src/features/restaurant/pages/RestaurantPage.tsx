@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import RestaurantCard from '../components/RestaurantCard';
 import RestaurantListSkeleton from './RestaurantListSkeleton';
 
-import Button from '@/shared/components/Button';
+import NoRestaurants from '@/features/standalone/components/NoRestaurants';
 import { useRestaurants } from '../hooks/useRestaurants';
 
 const RestaurantPage: React.FC = () => {
@@ -34,19 +34,8 @@ const RestaurantPage: React.FC = () => {
   }
 
   if (isError) {
-    return (
-      <section className="mt-16 bg-gray-50 dark:bg-gray-950 min-h-screen">
-        <div className="container mx-auto px-6 py-10">
-          <div className="text-center">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Error loading restaurants</h2>
-            <p className="text-red-600 dark:text-red-400">{(error as Error).message}</p>
-            <div className="max-w-[320px] mx-auto">
-              <Button onClickHandler={() => refetch()}>Retry</Button>
-            </div>
-          </div>
-        </div>
-      </section>
-    );
+    console.error((error as Error).message);
+    return <NoRestaurants />;
   }
 
   return (
