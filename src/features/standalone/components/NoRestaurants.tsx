@@ -2,7 +2,11 @@ import Button from '@/shared/components/Button';
 import { Store } from 'lucide-react';
 import React from 'react';
 
-const NoRestaurants: React.FC = () => {
+type NoRestaurantsProps = {
+  refetch: () => void;
+};
+
+const NoRestaurants: React.FC<NoRestaurantsProps> = ({ refetch }) => {
   return (
     <div className="flex min-h-[calc(100vh-64px)] items-center justify-center bg-white px-6">
       <div className="w-full max-w-md text-center">
@@ -23,7 +27,7 @@ const NoRestaurants: React.FC = () => {
 
         {/* Button */}
         <div className="mx-auto my-12 w-[320px]">
-          <Button onClickHandler={() => {}}>Retry</Button>
+          <Button onClickHandler={() => refetch()}>Retry</Button>
         </div>
       </div>
     </div>
