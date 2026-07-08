@@ -1,3 +1,4 @@
+import Button from '@/shared/components/Button';
 import Input from '@/shared/components/Input';
 import { setAuth } from '@/store/authSlice';
 import { Eye, EyeClosed, Loader2 } from 'lucide-react';
@@ -100,11 +101,7 @@ const LoginPage = () => {
 
           {/* CTA */}
           <div className="mt-6">
-            <button
-              type="submit"
-              className="w-full py-4 text-sm font-semibold text-white bg-ginger hover:bg-ginger-dark cursor-pointer"
-              disabled={isSubmitting}
-            >
+            <Button isDisabled={isSubmitting}>
               {isSubmitting ? (
                 <div className="flex justify-center items-center gap-2">
                   <Loader2 className="animate-spin" size={20} />
@@ -113,7 +110,7 @@ const LoginPage = () => {
               ) : (
                 'LOGIN'
               )}
-            </button>
+            </Button>
           </div>
         </form>
       </section>
