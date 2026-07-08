@@ -1,3 +1,4 @@
+import Button from '@/shared/components/Button';
 import { setAuth } from '@/store/authSlice';
 import { Eye, EyeClosed, Loader2 } from 'lucide-react';
 import { useState } from 'react';
@@ -145,11 +146,7 @@ const SignupPage = () => {
 
           {/* CTA */}
           <div className="mt-6">
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full py-4 text-sm font-semibold text-white bg-ginger hover:bg-ginger-dark cursor-pointer"
-            >
+            <Button isDisabled={isSubmitting}>
               {isSubmitting ? (
                 <div className="flex justify-center items-center gap-2">
                   <Loader2 className="animate-spin" size={20} />
@@ -158,7 +155,7 @@ const SignupPage = () => {
               ) : (
                 'CREATE ACCOUNT'
               )}
-            </button>
+            </Button>
           </div>
 
           {/* Terms */}
