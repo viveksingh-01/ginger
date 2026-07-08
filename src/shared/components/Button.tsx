@@ -1,7 +1,7 @@
-import type { ButtonHTMLAttributes } from 'react';
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
 type ButtonProps = {
-  children: string;
+  children: ReactNode;
   onClickHandler: () => void;
   isDisabled?: boolean;
   type?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
