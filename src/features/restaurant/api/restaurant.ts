@@ -7,7 +7,7 @@ interface IRestaurantResponse {
 }
 
 export const fetchRestaurants = async (): Promise<IRestaurant[]> => {
-  const res = await fetch(`${BASE_URL}/restaurants`);
+  const res = await fetch(`${BASE_URL}/restaurants?limit=20`);
 
   if (!res.ok) {
     throw new Error('Failed to fetch restaurant data');
