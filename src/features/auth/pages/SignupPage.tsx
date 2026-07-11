@@ -146,7 +146,7 @@ const SignupPage = () => {
 
           {/* CTA */}
           <div className="mt-6">
-            <Button isDisabled={isSubmitting}>
+            <Button type="submit" isDisabled={isSubmitting}>
               {isSubmitting ? (
                 <div className="flex justify-center items-center gap-2">
                   <Loader2 className="animate-spin" size={20} />
