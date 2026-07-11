@@ -1,4 +1,5 @@
 import Button from '@/shared/components/Button';
+import { UtensilsCrossed } from 'lucide-react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,6 +9,13 @@ const NoMenuFound: React.FC = () => {
   return (
     <div className="p-12 flex items-center justify-center bg-white px-6">
       <div className="w-full max-w-md text-center">
+        {/* Illustration */}
+        <div className="mb-10 flex justify-center">
+          <div className="flex h-32 w-32 items-center justify-center rounded-full bg-gray-100">
+            <UtensilsCrossed className="h-16 w-16 text-gray-400" />
+          </div>
+        </div>
+
         {/* Title */}
         <h1 className="text-xl font-bold text-gray-800">No menu available</h1>
 
