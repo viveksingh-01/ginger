@@ -1,3 +1,4 @@
+import NoMenuFound from '@/features/standalone/components/NoMenuFound';
 import { FaCircle, FaStar } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -38,11 +39,15 @@ const MenuPage: React.FC = () => {
             </div>
           </div>
         </div>
-        <ul className="space-y-6">
-          {restaurant?.menu?.map((item: IMenuItem) => (
-            <MenuItem item={item} key={item.id} restaurantId={restaurantId} />
-          ))}
-        </ul>
+        {restaurant?.menu.length == 0 ? (
+          <NoMenuFound />
+        ) : (
+          <ul className="space-y-6">
+            {restaurant?.menu?.map((item: IMenuItem) => (
+              <MenuItem item={item} key={item.id} restaurantId={restaurantId} />
+            ))}
+          </ul>
+        )}
       </div>
       <div className="w-full fixed bottom-0 left-1/2 -translate-x-1/2 transition-all duration-500 ease-out">
         <div
