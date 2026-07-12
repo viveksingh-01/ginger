@@ -21,7 +21,7 @@ const MenuPage: React.FC = () => {
     <section className="bg-gray-50 dark:bg-gray-950 min-h-screen">
       <div className="container mx-auto px-6 py-10 max-w-3xl">
         <div className="mb-12">
-          <h2 className="my-3 text-xl lg:text-3xl font-bold text-gray-900 dark:text-white">
+          <h2 className="my-3 text-xl lg:text-2xl font-bold text-gray-900 dark:text-white">
             {restaurant?.details?.name}
           </h2>
           <div className="p-3 bg-white/70 backdrop-blur rounded-lg">
