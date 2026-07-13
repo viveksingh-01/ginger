@@ -17,10 +17,10 @@ const NoMenuFound: React.FC = () => {
         </div>
 
         {/* Title */}
-        <h1 className="text-xl font-bold text-gray-800">No menu available</h1>
+        <h1 className="text-xl font-semibold text-gray-800">Menu not available :(</h1>
 
         {/* Subtitle */}
-        <p className="mt-2 text-gray-500">
+        <p className="mt-2 text-gray-500 text-sm">
           This restaurant hasn't added its menu yet. Explore other restaurants nearby.
         </p>
 
