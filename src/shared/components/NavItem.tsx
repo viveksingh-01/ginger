@@ -3,11 +3,15 @@ interface NavItemProps {
   label: string;
   badge?: string;
   iconOnly?: boolean;
+  onClick?: () => void;
 }
 
-const NavItem = ({ icon, label, badge, iconOnly = false }: NavItemProps) => {
+const NavItem = ({ icon, label, badge, onClick, iconOnly = false }: NavItemProps) => {
   return (
-    <div className="relative flex cursor-pointer items-center gap-1 text-(--text-primary) hover:text-ginger transition-colors">
+    <div
+      onClick={onClick}
+      className="relative flex cursor-pointer items-center gap-1 text-(--text-primary) hover:text-ginger transition-colors"
+    >
       {icon}
       <span className={`text-sm font-medium ${iconOnly ? 'hidden lg:inline' : ''}`}>{label}</span>
 
