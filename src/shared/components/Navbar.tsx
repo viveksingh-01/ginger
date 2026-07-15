@@ -12,6 +12,11 @@ const Navbar = () => {
   const user = useSelector((state: ReturnType<typeof store.getState>) => state.auth.user);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    window.location.href = '/auth/login';
+  };
+
   return (
     <nav className="fixed top-0 z-50 w-full bg-white border-b border-(--border-light)">
       <div className="container mx-auto px-4">
@@ -54,7 +59,11 @@ const Navbar = () => {
                 />
                 {userMenuOpen && (
                   <div className="absolute right-0 top-full z-60 mt-2 w-36 overflow-hidden rounded-md border border-(--border-light) bg-white shadow-lg">
-                    <button type="button" className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-gray-100">
+                    <button
+                      type="button"
+                      onClick={handleLogout}
+                      className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-gray-100"
+                    >
                       Logout
                     </button>
                   </div>
