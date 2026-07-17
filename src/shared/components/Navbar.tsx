@@ -1,7 +1,7 @@
 import type store from '@/store/store';
 import { isAuthenticated } from '@/utils/auth';
 import { HelpCircle, MapPin, Percent, Search, ShoppingCart, User } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Logo from './Logo';
@@ -11,11 +11,17 @@ const Navbar = () => {
   const cartItems = useSelector((state: ReturnType<typeof store.getState>) => state.cart.items);
   const user = useSelector((state: ReturnType<typeof store.getState>) => state.auth.user);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const userMenuRef = useRef<HTMLDivElement>(null);
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    window.location.href = '/auth/login';
-  };
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
+        setUserMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+  }, [userMenuOpen]);
 
   return (
     <nav className="fixed top-0 z-50 w-full bg-white border-b border-(--border-light)">
@@ -51,18 +57,22 @@ const Navbar = () => {
               <NavItem icon={<HelpCircle size={18} />} label="Help" />
             </Link>
             {isAuthenticated() ? (
-              <div className="relative">
+              <div className="relative" ref={userMenuRef}>
                 <NavItem
                   icon={<User size={18} />}
                   label={user?.name.split(' ')[0] ?? 'Me'}
+                  iconOnly
                   onClick={() => setUserMenuOpen(open => !open)}
                 />
                 {userMenuOpen && (
                   <div className="absolute right-0 top-full z-60 mt-2 w-36 overflow-hidden rounded-md border border-(--border-light) bg-white shadow-lg">
                     <button
                       type="button"
-                      onClick={handleLogout}
                       className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-gray-100"
+                      onClick={() => {
+                        localStorage.removeItem('token');
+                        window.location.href = '/auth/login';
+                      }}
                     >
                       Logout
                     </button>
