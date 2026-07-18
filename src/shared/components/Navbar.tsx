@@ -14,6 +14,8 @@ const Navbar = () => {
   const userMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!userMenuOpen) return;
+
     const handleClickOutside = (event: MouseEvent) => {
       if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
         setUserMenuOpen(false);
@@ -21,6 +23,7 @@ const Navbar = () => {
     };
 
     document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [userMenuOpen]);
 
   return (
